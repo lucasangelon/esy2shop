@@ -15,9 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Copyright"
+        android:text="@string/Copyright"
         android:id="@+id/title"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_marginTop="34dp"
         android:layout_below="@+id/tool_bar"
         android:layout_centerHorizontal="true" />
@@ -26,19 +26,16 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView"
         android:layout_width="fill_parent"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="135sp"
 
-        android:layout_height="350dp"
-        android:visibility="visible"
-        android:touchscreenBlocksFocus="false"
-        android:transitionGroup="false"
-        android:importantForAccessibility="auto"
-        android:focusable="false">
+        android:layout_height="350dp">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="300dp"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
             android:orientation="vertical">
 
             <TextView

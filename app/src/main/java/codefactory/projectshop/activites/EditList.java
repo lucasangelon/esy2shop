@@ -4,6 +4,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import codefactory.projectshop.R;
 import codefactory.projectshop.models.List;
@@ -23,6 +29,11 @@ public class EditList extends ActionBarActivity {
         TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
     */
 
+    private EditText listName;
+    private EditText listCatagory;
+    private Spinner storeSpinner;
+    private CheckBox isComplete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,13 +46,21 @@ public class EditList extends ActionBarActivity {
             TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
          */
 
+
+        //Models
         list = new List("Test List","testing purpose list");
         coles = new Store();
         coles.setName("Coles");
+        coles.setId(1);
         woolies = new Store();
         woolies.setName("Woolworths");
+        woolies.setId(2);
         iga = new Store();
         iga.setName("IGA");
+        iga.setId(3);
+
+        // Adapter for spinner
+        ArrayList<String> storeNames = new ArrayList<>();
 
 
         /*
@@ -83,10 +102,18 @@ public class EditList extends ActionBarActivity {
 
     /*
         Saves Changes to a list
+
+        Saving in Variables
+
+        Database will be added later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      */
     public void saveChanges(String name,String catagory, Store store, boolean complete){
 
 
+        list.setName(name);
+        list.setCatagory(catagory);
+        list.setStoreId(store);
+        list.setComplete(complete);
 
     }
 }

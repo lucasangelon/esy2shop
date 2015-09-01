@@ -18,7 +18,7 @@ public class List{
     String name;
     String catagory;
     boolean complete;
-    int storeId;
+    Store store;
 
 
     /*
@@ -85,8 +85,8 @@ public class List{
         return catagory;
     }
 
-    public int getStoreId() {
-        return storeId;
+    public Store getStoreId() {
+        return store;
     }
 
     public ArrayList<Item> getItemList() {
@@ -103,8 +103,8 @@ public class List{
 
     //--------------------------
 
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
+    public void setStoreId(Store store) {
+        this.store = store;
     }
 
     public void setItems(ArrayList<Item> items) {

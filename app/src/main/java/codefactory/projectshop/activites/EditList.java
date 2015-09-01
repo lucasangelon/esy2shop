@@ -18,17 +18,11 @@ import codefactory.projectshop.models.Store;
 public class EditList extends ActionBarActivity {
 
 
+
     /*
-        TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
+        Test Test Test
      */
     private List list;
-    private Store coles;
-    private Store woolies;
-    private Store iga;
-    /*'''
-        TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
-    */
-
     private EditText listName;
     private EditText listCatagory;
     private Spinner storeSpinner;
@@ -41,31 +35,8 @@ public class EditList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_list);
 
+        list = new List();
 
-        /*
-            TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
-         */
-
-
-        //Models
-        list = new List("Test List","testing purpose list");
-        coles = new Store();
-        coles.setName("Coles");
-        coles.setId(1);
-        woolies = new Store();
-        woolies.setName("Woolworths");
-        woolies.setId(2);
-        iga = new Store();
-        iga.setName("IGA");
-        iga.setId(3);
-
-        // Adapter for spinner
-        ArrayList<String> storeNames = new ArrayList<>();
-
-
-        /*
-            TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
-         */
     }
 
     @Override

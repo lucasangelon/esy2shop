@@ -16,8 +16,18 @@ public class SplashActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+
+
+        /*
+            Change this to test your activity TEST TEST
+         */
         Intent intent = new Intent(this,EditList.class);
         startActivity(intent);
+
+
+
+
+
     }
 
     @Override

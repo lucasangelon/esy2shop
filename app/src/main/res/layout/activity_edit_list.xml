@@ -43,18 +43,11 @@
         android:id="@+id/catagoryText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textCatagory"
         android:layout_alignParentLeft="true"
         android:inputType="text" />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/storeSpinner"
-        android:spinnerMode="dropdown"
-        android:layout_below="@+id/storeView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -79,10 +72,18 @@
         android:layout_height="wrap_content"
         android:text="Completed"
         android:id="@+id/isCompleteBox"
+        android:checked="false"
         android:layout_below="@+id/storeSpinner"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="false" />
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeSpinner"
+        android:layout_below="@+id/storeView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

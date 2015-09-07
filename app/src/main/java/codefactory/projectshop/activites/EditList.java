@@ -4,10 +4,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,15 +22,22 @@ import codefactory.projectshop.models.Store;
 public class EditList extends ActionBarActivity {
 
 
-
     /*
-        Test Test Test
+        Views
      */
     private List list;
     private EditText listName;
     private EditText listCatagory;
     private Spinner storeSpinner;
     private CheckBox isComplete;
+    private Button saveButton;
+
+
+    /*
+        Test Test Test
+    */
+    private ArrayList<Store> storeList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +46,44 @@ public class EditList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_list);
 
+
+        /*
+            Views
+         */
         list = new List();
+        listName = (EditText) findViewById(R.id.listNameText);
+        listCatagory = (EditText) findViewById(R.id.catagoryText);
+        storeSpinner = (Spinner) findViewById(R.id.storeSpinner);
+        isComplete = (CheckBox) findViewById(R.id.isCompleteBox);
+        saveButton = (Button) findViewById(R.id.saveButton);
+
+
+
+        /*
+            TEST TEST TEST
+         */
+        storeList = new ArrayList<Store>();
+
+        //Add shops to store list
+        storeList.add(new Store("Coles",0,0));
+        storeList.add(new Store("Woolies",1,1));
+        storeList.add(new Store("IGA",2,2));
+
+        /*
+            TEST TEST TEST
+         */
+
+
+        /*
+                Populate Spinner
+        */
+        ArrayList<String> storeNames = new ArrayList<>();
+
+        for(Store addStore : storeList)
+            storeNames.add(addStore.getName());
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, storeNames);
+        storeSpinner.setAdapter(spinnerAdapter);
 
     }
 
@@ -63,10 +111,22 @@ public class EditList extends ActionBarActivity {
 
     /*
         OnClick Listener
+
      */
-    public void onSaveClick(){
+    public void onSaveClick(View view){
 
 
+        /*
+            Save changes
+         */
+        Store selectedStore = storeList.get(storeSpinner.getSelectedItemPosition());
+        saveChanges(listName.getText().toString(),listCatagory.getText().toString(),selectedStore,isComplete.isChecked());
+
+
+        /*
+            Toast
+         */
+        Toast.makeText(this,"Changes Saved",Toast.LENGTH_LONG).show();
 
     }
 

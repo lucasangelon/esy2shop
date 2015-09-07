@@ -12,9 +12,9 @@ public class Item {
     /*
         Vars
      */
-    private int id;
     private String name;
     private boolean complete;
+    private int id;
 
     /*
         Constructors
@@ -23,9 +23,8 @@ public class Item {
 
     public Item(int id,String name){
 
-        this.id=id;
         this.name=name;
-
+        this.id=id;
         /*
             complate always defaults to false
          */
@@ -37,16 +36,6 @@ public class Item {
     /*
         Get and Set
      */
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
 
     public String getName() {
         return name;
@@ -66,4 +55,11 @@ public class Item {
         this.complete = complete;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

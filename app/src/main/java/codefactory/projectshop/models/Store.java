@@ -14,7 +14,6 @@ public class Store {
      */
 
     private String name;
-    private int id;
     private double latitude;
     private double longitude;
 
@@ -25,9 +24,8 @@ public class Store {
 
     public Store(){}
 
-    public Store(int id, String name, double longitude,double latitude){
+    public Store(String name, double longitude,double latitude){
 
-        this.id=id;
         this.name=name;
         this.longitude=longitude;
         this.latitude=latitude;
@@ -46,10 +44,6 @@ public class Store {
         return longitude;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public double getLatitude() {
         return latitude;
     }
@@ -57,9 +51,6 @@ public class Store {
 
     
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;

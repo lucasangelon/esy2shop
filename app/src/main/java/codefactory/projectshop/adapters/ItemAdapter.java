@@ -50,7 +50,6 @@ public class ItemAdapter extends BaseAdapter {
         return items.get(position).getId();
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View V = convertView;

@@ -24,6 +24,10 @@
             android:name=".activites.AddItems"
             android:label="@string/title_activity_add_items" >
         </activity>
+        <activity
+            android:name=".activites.CopyrightActivity"
+            android:label="@string/title_activity_copyright" >
+        </activity>
     </application>
 
 </manifest>

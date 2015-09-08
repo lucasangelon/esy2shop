@@ -21,7 +21,7 @@ public class SplashActivity extends ActionBarActivity {
         /*
             Change this to test your activity TEST TEST
          */
-        Intent intent = new Intent(this,EditList.class);
+        Intent intent = new Intent(this,CopyrightActivity.class);
         startActivity(intent);
 
 

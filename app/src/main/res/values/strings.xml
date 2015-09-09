@@ -17,4 +17,6 @@ Central Institute of Technology uses third-party vendors and hosting partners to
 Central Institute of Technology may update this policy at anytime. Any changes will be displayed on the Website for the Central Wayfinder software and the latest version is going to be available on both the mobile application and the website related to it.
    </string>
     <string name="Copyright">Copyright</string>
+    <string name="open_location_settings">Open Settings</string>
+    <string name="cancel">Cancel</string>>
 </resources>

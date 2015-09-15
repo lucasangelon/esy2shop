@@ -17,7 +17,7 @@ import codefactory.projectshop.models.Item;
  *  Item Adapter,
  *  Displays the items in a list
  *
- *  Jack Kitchener
+ *  Jack Kitchener - James McNeil
  */
 public class ItemAdapter extends BaseAdapter {
 
@@ -99,6 +99,11 @@ public class ItemAdapter extends BaseAdapter {
                 else
                     txt.setText(it.getName());
 
+                /*
+                    DATABASE STUFF GOOSE HERE
+                 */
+
+
             }
 
         });
@@ -115,6 +120,10 @@ public class ItemAdapter extends BaseAdapter {
 
                 //Update adapter
                 notifyDataSetChanged();
+
+                 /*
+                    DATABASE STUFF GOOSE HERE
+                 */
 
             }
         });

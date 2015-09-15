@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import codefactory.projectshop.R;
 import codefactory.projectshop.models.Item;
 
 /**
@@ -50,18 +52,88 @@ public class ItemAdapter extends BaseAdapter {
         return items.get(position).getId();
     }
 
+
+
+    /*
+        Changes 14/9/2015
+
+        Uses a custom layout
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View V = convertView;
+        final int finalPos = position;
 
         if(V == null) {
             LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            V = vi.inflate(android.R.layout.simple_list_item_1, null);
+            V = vi.inflate(R.layout.list_item, null);
         }
 
-        Item it = items.get(position);
-        TextView txt = (TextView)V.findViewById(android.R.id.text1);
+        final Item it = items.get(finalPos);
+
+
+        /*
+            Text View
+         */
+        final TextView txt = (TextView)V.findViewById(R.id.itemText);
         txt.setText(it.getName());
+
+
+        /*
+            Complete button
+         */
+        Button completeBtn = (Button) V.findViewById(R.id.completeButton);
+
+        //Completes item!
+
+        completeBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                /// Toggles complete status of item
+                it.setComplete(!it.isComplete());
+
+                //Changes text
+                if(it.isComplete())
+                    txt.setText(it.getName() + " -C");
+                else
+                    txt.setText(it.getName());
+
+            }
+
+        });
+
+        /*
+            Delete Button
+         */
+        Button deleteButton = (Button) V.findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                //Delete item from array list
+                items.remove(finalPos);
+
+                //Update adapter
+                notifyDataSetChanged();
+
+            }
+        });
+
+        /*
+            Edit Button
+         */
+        Button editButton = (Button) V.findViewById(R.id.editButton);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                ////// Do stuff here
+
+            }
+        });
+
+
+
+
         return V;
     }
 }

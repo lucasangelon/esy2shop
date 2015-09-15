@@ -41,10 +41,11 @@ public class AddItems extends ActionBarActivity implements View.OnClickListener 
 
         /*
             Assign Buttons
-         */
+
         shopName =(Button) findViewById(R.id.shop);
         add =(Button) findViewById(R.id.item);
         clear =(Button) findViewById(R.id.clear);
+        */
 
         /*
             Text Box for Name of added Item
@@ -53,10 +54,11 @@ public class AddItems extends ActionBarActivity implements View.OnClickListener 
 
         /*
             Add Listeners
-         */
+
         shopName.setOnClickListener(this);
         add.setOnClickListener(this);
         clear.setOnClickListener(this);
+        */
 
 
         /*

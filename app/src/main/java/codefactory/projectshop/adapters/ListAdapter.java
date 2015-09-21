@@ -93,7 +93,9 @@ public class ListAdapter extends BaseAdapter {
                 /*
                     Whats happens when you delete a list
                  */
-                list.remove(finalPos);
+               /* remove all elements not working
+                ArrayList.clear();
+                 */
                 //Update adapter
                 notifyDataSetChanged();
 

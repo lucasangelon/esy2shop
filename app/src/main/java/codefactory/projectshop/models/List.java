@@ -1,6 +1,12 @@
 package codefactory.projectshop.models;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
+import codefactory.projectshop.database.DatabaseManager;
 
 /**
  * List
@@ -8,118 +14,149 @@ import java.util.ArrayList;
  * Stores a list of items
  *
  * Created by 041402465 on 20/08/2015.
+ * Updated by 041502996 on 16/09/2015
  */
 public class List{
 
     /*
         Vars
      */
-    ArrayList<Item> items;
+    int id;
     String name;
-    String catagory;
-    boolean complete;
+    ArrayList<Item> items;
     Store store;
-
+    int category;
+    boolean complete;
 
     /*
         Constructors
      */
     public List(){
-
-        items = new ArrayList<Item>();
-        complete = false;
-
+        this.id = -1;
+        this.name = "";
+        this.items = new ArrayList<Item>();
+        this.store = null;
+        this.category = 0;
+        this.complete = false;
     }
 
+    public List(Context context, int ID){
+        DatabaseManager db = new DatabaseManager(context);
+        List dbList = db.GetList(ID);
+        if(dbList != null) {
+            this.id = dbList.id;
+            this.name = dbList.name;
+            this.items = dbList.items;
+            this.store = dbList.store;
+            this.category = dbList.category;
+            this.complete = dbList.complete;
+        }
+    }
 
-    public List(String name, String catagory){
-        items = new ArrayList<Item>();
+    public List(int id, String name, ArrayList<Item> items, Store store, int category, boolean complete){
+        this.id = id;
         this.name = name;
-        this.catagory = catagory;
-        complete = false;
+        this.items = items;
+        this.store = store;
+        this.category = category;
+        this.complete = complete;
     }
 
+    public void SaveChanges(Context context)
+    {
+        DatabaseManager db = new DatabaseManager(context);
+        // As per hierarchy
+        // Update Store ?and Category? first
+        store.setId(db.UpdateStore(store));
+        // DEBUG PLACEHOLDER CATEGORY
+        category = db.UpdateCategory(-1, "General");
+
+        // Then update List
+        id = db.UpdateList(this);
+
+        // Finally update Items ?and notifications?
+        for(Item i : items)
+        {
+            i.setId(db.UpdateItem(i, id));
+        }
+    }
+
+    public boolean Delete(Context context)
+    {
+        DatabaseManager db = new DatabaseManager(context);
+        boolean result = true;
+        for(Item i : items)
+        {
+            if(db.DeleteItem(i.getId()))
+            {
+                result = false;
+            }
+        }
+        if(db.DeleteList(id))
+        {
+            result = false;
+        }
+        return result;
+    }
 
     /*
-        Methods
+        Get and Set
      */
-
-    /**
-     * Adds an Item to the arraylist
-     * @param item
-     */
-    public void add(Item item){
-        items.add(item);
+    public int getId() {
+        return id;
     }
-
-    /**
-     * Removes the Item at the specified index
-     * @param index
-     */
-    public void remove(int index){
-        items.remove(index);
-    }
-
-    /**
-     * Returns the size of the list
-     * @return int
-     */
-    public int listSize(){
-        return items.size();
-    }
-
-    /**
-     * Returns a single item
-     *
-     * @param index
-     * @return Item
-     */
-    public Item getItem(int index){
-        return items.get(index);
-    }
-
-    /*
-        Getters and Setters
-     */
-    public String getCatagory() {
-        return catagory;
-    }
-
-    public Store getStoreId() {
-        return store;
-    }
-
-    public ArrayList<Item> getItemList() {
-        return items;
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Item> getItemList() {
+        return items;
+    }
+    public int listSize(){
+        return items.size();
+    }
+    public void add(Item item){
+        items.add(item);
+    }
+    public void remove(Item item){
+        items.remove(item);
+    }
+    public Item getItem(int id, String name){
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).getId() == id && items.get(i).getName().equals(name))
+            {
+                return items.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+    public void setCategory(int category) {
+        this.category = category;
+    }
 
     public boolean isComplete() {
         return complete;
     }
-
-    //--------------------------
-
-    public void setStoreId(Store store) {
-        this.store = store;
-    }
-
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
     public void setComplete(boolean complete) {
         this.complete = complete;
-    }
-
-    public void setCatagory(String catagory) {
-        this.catagory = catagory;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

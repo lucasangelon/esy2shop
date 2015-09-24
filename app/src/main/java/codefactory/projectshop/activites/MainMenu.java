@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.app.ActionBar;
 import android.widget.ListView;
@@ -18,6 +19,7 @@ import junit.framework.Test;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import codefactory.projectshop.R;
 import codefactory.projectshop.models.Item;
 import codefactory.projectshop.models.List;
@@ -26,10 +28,29 @@ public class MainMenu extends AppCompatActivity {
 
     ListView mainListView;
 
+    //Navigation Drawer
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
+
+    //@Bind(R.id.refreshImageView) ImageView mRefreshImageView;
+
+    //Method called in onCreate
+    private void addDrawerItems(){
+        String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+
+        //Navigation Drawer
+        mDrawerList = (ListView)findViewById(R.id.navList);
 
         //Array for adapter
         ArrayList<List> listOfLists = new ArrayList<>();
@@ -55,14 +76,12 @@ public class MainMenu extends AppCompatActivity {
         mainListView = (ListView)findViewById(R.id.mainListView);
         mainListView.setAdapter(adapter);
 
+        //Navigation Drawer
+        addDrawerItems();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
 
-
-      /*  Test for now, will change to get list of lists later
-        String[] listOfListsTest = {"Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, );
-        setListAdapter(adapter); */
 
     }
 
@@ -70,6 +89,7 @@ public class MainMenu extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
         return super.onCreateOptionsMenu(menu);
+
     }
 
 }

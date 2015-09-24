@@ -21,4 +21,6 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="no_list_data">There are no lists to display</string>
     <string name="title_activity_edit_list">Edit List</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

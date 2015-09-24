@@ -3,7 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_edit_list">EditList</string>
     <string name="title_activity_add_items">AddItems</string>
     <string name="title_activity_copyright">CopyrightActivity</string>
     <string name="copyright1"> A. General Information
@@ -18,5 +17,8 @@ Central Institute of Technology may update this policy at anytime. Any changes w
    </string>
     <string name="Copyright">Copyright</string>
     <string name="open_location_settings">Open Settings</string>
-    <string name="cancel">Cancel</string>>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="no_list_data">There are no lists to display</string>
+    <string name="title_activity_edit_list">Edit List</string>
 </resources>

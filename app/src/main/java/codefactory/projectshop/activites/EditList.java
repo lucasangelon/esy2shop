@@ -140,11 +140,16 @@ public class EditList extends ActionBarActivity {
      */
     public void saveChanges(String name,String catagory, Store store, boolean complete){
 
+        /*
+
+        Useless anyway
 
         list.setName(name);
         list.setCatagory(catagory);
         list.setStoreId(store);
         list.setComplete(complete);
+
+        */
 
     }
 }

@@ -116,9 +116,16 @@ public class List{
         this.name = name;
     }
 
+
     public ArrayList<Item> getItemList() {
         return items;
     }
+
+
+    /**
+     * Returns the size of the list
+     * @return int
+     */
     public int listSize(){
         return items.size();
     }

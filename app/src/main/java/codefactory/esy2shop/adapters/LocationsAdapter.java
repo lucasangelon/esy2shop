@@ -1,4 +1,4 @@
-package codefactory.projectshop.adapters;
+package codefactory.esy2shop.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import codefactory.esy2shop.models.Item;
 import codefactory.projectshop.R;
-import codefactory.projectshop.models.Item;
 
 /**
  *  Item Adapter,
@@ -19,7 +19,7 @@ import codefactory.projectshop.models.Item;
  *
  *  Jack Kitchener - James McNeil
  */
-public class ItemAdapter extends BaseAdapter {
+public class LocationsAdapter extends BaseAdapter {
 
 
     public ArrayList<Item> items;
@@ -28,7 +28,7 @@ public class ItemAdapter extends BaseAdapter {
     Context mContext;
 
 
-    public ItemAdapter(ArrayList<Item> items, Context mContext){
+    public LocationsAdapter(ArrayList<Item> items, Context mContext){
         this.items = items;
         this.mContext = mContext;
 

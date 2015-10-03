@@ -1,8 +1,7 @@
-package codefactory.projectshop.activites;
+package codefactory.esy2shop.activites;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +13,12 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import codefactory.esy2shop.models.Item;
+import codefactory.esy2shop.models.List;
 import codefactory.projectshop.R;
-import codefactory.projectshop.adapters.ItemAdapter;
-import codefactory.projectshop.models.Item;
-import codefactory.projectshop.models.List;
+import codefactory.esy2shop.adapters.ItemAdapter;
 
-public class AddItems extends ActionBarActivity implements View.OnClickListener {
+public class AddItems extends Activity implements View.OnClickListener {
 
 
 
@@ -174,6 +173,7 @@ public class AddItems extends ActionBarActivity implements View.OnClickListener 
     public void onAddClick(View view){
 
         addItemToList();
+
     }
 
 

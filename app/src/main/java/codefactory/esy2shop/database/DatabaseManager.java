@@ -1,4 +1,4 @@
-package codefactory.projectshop.database;
+package codefactory.esy2shop.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import codefactory.projectshop.models.Item;
-import codefactory.projectshop.models.List;
-import codefactory.projectshop.models.Store;
+import codefactory.esy2shop.models.Item;
+import codefactory.esy2shop.models.List;
+import codefactory.esy2shop.models.Store;
 
 /**
  * Created by Dillon on 15/09/2015.
@@ -100,13 +100,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public DatabaseManager(Context Context) {
         super(Context, DATABASE_NAME, null, DATABASE_VERSION);
         context = Context;
-        SQLiteDatabase db = getReadableDatabase();
+        db = getReadableDatabase();
     }
 
     public DatabaseManager(Context Context, boolean updateGlobal) {
         super(Context, DATABASE_NAME, null, DATABASE_VERSION);
         context = Context;
-        SQLiteDatabase db = getReadableDatabase();
+        db = getReadableDatabase();
         if(updateGlobal)
         {
             CATEGORIES = GetCategoryMap(null);
@@ -152,7 +152,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor dbResult = db.query(TABLE_CATEGORY, columns, Where, null, null, null, null);
 
         Map<Integer, String> result = new TreeMap<Integer, String>();
-        dbResult.moveToFirst();
         while(dbResult.moveToNext()) {
             int tempCategoryID = dbResult.getInt(0);
             String tempCategoryName = dbResult.getString(1);
@@ -167,20 +166,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
     // Returns the Category_ID, used to reference category_id on return
     public int UpdateCategory(int ID, String name) {
         int result = -1;
-        if (GetCategoryMap(COLUMN_CATEGORY_ID + " = " + ID).containsKey(ID))
+        Map<Integer, String> test = GetCategoryMap(null);
+        if (test.containsKey(ID))
         {
             ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_CATEGORY_ID, ID);
             dbUpdate.put(COLUMN_CATEGORY_NAME, name);
-            db.update(TABLE_CATEGORY, dbUpdate, null, null);
+            db.update(TABLE_CATEGORY, dbUpdate, COLUMN_CATEGORY_ID + " = " + ID, null);
             result = ID;
         }
         else
         {
             ContentValues dbInsert = new ContentValues();
+            dbInsert.put(COLUMN_CATEGORY_ID, ID);
             dbInsert.put(COLUMN_CATEGORY_NAME, name);
             long rowID = db.insert(TABLE_CATEGORY, null, dbInsert);
             Cursor dbResult = db.query(TABLE_CATEGORY, new String[]{COLUMN_CATEGORY_ID}, "ROWID = " + rowID, null, null, null, null);
+            dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
 
@@ -213,7 +214,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor dbResult = db.query(TABLE_STORE, columns, Where, null, null, null, null);
 
         Map<Integer, String> result = new TreeMap<Integer, String>();
-        dbResult.moveToFirst();
         while(dbResult.moveToNext()) {
             int tempStoreID = dbResult.getInt(0);
             String tempStoreName = dbResult.getString(1);
@@ -238,7 +238,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor dbResult = db.query(TABLE_STORE, columns, Where, null, null, null, null);
 
         ArrayList<Store> result = new ArrayList<Store>();
-        dbResult.moveToFirst();
         while(dbResult.moveToNext())
         {
             int tempStoreID = dbResult.getInt(0);
@@ -259,7 +258,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     {
         Store dbTest = null;
         if(inputStore.getId() != -1) {
-            dbTest = GetStores(COLUMN_STORE_ID + " = " + inputStore.getId()).get(0);
+            dbTest = GetStore(inputStore.getId());
         }
 
         int result = -1;
@@ -271,16 +270,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbInsert.put(COLUMN_STORE_LONG, inputStore.getLongitude());
             long rowID = db.insert(TABLE_STORE, null, dbInsert);
             Cursor dbResult = db.query(TABLE_STORE, new String[]{COLUMN_STORE_ID}, "ROWID = " + rowID, null, null, null, null);
+            dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else
         {
             ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_STORE_ID, inputStore.getId());
             dbUpdate.put(COLUMN_STORE_NAME, inputStore.getName());
             dbUpdate.put(COLUMN_STORE_LAT, inputStore.getLatitude());
             dbUpdate.put(COLUMN_STORE_LONG, inputStore.getLongitude());
-            db.update(TABLE_STORE, dbUpdate, null, null);
+            db.update(TABLE_STORE, dbUpdate, COLUMN_STORE_ID + " = " + inputStore.getId(), null);
             result = inputStore.getId();
         }
 
@@ -313,7 +312,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor dbResult = db.query(TABLE_LIST, columns, Where, null, null, null, null);
 
         Map<Integer, String> result = new TreeMap<Integer, String>();
-        dbResult.moveToFirst();
         while(dbResult.moveToNext()) {
             int tempListID = dbResult.getInt(0);
             String tempListName = dbResult.getString(1);
@@ -338,7 +336,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor dbResult = db.query(TABLE_LIST, columns, Where, null, null, null, null);
 
         ArrayList<List> result = new ArrayList<List>();
-        dbResult.moveToFirst();
         while(dbResult.moveToNext())
         {
             int tempListID = dbResult.getInt(0);
@@ -360,7 +357,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     {
         List dbTest = null;
         if(inputList.getId() != -1) {
-            dbTest = GetLists(COLUMN_LIST_ID + " = " + inputList.getId()).get(0);
+            dbTest = GetList(inputList.getId());
         }
 
         int result = -1;
@@ -373,17 +370,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbInsert.put(COLUMN_LIST_COMPLETE, (inputList.isComplete()) ? 1 : 0);
             long rowID = db.insert(TABLE_LIST, null, dbInsert);
             Cursor dbResult = db.query(TABLE_LIST, new String[]{COLUMN_LIST_ID}, "ROWID = " + rowID, null, null, null, null);
+            dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else
         {
             ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_LIST_ID, inputList.getId());
             dbUpdate.put(COLUMN_STORE_ID, inputList.getStore().getId());
             dbUpdate.put(COLUMN_CATEGORY_ID, inputList.getCategory());
             dbUpdate.put(COLUMN_LIST_NAME, inputList.getName());
             dbUpdate.put(COLUMN_LIST_COMPLETE, (inputList.isComplete()) ? 1 : 0);
-            db.update(TABLE_LIST, dbUpdate, null, null);
+            db.update(TABLE_LIST, dbUpdate, COLUMN_LIST_ID + " = " + inputList.getId(), null);
             result = inputList.getId();
         }
 
@@ -408,6 +405,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     ITEMS
     As Items should never be accessed individually, nor outside List, only GetItems() required
      */
+    // GetItem(int ID), Returns Item, null if not found
+    public Item GetItem(int itemID)
+    {
+        ArrayList<Item> dbTemp = GetItems(COLUMN_ITEM_ID + " = " + itemID);
+        return (dbTemp.size() == 1) ? dbTemp.get(0) : null;
+    }
+
     // GetItems(String Where), returns an ArrayList<Item>
     // Used to get all Items Where, use Where == 'null' for all Items
     public ArrayList<Item> GetItems(String Where)
@@ -416,7 +420,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor dbResult = db.query(TABLE_ITEM, columns, Where, null, null, null, null);
 
         ArrayList<Item> result = new ArrayList<Item>();
-        dbResult.moveToFirst();
         while(dbResult.moveToNext())
         {
             int tempItemID = dbResult.getInt(0);
@@ -434,7 +437,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     {
         Item dbTest = null;
         if(inputItem.getId() != -1) {
-            dbTest = GetItems(COLUMN_ITEM_ID + " = " + inputItem.getId()).get(0);
+            dbTest = GetItem(inputItem.getId());
         }
 
         int result = -1;
@@ -446,16 +449,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbInsert.put(COLUMN_ITEM_COMPLETE, (inputItem.isComplete()) ? 1 : 0);
             long rowID = db.insert(TABLE_ITEM, null, dbInsert);
             Cursor dbResult = db.query(TABLE_ITEM, new String[]{COLUMN_ITEM_ID}, "ROWID = " + rowID, null, null, null, null);
+            dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else
         {
             ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_ITEM_ID, inputItem.getId());
             dbUpdate.put(COLUMN_LIST_ID, listID);
             dbUpdate.put(COLUMN_ITEM_NAME, inputItem.getName());
             dbUpdate.put(COLUMN_ITEM_COMPLETE, (inputItem.isComplete()) ? 1 : 0);
-            db.update(TABLE_LIST, dbUpdate, null, null);
+            db.update(TABLE_LIST, dbUpdate, COLUMN_ITEM_ID + " = " + inputItem.getId(), null);
             result = inputItem.getId();
         }
 
@@ -483,7 +486,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String[] columns = new String[]{COLUMN_NOTIFICATION_ID, COLUMN_LIST_ID, COLUMN_NOTIFICATION_DATE};
         Cursor dbResult = db.query(TABLE_NOTIFICATION, columns, Where, null, null, null, null);
 
-        dbResult.moveToFirst();
         while(dbResult.moveToNext())
         {
             int tempNotificationID = dbResult.getInt(0);
@@ -510,6 +512,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbInsert.put(COLUMN_NOTIFICATION_DATE, DATE);
             long rowID = db.insert(TABLE_NOTIFICATION, null, dbInsert);
             Cursor dbResult = db.query(TABLE_NOTIFICATION, new String[]{COLUMN_NOTIFICATION_ID}, "ROWID = " + rowID, null, null, null, null);
+            dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else

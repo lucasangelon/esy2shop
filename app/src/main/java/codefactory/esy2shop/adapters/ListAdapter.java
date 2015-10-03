@@ -1,21 +1,19 @@
-package codefactory.projectshop.adapters;
+package codefactory.esy2shop.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import codefactory.esy2shop.activites.EditList;
+import codefactory.esy2shop.models.List;
 import codefactory.projectshop.R;
-import codefactory.projectshop.models.Item;
-import codefactory.projectshop.models.List;
 
 /**
  * Should help display list of list on main page
@@ -27,14 +25,9 @@ public class ListAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<List> mList;
 
-
-
-
     public ListAdapter (ArrayList<List> list, Context context) {
         this.mList = list;
         this.mContext = context;
-
-
     }
 
     @Override
@@ -53,19 +46,15 @@ public class ListAdapter extends BaseAdapter {
         return 0;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
         View V = convertView;
         final int finalPos = position;
 
-        if (V == null) {
-
+        if (V == null)
+        {
             LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             V = vi.inflate(R.layout.main_list, null);
-
         }
 
         final List list = mList.get(finalPos);
@@ -93,20 +82,12 @@ public class ListAdapter extends BaseAdapter {
                 /*
                     Whats happens when you delete a list
                  */
-
+                list.Delete(mContext);
                 mList.remove(finalPos);
 
                 //Update adapter
                 notifyDataSetChanged();
-
-
-                /*
-                    DATABASE STUFF GOOSE HERE
-                 */
-
-
             }
-
         });
 
          /*
@@ -114,11 +95,10 @@ public class ListAdapter extends BaseAdapter {
          */
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                // Navigate to edit List fragment/screen
-
-            }
-        });
+                Intent listIntent = new Intent(mContext, EditList.class);
+                listIntent.putExtra("ListID", list.getId());
+                mContext.startActivity(listIntent);
+            }});
 
         return V;
     }
@@ -128,6 +108,4 @@ public class ListAdapter extends BaseAdapter {
         Button editButton;
         Button deleteButton;
     }
-
-
 }

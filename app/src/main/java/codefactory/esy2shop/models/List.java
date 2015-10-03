@@ -1,12 +1,10 @@
-package codefactory.projectshop.models;
+package codefactory.esy2shop.models;
 
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
-import codefactory.projectshop.database.DatabaseManager;
+import codefactory.esy2shop.database.DatabaseManager;
 
 /**
  * List
@@ -51,6 +49,15 @@ public class List{
             this.category = dbList.category;
             this.complete = dbList.complete;
         }
+        else
+        {
+            this.id = -1;
+            this.name = "";
+            this.items = new ArrayList<Item>();
+            this.store = null;
+            this.category = 0;
+            this.complete = false;
+        }
     }
 
     public List(int id, String name, ArrayList<Item> items, Store store, int category, boolean complete){
@@ -67,9 +74,9 @@ public class List{
         DatabaseManager db = new DatabaseManager(context);
         // As per hierarchy
         // Update Store ?and Category? first
-        store.setId(db.UpdateStore(store));
-        // DEBUG PLACEHOLDER CATEGORY
-        category = db.UpdateCategory(-1, "General");
+        if(store != null) {
+            store.setId(db.UpdateStore(store));
+        }
 
         // Then update List
         id = db.UpdateList(this);
@@ -120,12 +127,6 @@ public class List{
     public ArrayList<Item> getItemList() {
         return items;
     }
-
-
-    /**
-     * Returns the size of the list
-     * @return int
-     */
     public int listSize(){
         return items.size();
     }

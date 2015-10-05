@@ -10,11 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import codefactory.esy2shop.adapters.ListItemAdapter;
 import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.esy2shop.models.Item;
 import codefactory.esy2shop.models.List;
@@ -23,26 +25,20 @@ import codefactory.projectshop.R;
 
 public class EditList extends ActionBarActivity {
 
-    /*
-        Values
-     */
-    private List list;
-
-    /*
-        Views
-     */
-
-    private EditText listName;
-    private Integer[] categoryIDs;
-    private Spinner categorySpinner;
-    private Integer[] storeIDs;
-    private Spinner storeSpinner;
-    private CheckBox isComplete;
-    private Button saveButton;
-
-    /*
-        Test Test Test
-    */
+    List list;
+    DatabaseManager db;
+    EditText listNameField;
+    CheckBox listCompleteField;
+    Button newStoreBtn;
+    Spinner listStoreSpinner;
+    ArrayAdapter<String> listStoreAdapter;
+    int[] listStoreIDs;
+    Spinner listCategorySpinner;
+    ArrayAdapter<String> listCategoryAdapter;
+    int[] listCategoryIDs;
+    Button listAddItemBtn;
+    ListItemAdapter listItemsAdapter;
+    Button listSaveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,47 +46,125 @@ public class EditList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_list);
 
-        /*
-        Deal with List from Intent and/or Database
-         */
         //Get ID from intent
+        db = new DatabaseManager(this);
         Intent intent = getIntent();
         int id = intent.getIntExtra("ListID", -1);
         // If id == -1 new list else get from DB
-        list = (id == -1) ? new List(): new List(getApplicationContext(), id);
+        list = (id == -1) ? new List(): new List(db, id);
 
-        /*
-            Views
-         */
-        listName = (EditText) findViewById(R.id.listNameText);
-        listName.setText(list.getName());
+        // Update Name Field
+        listNameField = (EditText) findViewById(R.id.listNameField);
+        listNameField.setText(list.getName());
 
-        categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
-        String[] categoryNames = new String[DatabaseManager.CATEGORIES.size()];
-        categoryNames = DatabaseManager.CATEGORIES.values().toArray(categoryNames);
-        if(categoryNames.length == 0)
+        // Update Completed Checkbox
+        listCompleteField = (CheckBox) findViewById(R.id.listCompleteField);
+        listCompleteField.setChecked(list.isComplete());
+
+        // Set New Store button
+        newStoreBtn = (Button) findViewById(R.id.listNewStoreBtn);
+        // REQ ATTN
+
+        // Update Store Spinner
+        listStoreSpinner = (Spinner) findViewById(R.id.listStoreSpinner);
+        int listStoreSize = DatabaseManager.STORES.size();
+        // Prepare Store Names and IDs
+        String[] listStoreNames = new String[listStoreSize + 1];
+        listStoreNames[0] = "None";
+        listStoreIDs = new int[listStoreSize + 1];
+        listStoreIDs[0] = -1;
+        // Get the List Store ID for testing
+        int listStoreID = list.getStore();
+        int storeStartPos = 0;
+        // Get DB Store names and IDs
+        String[] tempListStoreNames = new String[listStoreSize];
+        tempListStoreNames = DatabaseManager.STORES.values().toArray(tempListStoreNames);
+        Integer[] tempListStoreIDs = new Integer[listStoreSize];
+        tempListStoreIDs = DatabaseManager.STORES.keySet().toArray(tempListStoreIDs);
+        // Add DB data to adapter array
+        for(int i = 0; i < listStoreSize; i++)
         {
-            categoryNames = new String[]{"General"};
+            listStoreNames[i + 1] = tempListStoreNames[i];
+            listStoreIDs[i + 1] = tempListStoreIDs[i];
+            if(listStoreID == tempListStoreIDs[i])
+            {
+                storeStartPos = i + 1;
+            }
         }
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryNames);
-        categorySpinner.setAdapter(categoryAdapter);
+        // Finalise adapter and spinner
+        listStoreAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listStoreNames);
+        listStoreSpinner.setAdapter(listStoreAdapter);
+        listStoreSpinner.setSelection(storeStartPos);
 
-        storeSpinner = (Spinner) findViewById(R.id.storeSpinner);
-        String[] storeNames = new String[DatabaseManager.STORES.size()];
-        storeNames = DatabaseManager.STORES.values().toArray(storeNames);
-        storeIDs = new Integer[storeNames.length];
-        storeIDs = DatabaseManager.STORES.keySet().toArray(storeIDs);
-        if(storeNames.length == 0)
+        // Update Category Spinner
+        listCategorySpinner = (Spinner) findViewById(R.id.listCategorySpinner);
+        int listCategorySize = DatabaseManager.CATEGORIES.size();
+        // Get Category Names and prepare IDs
+        String[] listCategoryNames = new String[listCategorySize];
+        listCategoryNames = DatabaseManager.CATEGORIES.values().toArray(listCategoryNames);
+        listCategoryIDs = new int[listCategorySize];
+        // Get the List Category ID for testing
+        int listCategoryID = list.getCategory();
+        int CategoryStartPos = 0;
+        // Get DB Categories IDs
+        Integer[] tempListCategoryIDs = new Integer[listCategorySize];
+        tempListCategoryIDs = DatabaseManager.CATEGORIES.keySet().toArray(tempListCategoryIDs);
+        // Add DB data to adapter array
+        for(int i = 0; i < listCategorySize; i++)
         {
-            storeNames = new String[]{"Empty"};
+            listCategoryIDs[i] = tempListCategoryIDs[i];
+            if(listCategoryID == tempListCategoryIDs[i])
+            {
+                CategoryStartPos = i;
+            }
         }
-        ArrayAdapter<String> storeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, storeNames);
-        storeSpinner.setAdapter(storeAdapter);
+        // Finalise adapter and spinner
+        listCategoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCategoryNames);
+        listCategorySpinner.setAdapter(listCategoryAdapter);
+        listCategorySpinner.setSelection(CategoryStartPos);
 
-        isComplete = (CheckBox) findViewById(R.id.isCompleteBox);
-        isComplete.setChecked(list.isComplete());
+        // Setup Add Item Button
+        listAddItemBtn = (Button) findViewById(R.id.listNewItem);
 
-        saveButton = (Button) findViewById(R.id.saveButton);
+        // Setup Items List View
+        listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
+        ListView listItemsView = (ListView) findViewById(R.id.listItemVeiw);
+        listItemsView.setAdapter(listItemsAdapter);
+
+
+        // Setup Save Button
+        listSaveBtn = (Button) findViewById(R.id.listSaveBtn);
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        int listStoreSize = DatabaseManager.STORES.size();
+        // Prepare Store Names and IDs
+        listStoreAdapter.clear();
+        listStoreAdapter.insert("None", 0);
+        listStoreIDs = new int[listStoreSize + 1];
+        listStoreIDs[0] = -1;
+        // Get the List Store ID for testing
+        int listStoreID = list.getStore();
+        int storeStartPos = 0;
+        // Get DB Store names and IDs
+        String[] tempListStoreNames = new String[listStoreSize];
+        tempListStoreNames = DatabaseManager.STORES.values().toArray(tempListStoreNames);
+        Integer[] tempListStoreIDs = new Integer[listStoreSize];
+        tempListStoreIDs = DatabaseManager.STORES.keySet().toArray(tempListStoreIDs);
+        // Add DB data to adapter array
+        for(int i = 0; i < listStoreSize; i++)
+        {
+            listStoreAdapter.insert(tempListStoreNames[i], 1);
+            listStoreIDs[i + 1] = tempListStoreIDs[i];
+            if(listStoreID == tempListStoreIDs[i])
+            {
+                storeStartPos = i + 1;
+            }
+        }
+        listStoreAdapter.notifyDataSetChanged();
+        listCategorySpinner.setSelection(storeStartPos);
     }
 
     @Override
@@ -117,40 +191,33 @@ public class EditList extends ActionBarActivity {
 
     /*
         OnClick Listener
-
      */
-    public void onSaveClick(View view){
-        /*
-            Save changes
-         */
-        //NEEDS SOME REWORK
-        int storeID = storeIDs[storeSpinner.getSelectedItemPosition()];
-        Store selectedStore = new DatabaseManager(getApplicationContext()).GetStore(storeID);
-        saveChanges(listName.getText().toString(), selectedStore, list.getCategory(), isComplete.isChecked());
-
-        /*
-            Toast
-         */
-        Toast.makeText(this,"Changes Saved",Toast.LENGTH_LONG).show();
-
+    public void listAddItemBtnOnClick(View view){
+        listItemsAdapter.AddItem();
     }
 
+    public void listSaveBtnOnClick(View view){
+        // Make useable DbManager
+        DatabaseManager db = new DatabaseManager(this);
 
-    /*
-        Saves Changes to a list
+        // Update List Object
+        list.setName(listNameField.getText().toString());
+        list.setItems(listItemsAdapter.GetListItems());
+        for(Item i : listItemsAdapter.mRemovedItems)
+        {
+            db.DeleteItem(i.getId());
+        }
+        list.setStore(listStoreIDs[listStoreSpinner.getSelectedItemPosition()]);
+        list.setCategory(listCategoryIDs[listCategorySpinner.getSelectedItemPosition()]);
+        list.setComplete(listCompleteField.isChecked());
 
-        Saving in Variables
+        // Apply Changes
+        list.SaveChanges(db);
 
-        Database will be added later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     */
-    public void saveChanges(String name, Store store, int category, boolean complete){
-        list.setName(name);
-        // ITEM HANDLER NEEDS TO GO HERE
-        list.setCategory(category);
-        list.setStore(store);
-        list.setComplete(complete);
+        // Toast
+        Toast.makeText(this,"Changes Saved",Toast.LENGTH_LONG).show();
 
-        list.SaveChanges(getApplicationContext());
+        // Close
         finish();
     }
 }

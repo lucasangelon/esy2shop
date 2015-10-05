@@ -21,20 +21,8 @@
             android:label="@string/title_activity_edit_list" >
         </activity>
         <activity
-            android:name="codefactory.esy2shop.activites.AddItems"
-            android:label="@string/title_activity_add_items" >
-        </activity>
-        <activity
             android:name="codefactory.esy2shop.activites.CopyrightActivity"
             android:label="@string/title_activity_copyright" >
-        </activity>
-        <activity
-            android:name="codefactory.esy2shop.activites.Main_Locations"
-            android:label="@string/title_activity_main__locations" >
-        </activity>
-        <activity
-            android:name="codefactory.esy2shop.activites.MainLocations"
-            android:label="@string/title_activity_main_locations" >
         </activity>
     </application>
 

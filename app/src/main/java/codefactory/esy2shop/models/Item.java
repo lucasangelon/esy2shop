@@ -44,9 +44,8 @@ public class Item {
         this.complete = complete;
     }
 
-    public boolean Delete(Context context)
+    public boolean Delete(DatabaseManager db)
     {
-        DatabaseManager db = new DatabaseManager(context);
         return db.DeleteItem(id);
     }
 

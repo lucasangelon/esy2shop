@@ -109,6 +109,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db = getReadableDatabase();
         if(updateGlobal)
         {
+            UpdateCategory(2, "General");
+            UpdateCategory(3, "Specific");
+            Map<Integer, String> empty = new TreeMap<Integer, String>();
+            UpdateStore(new Store(2, "Store1", 1, 1, empty));
+            UpdateStore(new Store(3, "Store2", 2, 2, empty));
+            UpdateStore(new Store(4, "Store3", 3, 3, empty));
+            Log.d("", "Placeholder Values Inserted from 'new DatabaseManager(Context, boolean == true)'");
+
             CATEGORIES = GetCategoryMap(null);
             STORES = GetStoreMap(null);
             LISTS = GetListMap(null);
@@ -339,7 +347,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while(dbResult.moveToNext())
         {
             int tempListID = dbResult.getInt(0);
-            Store tempStore = GetStore(dbResult.getInt(1));
+            int tempStore = dbResult.getInt(1);
             int tempCategoryID = dbResult.getInt(2);
             String tempListName = dbResult.getString(3);
             boolean tempListComplete = (dbResult.getInt(4) == 1);
@@ -364,7 +372,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         if(dbTest == null)
         {
             ContentValues dbInsert = new ContentValues();
-            dbInsert.put(COLUMN_STORE_ID, inputList.getStore().getId());
+            dbInsert.put(COLUMN_STORE_ID, inputList.getStore());
             dbInsert.put(COLUMN_CATEGORY_ID, inputList.getCategory());
             dbInsert.put(COLUMN_LIST_NAME, inputList.getName());
             dbInsert.put(COLUMN_LIST_COMPLETE, (inputList.isComplete()) ? 1 : 0);
@@ -376,7 +384,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         else
         {
             ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_STORE_ID, inputList.getStore().getId());
+            dbUpdate.put(COLUMN_STORE_ID, inputList.getStore());
             dbUpdate.put(COLUMN_CATEGORY_ID, inputList.getCategory());
             dbUpdate.put(COLUMN_LIST_NAME, inputList.getName());
             dbUpdate.put(COLUMN_LIST_COMPLETE, (inputList.isComplete()) ? 1 : 0);
@@ -423,8 +431,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while(dbResult.moveToNext())
         {
             int tempItemID = dbResult.getInt(0);
-            String tempItemName = dbResult.getString(3);
-            boolean tempItemComplete = (dbResult.getInt(4) == 1);
+            String tempItemName = dbResult.getString(2);
+            boolean tempItemComplete = (dbResult.getInt(3) == 1);
             result.add(new Item(tempItemID, tempItemName, tempItemComplete));
         }
         return result;
@@ -458,7 +466,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbUpdate.put(COLUMN_LIST_ID, listID);
             dbUpdate.put(COLUMN_ITEM_NAME, inputItem.getName());
             dbUpdate.put(COLUMN_ITEM_COMPLETE, (inputItem.isComplete()) ? 1 : 0);
-            db.update(TABLE_LIST, dbUpdate, COLUMN_ITEM_ID + " = " + inputItem.getId(), null);
+            db.update(TABLE_ITEM, dbUpdate, COLUMN_ITEM_ID + " = " + inputItem.getId(), null);
             result = inputItem.getId();
         }
 

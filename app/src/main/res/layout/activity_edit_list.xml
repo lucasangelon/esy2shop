@@ -1,86 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="codefactory.esy2shop.activites.EditList"
-    android:id="@+id/activity_edit_list">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listNameText"
-        android:layout_below="@+id/listNameView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="List Name"
-        android:id="@+id/listNameView"
-        android:layout_alignLeft="@+id/listNameText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="List Category"
-        android:id="@+id/textCategory"
-        android:layout_below="@+id/listNameText"
+        android:id="@+id/listNameLabel"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Store"
-        android:id="@+id/storeView"
-        android:layout_below="@+id/categorySpinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save Changes"
-        android:id="@+id/saveButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onSaveClick" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Completed"
-        android:id="@+id/isCompleteBox"
+        android:id="@+id/listCompleteField"
         android:checked="false"
-        android:layout_below="@+id/storeSpinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/listStoreLabel"
+        android:layout_alignStart="@+id/listStoreLabel"
+        android:layout_above="@+id/listStoreLabel" />
 
-    <Spinner
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/storeSpinner"
-        android:layout_below="@+id/storeView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/listNameField"
+        android:layout_below="@+id/listNameLabel"
+        android:layout_alignRight="@+id/listCategoryField"
+        android:layout_alignEnd="@+id/listCategoryField"
+        android:layout_toRightOf="@+id/listCompleteField"
+        android:layout_toEndOf="@+id/listCompleteField" />
 
-    <Spinner
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/categorySpinner"
-        android:layout_below="@+id/textCategory"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="List Store"
+        android:id="@+id/listStoreLabel"
+        android:layout_below="@+id/listNameField"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="List Category"
+        android:id="@+id/listCategoryField"
+        android:layout_below="@+id/listNameField"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/listStoreLabel"
+        android:weightSum="3"
+        android:id="@+id/spinnerContainer">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listStoreSpinner"
+                android:layout_toRightOf="@+id/listNewStoreBtn"
+                android:layout_toEndOf="@+id/listNewStoreBtn" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/listNewStoreBtn"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/listCategorySpinner"
+            android:layout_weight="2"
+            android:layout_alignParentTop="true" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Item"
+        android:id="@+id/listNewItem"
+        android:onClick="listAddItemBtnOnClick"
+        android:layout_below="@+id/spinnerContainer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listItemVeiw"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/listNewItem"
+        android:layout_above="@+id/listSaveBtn" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Changes"
+        android:id="@+id/listSaveBtn"
+        android:onClick="listSaveBtnOnClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

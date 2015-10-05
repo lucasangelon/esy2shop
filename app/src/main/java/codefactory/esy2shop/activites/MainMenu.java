@@ -20,29 +20,13 @@ import codefactory.esy2shop.models.List;
 
 public class MainMenu extends Activity {
 
-    ListView mainListView;
     Intent listIntent;
+    codefactory.esy2shop.adapters.ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
-        // Load the Database for Static
-        DatabaseManager dbLoad = new DatabaseManager(getApplicationContext(), true);
-        // Get Database Lists
-        ArrayList<List> listOfLists = dbLoad.GetLists(null);
-
-        /*
-        TEST  TEST  TEST
-        Make sure there are placeholder objects
-         */
-        dbLoad.UpdateCategory(1, "General");
-        dbLoad.UpdateCategory(2, "Specific");
-        Map<Integer, String> empty = new TreeMap<Integer, String>();
-        dbLoad.UpdateStore(new Store(1, "Store1", 1, 1, empty));
-        dbLoad.UpdateStore(new Store(2, "Store2", 2, 2, empty));
-        dbLoad.UpdateStore(new Store(3, "Store3", 3, 3, empty));
 
         listIntent = new Intent(this, EditList.class);
 
@@ -53,20 +37,22 @@ public class MainMenu extends Activity {
                 startActivity(listIntent);
             }});
 
+        // Load the Database for Static
+        DatabaseManager dbLoad = new DatabaseManager(this, true);
+
         //Set adapter to list view
-        ListAdapter adapter = new codefactory.esy2shop.adapters.ListAdapter(listOfLists, MainMenu.this);
-        mainListView = (ListView)findViewById(R.id.mainListView);
-        mainListView.setAdapter(adapter);
+        listAdapter = new codefactory.esy2shop.adapters.ListAdapter(dbLoad.GetLists(null), this);
+        ListView mainListView = (ListView)findViewById(R.id.mainListView);
+        mainListView.setAdapter(listAdapter);
+    }
 
-
-
-
-      /*  Test for now, will change to get list of lists later
-        String[] listOfListsTest = {"Test 1", "Test 2", "Test 3", "Test 4", "Test 5", "Test 6", "Test 7"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, );
-        setListAdapter(adapter); */
-
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        // Load the Database
+        DatabaseManager dbLoad = new DatabaseManager(this);
+        listAdapter.Update(dbLoad.GetLists(null));
     }
 
     @Override
@@ -74,7 +60,5 @@ public class MainMenu extends Activity {
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-
 }
 

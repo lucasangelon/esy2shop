@@ -1,12 +1,10 @@
-package codefactory.projectshop.models;
+package codefactory.esy2shop.models;
 
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
-import codefactory.projectshop.database.DatabaseManager;
+import codefactory.esy2shop.database.DatabaseManager;
 
 /**
  * List
@@ -24,7 +22,7 @@ public class List{
     int id;
     String name;
     ArrayList<Item> items;
-    Store store;
+    int store;
     int category;
     boolean complete;
 
@@ -35,13 +33,12 @@ public class List{
         this.id = -1;
         this.name = "";
         this.items = new ArrayList<Item>();
-        this.store = null;
+        this.store = -1;
         this.category = 0;
         this.complete = false;
     }
 
-    public List(Context context, int ID){
-        DatabaseManager db = new DatabaseManager(context);
+    public List(DatabaseManager db, int ID){
         List dbList = db.GetList(ID);
         if(dbList != null) {
             this.id = dbList.id;
@@ -51,9 +48,18 @@ public class List{
             this.category = dbList.category;
             this.complete = dbList.complete;
         }
+        else
+        {
+            this.id = -1;
+            this.name = "";
+            this.items = new ArrayList<Item>();
+            this.store = -1;
+            this.category = 0;
+            this.complete = false;
+        }
     }
 
-    public List(int id, String name, ArrayList<Item> items, Store store, int category, boolean complete){
+    public List(int id, String name, ArrayList<Item> items, int store, int category, boolean complete){
         this.id = id;
         this.name = name;
         this.items = items;
@@ -62,28 +68,21 @@ public class List{
         this.complete = complete;
     }
 
-    public void SaveChanges(Context context)
+    public void SaveChanges(DatabaseManager db)
     {
-        DatabaseManager db = new DatabaseManager(context);
         // As per hierarchy
-        // Update Store ?and Category? first
-        store.setId(db.UpdateStore(store));
-        // DEBUG PLACEHOLDER CATEGORY
-        category = db.UpdateCategory(-1, "General");
-
         // Then update List
         id = db.UpdateList(this);
 
-        // Finally update Items ?and notifications?
+        // Finally update Items
         for(Item i : items)
         {
             i.setId(db.UpdateItem(i, id));
         }
     }
 
-    public boolean Delete(Context context)
+    public boolean Delete(DatabaseManager db)
     {
-        DatabaseManager db = new DatabaseManager(context);
         boolean result = true;
         for(Item i : items)
         {
@@ -120,12 +119,10 @@ public class List{
     public ArrayList<Item> getItemList() {
         return items;
     }
-
-
-    /**
-     * Returns the size of the list
-     * @return int
-     */
+    public void setItems(ArrayList<Item> items)
+    {
+        this.items = items;
+    }
     public int listSize(){
         return items.size();
     }
@@ -146,10 +143,10 @@ public class List{
         return null;
     }
 
-    public Store getStore() {
+    public int getStore() {
         return store;
     }
-    public void setStore(Store store) {
+    public void setStore(int store) {
         this.store = store;
     }
 

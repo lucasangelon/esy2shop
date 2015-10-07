@@ -1,11 +1,11 @@
-package codefactory.projectshop.models;
+package codefactory.esy2shop.models;
 
 import android.content.Context;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-import codefactory.projectshop.database.DatabaseManager;
+import codefactory.esy2shop.database.DatabaseManager;
 
 /**
  * Store

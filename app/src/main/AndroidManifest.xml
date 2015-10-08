@@ -32,6 +32,10 @@
             android:name="codefactory.esy2shop.activites.EditNotification"
             android:label="@string/title_activity_edit_notification" >
         </activity>
+        <activity
+            android:name=".activites.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
 </manifest>

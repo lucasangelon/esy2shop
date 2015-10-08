@@ -25,4 +25,5 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="title_activity_main_locations">Main Locations</string>
     <string name="title_activity_edit_store">Edit Store</string>
     <string name="title_activity_edit_notification">Edit Notification</string>
+    <string name="title_activity_about">AboutActivity</string>
 </resources>

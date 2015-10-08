@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Dillon\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jar="C:\Users\041402465\AppData\Roaming\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-9370b7b4b5354f8c6d700322c23d6f3c1f886f04.jar" />
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-1e814edb4179a1b8942c3dc7b9f22adda8ffc32f.jar" />
     </item>
     <item
-        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\classes.jar"
+        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\pre-dexed\debug\classes-794acc2f251224482649fd2512cc416bc988deee.jar" />
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-7126811a09387e78c27ee86a5760446813dca099.jar" />
     </item>
     <item
-        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\pre-dexed\debug\classes-b2e1f7c93b48cf1e1e85b70b1c30ac28240604df.jar" />
-    </item>
-    <item
-        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\libs\internal_impl-21.0.0.jar"
+        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\libs\internal_impl-21.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-Database-Integration\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-b585635493e5bb54924b6d3ddf740ebb4c52a7a9.jar" />
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-9d6369963e02b25d5ab3f21700de7719240871f9.jar" />
+    </item>
+    <item
+        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-1c2107ad1d232cd861cbd4811083c22ff76d847a.jar" />
     </item>
 
 </items>

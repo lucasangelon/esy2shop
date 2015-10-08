@@ -16,6 +16,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+
 import java.util.ArrayList;
 
 import codefactory.esy2shop.adapters.ListItemAdapter;
@@ -89,8 +94,42 @@ public class EditList extends ActionBarActivity {
 
         // Setup Items List View
         listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
-        ListView listItemsView = (ListView) findViewById(R.id.listItemVeiw);
+        com.baoyz.swipemenulistview.SwipeMenuListView listItemsView = (com.baoyz.swipemenulistview.SwipeMenuListView) findViewById(R.id.listItemVeiw);
         listItemsView.setAdapter(listItemsAdapter);
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "open" item
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth((90));
+                // set a icon
+                deleteItem.setIcon(R.mipmap.ic_launcher);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+        listItemsView.setMenuCreator(creator);
+        listItemsView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        listItemsView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                       listItemsAdapter.remove(position);
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
     }
 
     @Override

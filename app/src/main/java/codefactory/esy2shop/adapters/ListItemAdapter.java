@@ -33,6 +33,12 @@ public class ListItemAdapter extends BaseAdapter {
         inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
     }
 
+    public void remove(int index)
+    {
+        itemHandlers.remove(index);
+        notifyDataSetChanged();
+    }
+
     public void Update(ArrayList<Item> items)
     {
         itemHandlers = new ArrayList<ItemHandler>();

@@ -37,12 +37,6 @@ public class ListAdapter extends BaseAdapter {
         inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void remove(int index)
-    {
-        mList.remove(index);
-        notifyDataSetChanged();
-    }
-
     public void Update(ArrayList<List> list)
     {
         mList = list;

@@ -9,11 +9,6 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -47,46 +42,8 @@ public class MainMenu extends Activity {
 
         //Set adapter to list view
         listAdapter = new codefactory.esy2shop.adapters.ListAdapter(dbLoad.GetLists(null), this);
-        com.baoyz.swipemenulistview.SwipeMenuListView mainListView = (com.baoyz.swipemenulistview.SwipeMenuListView)findViewById(R.id.mainListView);
+        ListView mainListView = (ListView)findViewById(R.id.mainListView);
         mainListView.setAdapter(listAdapter);
-
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "open" item
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
-                deleteItem.setWidth((90));
-                // set a icon
-                deleteItem.setIcon(R.mipmap.ic_launcher);
-                // add to menu
-                menu.addMenuItem(deleteItem);
-            }
-        };
-
-        mainListView.setMenuCreator(creator);
-        mainListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-        mainListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index) {
-                    case 0:
-                        listAdapter.remove(position);
-                        break;
-                }
-                // false : close the menu; true : not close the menu
-                return false;
-            }
-        });
-
-
     }
 
     @Override

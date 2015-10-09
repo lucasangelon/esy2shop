@@ -3,6 +3,7 @@ package codefactory.esy2shop.models;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import codefactory.esy2shop.database.DatabaseManager;
 
@@ -23,8 +24,9 @@ public class List{
     String name;
     ArrayList<Item> items;
     int store;
+    boolean proximityAlert;
     int category;
-    boolean complete;
+    Date dateAlert;
 
     /*
         Constructors
@@ -34,8 +36,9 @@ public class List{
         this.name = "";
         this.items = new ArrayList<Item>();
         this.store = -1;
+        this.proximityAlert = true;
         this.category = 0;
-        this.complete = false;
+        this.dateAlert = null;
     }
 
     public List(DatabaseManager db, int ID){
@@ -45,8 +48,9 @@ public class List{
             this.name = dbList.name;
             this.items = dbList.items;
             this.store = dbList.store;
+            this.proximityAlert = dbList.proximityAlert;
             this.category = dbList.category;
-            this.complete = dbList.complete;
+            this.dateAlert = dbList.dateAlert;
         }
         else
         {
@@ -54,18 +58,20 @@ public class List{
             this.name = "";
             this.items = new ArrayList<Item>();
             this.store = -1;
+            this.proximityAlert = true;
             this.category = 0;
-            this.complete = false;
+            this.dateAlert = null;
         }
     }
 
-    public List(int id, String name, ArrayList<Item> items, int store, int category, boolean complete){
+    public List(int id, String name, ArrayList<Item> items, int store, boolean proximityAlert, int category, Date dateAlert){
         this.id = id;
         this.name = name;
         this.items = items;
         this.store = store;
+        this.proximityAlert = proximityAlert;
         this.category = category;
-        this.complete = complete;
+        this.dateAlert = dateAlert;
     }
 
     public void SaveChanges(DatabaseManager db)
@@ -149,6 +155,12 @@ public class List{
     public void setStore(int store) {
         this.store = store;
     }
+    public boolean getProximityAlert(){
+        return proximityAlert;
+    }
+    public void setProximityAlert(boolean proximityAlert){
+        this.proximityAlert = proximityAlert;
+    }
 
     public int getCategory() {
         return category;
@@ -157,10 +169,10 @@ public class List{
         this.category = category;
     }
 
-    public boolean isComplete() {
-        return complete;
+    public Date getDateAlert(){
+        return dateAlert;
     }
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setDateAlert(Date dateAlert){
+        this.dateAlert = dateAlert;
     }
 }

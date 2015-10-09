@@ -10,32 +10,74 @@
     android:id="@+id/activity_main_layout">
 
 
-
-    <ImageView
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:id="@+id/PLACEHOLDER"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/imageView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REFINE"
+            android:id="@+id/refineCategoryBtn"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeActiveBtn"
+            android:checked="false"
+            android:layout_above="@+id/refineCategoryBtn"
+            android:layout_toLeftOf="@+id/refineStoreBtn"
+            android:layout_toStartOf="@+id/refineStoreBtn" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pantryImage"
-        android:src="@mipmap/pantry_placeholder"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TEMPCategorySpinner"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/refineCategoryBtn"
+            android:layout_toStartOf="@+id/refineCategoryBtn"
+            android:layout_alignTop="@+id/refineCategoryBtn" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TEMPStoreSpinner"
+            android:layout_above="@+id/TEMPCategorySpinner"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/storeActiveBtn"
+            android:layout_toStartOf="@+id/storeActiveBtn" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REFINE"
+            android:id="@+id/refineStoreBtn"
+            android:layout_above="@+id/refineCategoryBtn"
+            android:layout_alignRight="@+id/refineCategoryBtn"
+            android:layout_alignEnd="@+id/refineCategoryBtn" />
+
+    </RelativeLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New List"
         android:id="@+id/newList"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/PLACEHOLDER"/>
 
     <ListView
         android:layout_width="wrap_content"

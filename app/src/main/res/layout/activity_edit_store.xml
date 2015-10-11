@@ -10,8 +10,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Your Saved Stores"
+        android:id="@+id/existingStoreLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/existingStoreSpinner"
+        android:layout_below="@+id/existingStoreLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Find A New Store"
         android:id="@+id/newStoreLabel"
+        android:layout_below="@+id/existingStoreSpinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -31,34 +49,29 @@
         android:layout_height="wrap_content"
         android:text="S"
         android:id="@+id/newStoreBtn"
-        android:onClick="newStoreBtnOnClick"
         android:layout_alignTop="@+id/newStoreField"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/existingStoreSpinner"
+        android:layout_alignEnd="@+id/existingStoreSpinner" />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/newStoreBtn"
+        android:layout_above="@+id/ADVERTISEMENT_PLACEHOLDER"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:weightSum="3"
-        android:layout_above="@+id/ADVERTISEMENT_PLACEHOLDER"
-        android:id="@+id/linearLayout">
+        android:layout_below="@+id/newStoreBtn"
+        android:id="@+id/storeResultPLACEHOLDER">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/storesListView"
-            android:layout_weight="2"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/GOOGLEMAPSPLACEHOLDER"></RelativeLayout>
-    </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SUBMIT"
+            android:id="@+id/storeResultSubmitPLACEHOLDER"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="storeResultSubmitPLACEHOLDEROnClick"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

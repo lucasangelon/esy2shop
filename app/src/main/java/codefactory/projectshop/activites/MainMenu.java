@@ -1,6 +1,7 @@
 package codefactory.projectshop.activites;
 
 import android.app.ListActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,12 +32,13 @@ public class MainMenu extends AppCompatActivity {
     //Navigation Drawer
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private DrawerLayout drawer;
 
     //@Bind(R.id.refreshImageView) ImageView mRefreshImageView;
 
     //Method called in onCreate
     private void addDrawerItems(){
-        String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders"};
+        String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders", "Saved Stores", "About Page"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
     }
@@ -51,7 +53,7 @@ public class MainMenu extends AppCompatActivity {
 
         //Navigation Drawer
         mDrawerList = (ListView)findViewById(R.id.navList);
-
+        drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         //Array for adapter
         ArrayList<List> listOfLists = new ArrayList<>();
 
@@ -88,8 +90,26 @@ public class MainMenu extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
+
         return super.onCreateOptionsMenu(menu);
 
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // EITHER CALL THE METHOD HERE OR DO THE FUNCTION DIRECTLY
+               show_drawer();
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void show_drawer() {
+        drawer.openDrawer(findViewById(R.id.navList));
     }
 
 }

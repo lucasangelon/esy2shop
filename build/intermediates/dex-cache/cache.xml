@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-0677e8dc862611f056fd061351d89ad195a206d7.jar" />
+    </item>
+    <item
+        jar="C:\Users\041402465\AppData\Roaming\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-bd679fec9d678bc8cfb3d7668bdfd7fa9aba5266.jar" />
+    </item>
+    <item
+        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-3c0f2be36eb18935c5794fa283c9e7fbc1cfe5df.jar" />
+    </item>
+    <item
+        jar="C:\Users\041402465\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1-3ad251d4ac56a50b84521b867a59840981cbcf86.jar" />
+    </item>
+    <item
+        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-9e82234b6ad9d734b4f514dd4b8c670600e6d36c.jar" />
+    </item>
+
+</items>

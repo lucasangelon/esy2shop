@@ -61,19 +61,21 @@ public class EditList extends ActionBarActivity {
         listCategorySpinner = (Spinner) findViewById(R.id.listCategorySpinner);
         int listCategorySize = DatabaseManager.CATEGORIES.size();
         // Get Category Names and prepare IDs
-        String[] listCategoryNames = new String[listCategorySize];
-        listCategoryNames = DatabaseManager.CATEGORIES.values().toArray(listCategoryNames);
-        listCategoryIDs = new int[listCategorySize];
+        String[] listCategoryNames = new String[listCategorySize + 1];
+        listCategoryNames[0] = "";
+        listCategoryIDs = new int[listCategorySize + 1];
+        listCategoryIDs[0] = -1;
         // Get the List Category ID for testing
         int listCategoryID = list.getCategory();
         int CategoryStartPos = 0;
         // Get DB Categories IDs
-        Integer[] tempListCategoryIDs = new Integer[listCategorySize];
-        tempListCategoryIDs = DatabaseManager.CATEGORIES.keySet().toArray(tempListCategoryIDs);
+        String[] tempListCategoryNames = DatabaseManager.CATEGORIES.values().toArray(new String[listCategorySize]);
+        Integer[] tempListCategoryIDs = DatabaseManager.CATEGORIES.keySet().toArray(new Integer[listCategorySize]);
         // Add DB data to adapter array
         for(int i = 0; i < listCategorySize; i++)
         {
-            listCategoryIDs[i] = tempListCategoryIDs[i];
+            listCategoryNames[i + 1] = tempListCategoryNames[i];
+            listCategoryIDs[i + 1] = tempListCategoryIDs[i];
             if(listCategoryID == tempListCategoryIDs[i])
             {
                 CategoryStartPos = i;
@@ -146,18 +148,19 @@ public class EditList extends ActionBarActivity {
     public void listStoreBtnOnClick(View view){
         // Get the store ID from intent
         Intent storeIntent = new Intent(this, EditStore.class);
+        storeIntent.putExtra("StoreID", list.getStore());
         startActivityForResult(storeIntent, 1);
     }
 
     public void listNotificationBtnOnClick(View view){
-        Intent notificationIntent = new Intent(this, EditNotification.class);
-        startActivityForResult(notificationIntent, 2);
+        Intent storeIntent = new Intent(this, EditStore.class);
+        startActivity(storeIntent);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            list.setStore(data.getIntExtra("result", -1));
+            list.setStore(data.getIntExtra("StoreID", -1));
         }
         else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             // Deal with Notifications

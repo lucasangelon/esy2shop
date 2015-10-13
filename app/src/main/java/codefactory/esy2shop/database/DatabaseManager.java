@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -59,13 +63,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
     // FK to COLUMN_STORE_ID
     // FK to COLUMN_CATEGORY_ID
     public static final String COLUMN_LIST_NAME = "list_name";
-    public static final String COLUMN_LIST_COMPLETE = "list_complete";
+    public static final String COLUMN_LIST_ALERT_DATE = "list_alert_date";
+    public static final String COLUMN_LIST_ALERT_PROXIMITY = "list_alert_proximity";
     final String SQL_LIST = "CREATE TABLE " + TABLE_LIST + "("
             + COLUMN_LIST_ID + " INTEGER PRIMARY KEY, "
             + COLUMN_STORE_ID + " INTEGER, "
             + COLUMN_CATEGORY_ID + " INTEGER, "
             + COLUMN_LIST_NAME + " TEXT NOT NULL, "
-            + COLUMN_LIST_COMPLETE + " INTEGER NOT NULL, "
+            + COLUMN_LIST_ALERT_DATE + " TEXT, "
+            + COLUMN_LIST_ALERT_PROXIMITY + " INTEGER, "
             + "FOREIGN KEY(" + COLUMN_STORE_ID + ") REFERENCES " + TABLE_STORE + "(" + COLUMN_STORE_ID + "), "
             + "FOREIGN KEY(" + COLUMN_CATEGORY_ID + ") REFERENCES " + TABLE_CATEGORY + "(" + COLUMN_CATEGORY_ID + ")"
             + ");";
@@ -80,17 +86,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
             + COLUMN_LIST_ID + " INTEGER NOT NULL, "
             + COLUMN_ITEM_NAME + " TEXT NOT NULL, "
             + COLUMN_ITEM_COMPLETE + " INTEGER NOT NULL, "
-            + "FOREIGN KEY(" + COLUMN_LIST_ID + ") REFERENCES " + TABLE_LIST + "(" + COLUMN_LIST_ID + ")"
-            + ");";
-
-    public static final String TABLE_NOTIFICATION = "notification";
-    public static final String COLUMN_NOTIFICATION_ID = "notification_id";
-    // FK to COLUMN_LIST_ID
-    public static final String COLUMN_NOTIFICATION_DATE = "notification_date";
-    final String SQL_NOTIFICATION = "CREATE TABLE " + TABLE_NOTIFICATION + "("
-            + COLUMN_NOTIFICATION_ID + " INTEGER PRIMARY KEY, "
-            + COLUMN_LIST_ID + " INTEGER NOT NULL, "
-            + COLUMN_NOTIFICATION_DATE + " DATETIME NOT NULL, "
             + "FOREIGN KEY(" + COLUMN_LIST_ID + ") REFERENCES " + TABLE_LIST + "(" + COLUMN_LIST_ID + ")"
             + ");";
 
@@ -109,15 +104,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db = getReadableDatabase();
         if(updateGlobal)
         {
-            UpdateCategory(2, "");
-            UpdateCategory(3, "Work");
-            UpdateCategory(4, "Personal");
-            UpdateCategory(5, "Todays Reminders");
+            UpdateCategory(2, "Work");
+            UpdateCategory(3, "Personal");
             Map<Integer, String> empty = new TreeMap<Integer, String>();
-            UpdateStore(new Store(2, "Store1", 1, 1, empty));
-            UpdateStore(new Store(3, "Store2", 2, 2, empty));
-            UpdateStore(new Store(4, "Store3", 3, 3, empty));
-            Log.d("", "Placeholder Values Inserted from 'new DatabaseManager(Context, boolean == true)'");
+            UpdateStore(new Store(1, "Store1", 1, 1, empty));
+            UpdateStore(new Store(2, "Store2", 2, 2, empty));
+            UpdateStore(new Store(3, "Store3", 3, 3, empty));
+            Log.d("", "Placeholder Values Updated from 'new DatabaseManager(Context, boolean == true)'");
 
             CATEGORIES = GetCategoryMap(null);
             STORES = GetStoreMap(null);
@@ -134,13 +127,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(SQL_STORE);
         db.execSQL(SQL_LIST);
         db.execSQL(SQL_ITEM);
-        db.execSQL(SQL_NOTIFICATION);
         Log.d("", "All tables created");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + SQL_NOTIFICATION);
         db.execSQL("DROP TABLE IF EXISTS " + SQL_ITEM);
         db.execSQL("DROP TABLE IF EXISTS " + SQL_LIST);
         db.execSQL("DROP TABLE IF EXISTS " + SQL_STORE);
@@ -175,21 +166,21 @@ public class DatabaseManager extends SQLiteOpenHelper {
     // Updates the DatabaseManager's static CATEGORIES at end
     // Returns the Category_ID, used to reference category_id on return
     public int UpdateCategory(int ID, String name) {
+
+        ContentValues dbValues = new ContentValues();
+        dbValues.put(COLUMN_CATEGORY_NAME, name);
+
         int result = -1;
         Map<Integer, String> test = GetCategoryMap(null);
         if (test.containsKey(ID))
         {
-            ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_CATEGORY_NAME, name);
-            db.update(TABLE_CATEGORY, dbUpdate, COLUMN_CATEGORY_ID + " = " + ID, null);
+            db.update(TABLE_CATEGORY, dbValues, COLUMN_CATEGORY_ID + " = " + ID, null);
             result = ID;
         }
         else
         {
-            ContentValues dbInsert = new ContentValues();
-            dbInsert.put(COLUMN_CATEGORY_ID, ID);
-            dbInsert.put(COLUMN_CATEGORY_NAME, name);
-            long rowID = db.insert(TABLE_CATEGORY, null, dbInsert);
+            dbValues.put(COLUMN_CATEGORY_ID, ID);
+            long rowID = db.insert(TABLE_CATEGORY, null, dbValues);
             Cursor dbResult = db.query(TABLE_CATEGORY, new String[]{COLUMN_CATEGORY_ID}, "ROWID = " + rowID, null, null, null, null);
             dbResult.moveToFirst();
             result = dbResult.getInt(0);
@@ -271,25 +262,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbTest = GetStore(inputStore.getId());
         }
 
+        ContentValues dbValues = new ContentValues();
+        dbValues.put(COLUMN_STORE_NAME, inputStore.getName());
+        dbValues.put(COLUMN_STORE_LAT, inputStore.getLatitude());
+        dbValues.put(COLUMN_STORE_LONG, inputStore.getLongitude());
+
         int result = -1;
         if(dbTest == null)
         {
-            ContentValues dbInsert = new ContentValues();
-            dbInsert.put(COLUMN_STORE_NAME, inputStore.getName());
-            dbInsert.put(COLUMN_STORE_LAT, inputStore.getLatitude());
-            dbInsert.put(COLUMN_STORE_LONG, inputStore.getLongitude());
-            long rowID = db.insert(TABLE_STORE, null, dbInsert);
+            long rowID = db.insert(TABLE_STORE, null, dbValues);
             Cursor dbResult = db.query(TABLE_STORE, new String[]{COLUMN_STORE_ID}, "ROWID = " + rowID, null, null, null, null);
             dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else
         {
-            ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_STORE_NAME, inputStore.getName());
-            dbUpdate.put(COLUMN_STORE_LAT, inputStore.getLatitude());
-            dbUpdate.put(COLUMN_STORE_LONG, inputStore.getLongitude());
-            db.update(TABLE_STORE, dbUpdate, COLUMN_STORE_ID + " = " + inputStore.getId(), null);
+            db.update(TABLE_STORE, dbValues, COLUMN_STORE_ID + " = " + inputStore.getId(), null);
             result = inputStore.getId();
         }
 
@@ -342,7 +330,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     // Used to get all List Where, use Where == 'null' for all Lists
     public ArrayList<List> GetLists(String Where)
     {
-        String[] columns = new String[]{COLUMN_LIST_ID, COLUMN_STORE_ID, COLUMN_CATEGORY_ID, COLUMN_LIST_NAME, COLUMN_LIST_COMPLETE};
+        String[] columns = new String[]{COLUMN_LIST_ID, COLUMN_STORE_ID, COLUMN_CATEGORY_ID, COLUMN_LIST_NAME, COLUMN_LIST_ALERT_DATE, COLUMN_LIST_ALERT_PROXIMITY};
         Cursor dbResult = db.query(TABLE_LIST, columns, Where, null, null, null, null);
 
         ArrayList<List> result = new ArrayList<List>();
@@ -350,11 +338,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         {
             int tempListID = dbResult.getInt(0);
             int tempStore = dbResult.getInt(1);
-            int tempCategoryID = dbResult.getInt(2);
+            int tempCategoryID = !(dbResult.isNull(2)) ? dbResult.getInt(2) : -1;
             String tempListName = dbResult.getString(3);
-            boolean tempListComplete = (dbResult.getInt(4) == 1);
+            Date tempDateAlert = (dbResult.getString(4) != null) ? new Date(dbResult.getString(4)) : null;
+            boolean tempProximityAlert = dbResult.getInt(5) == 1;
             ArrayList<Item> tempItems = GetItems(COLUMN_LIST_ID + " = " + tempListID);
-            result.add(new List(tempListID, tempListName, tempItems, tempStore, tempCategoryID, tempListComplete));
+            result.add(new List(tempListID, tempListName, tempItems, tempStore, tempProximityAlert, tempCategoryID, tempDateAlert));
         }
         return result;
     }
@@ -370,27 +359,24 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbTest = GetList(inputList.getId());
         }
 
+        ContentValues dbValues = new ContentValues();
+        dbValues.put(COLUMN_STORE_ID, inputList.getStore());
+        dbValues.put(COLUMN_CATEGORY_ID, (inputList.getCategory() != -1) ? inputList.getCategory() : null);
+        dbValues.put(COLUMN_LIST_NAME, inputList.getName());
+        dbValues.put(COLUMN_LIST_ALERT_PROXIMITY, (inputList.getProximityAlert()) ? 1 : 0);
+        dbValues.put(COLUMN_LIST_ALERT_DATE, (inputList.getDateAlert() != null) ? inputList.getDateAlert().toString() : null);
+
         int result = -1;
         if(dbTest == null)
         {
-            ContentValues dbInsert = new ContentValues();
-            dbInsert.put(COLUMN_STORE_ID, inputList.getStore());
-            dbInsert.put(COLUMN_CATEGORY_ID, inputList.getCategory());
-            dbInsert.put(COLUMN_LIST_NAME, inputList.getName());
-            dbInsert.put(COLUMN_LIST_COMPLETE, (inputList.isComplete()) ? 1 : 0);
-            long rowID = db.insert(TABLE_LIST, null, dbInsert);
+            long rowID = db.insert(TABLE_LIST, null, dbValues);
             Cursor dbResult = db.query(TABLE_LIST, new String[]{COLUMN_LIST_ID}, "ROWID = " + rowID, null, null, null, null);
             dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else
         {
-            ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_STORE_ID, inputList.getStore());
-            dbUpdate.put(COLUMN_CATEGORY_ID, inputList.getCategory());
-            dbUpdate.put(COLUMN_LIST_NAME, inputList.getName());
-            dbUpdate.put(COLUMN_LIST_COMPLETE, (inputList.isComplete()) ? 1 : 0);
-            db.update(TABLE_LIST, dbUpdate, COLUMN_LIST_ID + " = " + inputList.getId(), null);
+            db.update(TABLE_LIST, dbValues, COLUMN_LIST_ID + " = " + inputList.getId(), null);
             result = inputList.getId();
         }
 
@@ -450,25 +436,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbTest = GetItem(inputItem.getId());
         }
 
+        ContentValues dbValues = new ContentValues();
+        dbValues.put(COLUMN_LIST_ID, listID);
+        dbValues.put(COLUMN_ITEM_NAME, inputItem.getName());
+        dbValues.put(COLUMN_ITEM_COMPLETE, (inputItem.isComplete()) ? 1 : 0);
+
         int result = -1;
         if(dbTest == null)
         {
-            ContentValues dbInsert = new ContentValues();
-            dbInsert.put(COLUMN_LIST_ID, listID);
-            dbInsert.put(COLUMN_ITEM_NAME, inputItem.getName());
-            dbInsert.put(COLUMN_ITEM_COMPLETE, (inputItem.isComplete()) ? 1 : 0);
-            long rowID = db.insert(TABLE_ITEM, null, dbInsert);
+            long rowID = db.insert(TABLE_ITEM, null, dbValues);
             Cursor dbResult = db.query(TABLE_ITEM, new String[]{COLUMN_ITEM_ID}, "ROWID = " + rowID, null, null, null, null);
             dbResult.moveToFirst();
             result = dbResult.getInt(0);
         }
         else
         {
-            ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_LIST_ID, listID);
-            dbUpdate.put(COLUMN_ITEM_NAME, inputItem.getName());
-            dbUpdate.put(COLUMN_ITEM_COMPLETE, (inputItem.isComplete()) ? 1 : 0);
-            db.update(TABLE_ITEM, dbUpdate, COLUMN_ITEM_ID + " = " + inputItem.getId(), null);
+            db.update(TABLE_ITEM, dbValues, COLUMN_ITEM_ID + " = " + inputItem.getId(), null);
             result = inputItem.getId();
         }
 
@@ -482,69 +465,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
     {
         return db.delete(TABLE_ITEM, COLUMN_ITEM_ID + " = " + ID, null) > 0;
     }
-
-    /*
-    NOTIFICATIONS
-
-    TO BE DONE, hence commented out
-     */
-    /*
-    // GetNotifications(String Where), returns TO BE DONE
-    // Used to get all notifications Where, use Where == 'null' for all Items
-    public void GetNotifications(String Where)
-    {
-        String[] columns = new String[]{COLUMN_NOTIFICATION_ID, COLUMN_LIST_ID, COLUMN_NOTIFICATION_DATE};
-        Cursor dbResult = db.query(TABLE_NOTIFICATION, columns, Where, null, null, null, null);
-
-        while(dbResult.moveToNext())
-        {
-            int tempNotificationID = dbResult.getInt(0);
-            int tempListID = dbResult.getInt(1);
-            DATEFORMAT tempDate = dbResult.getString(2);
-        }
-    }
-
-    // UpdateNotification()
-    // Inserts/Update the notification passed to it
-    // Returns the Notification_ID
-    public int UpdateNotification()
-    {
-        UNKNOWN dbTest = null;
-        if(ID != -1) {
-            dbTest = GetNotifications(COLUMN_NOTIFICATION_ID + " = " + ID).get(0);
-        }
-
-        int result = -1;
-        if(dbTest == null)
-        {
-            ContentValues dbInsert = new ContentValues();
-            dbInsert.put(COLUMN_LIST_ID, LISTID);
-            dbInsert.put(COLUMN_NOTIFICATION_DATE, DATE);
-            long rowID = db.insert(TABLE_NOTIFICATION, null, dbInsert);
-            Cursor dbResult = db.query(TABLE_NOTIFICATION, new String[]{COLUMN_NOTIFICATION_ID}, "ROWID = " + rowID, null, null, null, null);
-            dbResult.moveToFirst();
-            result = dbResult.getInt(0);
-        }
-        else
-        {
-            ContentValues dbUpdate = new ContentValues();
-            dbUpdate.put(COLUMN_NOTIFICATION_ID, ID);
-            dbUpdate.put(COLUMN_LIST_ID, LISTID);
-            dbUpdate.put(COLUMN_NOTIFICATION_DATE, DATE);
-            db.update(TABLE_NOTIFICATION, dbUpdate, null, null);
-            result = ID;
-        }
-
-        return result;
-    }
-
-    // DeleteNotificaton(int ID)
-    // Attempts to delete the Notification_ID row
-    // Returns true if deleted
-    public boolean DeleteNotification(int ID)
-    {
-        return db.delete(TABLE_NOTIFICATION, COLUMN_NOTIFICATION_ID + " = " + ID, null) > 0;
-    }
-    */
 }
 

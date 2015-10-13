@@ -57,9 +57,8 @@ public class Store {
         this.listIDs = ListIDs;
     }
 
-    public boolean Delete(Context context)
+    public boolean Delete(DatabaseManager db)
     {
-        DatabaseManager db = new DatabaseManager(context);
         return db.DeleteStore(id);
     }
 

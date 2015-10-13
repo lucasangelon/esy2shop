@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.PriorityQueue;
 
 import codefactory.esy2shop.activites.EditList;
@@ -30,16 +31,65 @@ public class ListAdapter extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<List> mList;
+    ArrayList<List> fullList;
 
     public ListAdapter (ArrayList<List> list, Context context) {
         mContext = context;
+        fullList = list;
         mList = list;
         inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
     }
 
     public void Update(ArrayList<List> list)
     {
+        fullList = list;
         mList = list;
+        notifyDataSetChanged();
+    }
+
+    public void FilterCategory(int CategoryID)
+    {
+        mList = new ArrayList<List>();
+        for(List l : fullList)
+        {
+            if(l.getCategory() == CategoryID)
+            {
+                mList.add(l);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void FilterStore(int StoreID, boolean OnlyActive)
+    {
+        mList = new ArrayList<List>();
+        for(List l : fullList)
+        {
+            if(l.getStore() == StoreID && !(OnlyActive && l.getProximityAlert()))
+            {
+                mList.add(l);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void FilterTodays()
+    {
+        Date today = new Date();
+        mList = new ArrayList<List>();
+        for(List l : fullList)
+        {
+            if(l.getDateAlert() == today)
+            {
+                mList.add(l);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void FilterClear()
+    {
+        mList = fullList;
         notifyDataSetChanged();
     }
 

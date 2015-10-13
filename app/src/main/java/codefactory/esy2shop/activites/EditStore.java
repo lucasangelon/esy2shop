@@ -5,53 +5,44 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import codefactory.esy2shop.adapters.StoreAdapter;
 import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.projectshop.R;
 
 public class EditStore extends ActionBarActivity {
 
-    Spinner existingStoreSpinner;
-    ArrayAdapter<String> existingStoreAdapter;
-    int[] existingStoreIDs;
+    EditText newStoreField;
+    StoreAdapter storeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_store);
 
-        // Update Existing Store Spinner
-        existingStoreSpinner = (Spinner) findViewById(R.id.existingStoreSpinner);
-        int existingStoreSize = DatabaseManager.STORES.size();
-        // Prepare Store Names IDs
-        String[] existingStoreNames = new String[existingStoreSize + 1];
-        existingStoreNames[0] = "";
-        existingStoreIDs = new int[existingStoreSize + 1];
-        existingStoreIDs[0] = -1;
-        // Get DB Store Name and IDs
-        Integer[] tempExistingStoreIDs = new Integer[existingStoreSize];
-        tempExistingStoreIDs = DatabaseManager.STORES.keySet().toArray(tempExistingStoreIDs);
-        String[] tempExistingStoreNames = new String[existingStoreSize];
-        tempExistingStoreNames = DatabaseManager.STORES.values().toArray(tempExistingStoreNames);
-        // Add DB data to arrays
-        for(int i = 0; i < existingStoreSize; i++)
-        {
-            existingStoreIDs[i + 1] = tempExistingStoreIDs[i];
-            existingStoreNames[i + 1] = tempExistingStoreNames[i];
-        }
-        // Finalise adapter and spinner
-        existingStoreAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, existingStoreNames);
-        existingStoreSpinner.setAdapter(existingStoreAdapter);
+        newStoreField = (EditText) findViewById(R.id.newStoreField);
+        ListView storesListView = (ListView) findViewById(R.id.storesListView);
+        storeAdapter = new StoreAdapter(this, (getCallingActivity() != null));
+        storesListView.setAdapter(storeAdapter);
+
+        Intent intent = getIntent();
+        int extra = intent.getIntExtra("StoreID", -1);
+        storeAdapter.UpdateMapMarker(getIntent().getIntExtra("StoreID", -1));
     }
 
-    public void storeResultSubmitPLACEHOLDEROnClick(View view)
+    public void newStoreBtnOnClick(View view)
     {
-        Intent returnIntent = new Intent();
-        int result = existingStoreIDs[existingStoreSpinner.getSelectedItemPosition()];
-        returnIntent.putExtra("result", result);
-        setResult(RESULT_OK,returnIntent);
-        finish();
+        storeAdapter.Update(newStoreField.getText().toString());
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        storeAdapter.onBack();
     }
 }

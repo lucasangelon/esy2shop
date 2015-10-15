@@ -26,4 +26,6 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="title_activity_edit_store">Edit Store</string>
     <string name="title_activity_edit_notification">Edit Notification</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

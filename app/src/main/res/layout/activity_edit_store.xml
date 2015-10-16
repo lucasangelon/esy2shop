@@ -53,11 +53,12 @@
             android:id="@+id/storesListView"
             android:layout_weight="2"/>
 
-        <RelativeLayout
+        <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/GOOGLEMAPSPLACEHOLDER"></RelativeLayout>
+            android:id="@+id/storeMap"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
     </LinearLayout>
 
     <RelativeLayout

@@ -2,32 +2,207 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Dillon\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-9370b7b4b5354f8c6d700322c23d6f3c1f886f04.jar" />
+        sha1="997773777cf3904c11d6764fe3b7668538220e49">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-06cf74b096a9ae753be1bd431a175ea9ae2eb4d1.jar" />
     </item>
     <item
-        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\jars\classes.jar"
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\pre-dexed\debug\classes-abd819fba68a0c8d99f90bf3a4b2b14f333c9ef2.jar" />
+        sha1="82054090e487d78e163a988557db62d809fa9b95">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-e3d78dfa7cfce072925195c5014365b51d369b2a.jar" />
     </item>
     <item
-        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\classes.jar"
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\pre-dexed\debug\classes-aae79eae13e239bfa3c508b06c0dc621c72bfa6c.jar" />
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-91c662565ab9931c2c6935b98ccc5161b29bd334.jar" />
     </item>
     <item
-        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\libs\internal_impl-21.0.0.jar"
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-fcca0016043ef6fc8d1cb0ba745091396f70f503.jar" />
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-f39d6804316d4d84f68bc3cafd0e8d2554a84c4c.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-e16df02f52b07add9b0319bd40e943dab9bd7f16.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-92a3d625b8396e4738869fa44eac3ac2dbec2add.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-fb38de536eafe9a34e322fa99acbc5f83e14893a.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-8efed28836184bc8e7d3f2a4972863ecf3b2f312.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-07019b0128c9036b485f96f373279fe8c0b684fd.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="95758a2905669affbffc5ddd262921d375674fad">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-63785b5b59041364acbed6dcd654ac6c81d7a463.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="482de223655d06253cc6a4955d653f8994169500">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-9efc7ed0f508ff84df2e6956e8fd5b52addce3e6.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-d112cae47c3d086bd792e6e64f9fec81bf844855.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-ccd38c60627982369ff388b24a05f2c872da1abd.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-07c57bcdc32b23260c8a46c876be6ee82e9769c3.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-3585e568e343a6da75ba7784ca4e5fcbf1e9365a.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-2a8b891947b521259f0b67bac207c57b2515ee32.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-e1030028cfa58b28df9dba1fc74247ab44433543.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-4a1ed1dec0caa0c7bad2e414343d78fd25e3302a.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-00afa1e9069d3367fd7a164cfc648fa81b407429.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-4a5ae410e1a9feae430ef26693a13976d116c7f1.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-edaadaf75e2fffd1880eee2d38abe289c1496b06.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-477709378b427cdf7dbce8173a8bee86edadb60f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dillon\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-ad85cf4d75add29267bf5531a744ce493f24f212.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-a357dc5990a7c733d99aa5e2a52b9e18a4439e10.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-2d294083eeeb692a424aa9b71ad2967d2e5f6a31.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-d9814556438c8e26ac110eefc44c0bd3ffb59060.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d294caf562c4c678b2ef351662a0ca6f1a4d06c0">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-d4d58d961561f7b87123de6206dbc6935c0edadc.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-60a903de4270e9ee7f09b0a6b6e988753d9d8583.jar" />
+    </item>
+    <item
+        jar="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="G:\TAFE\2015\Semester 2\ezy2shop\esy2shop-125028ecec24029a1e7677b51847b1cb52d1a1b3\app\build\intermediates\pre-dexed\debug\classes-e327802eda17a0b325825cf342b3f248ec93f933.jar" />
     </item>
 
 </items>

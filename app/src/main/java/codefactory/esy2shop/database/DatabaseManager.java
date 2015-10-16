@@ -38,14 +38,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "ezy2shop.db";
     public static int DATABASE_VERSION = 1;
 
-    public static final String TABLE_CATEGORY = "category";
-    public static final String COLUMN_CATEGORY_ID = "category_id";
-    public static final String COLUMN_CATEGORY_NAME = "category_name";
-    final String SQL_CATEGORY = "CREATE TABLE " + TABLE_CATEGORY + "("
-            + COLUMN_CATEGORY_ID + " INTEGER PRIMARY KEY, "
-            + COLUMN_CATEGORY_NAME + " TEXT NOT NULL"
-            + ");";
-
     public static final String TABLE_STORE = "store";
     public static final String COLUMN_STORE_ID = "store_id";
     public static final String COLUMN_STORE_NAME = "store_name";
@@ -61,7 +53,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public static final String TABLE_LIST = "list";
     public static final String COLUMN_LIST_ID = "list_id";
     // FK to COLUMN_STORE_ID
-    // FK to COLUMN_CATEGORY_ID
+    public static final String COLUMN_CATEGORY_ID = "category_id";
     public static final String COLUMN_LIST_NAME = "list_name";
     public static final String COLUMN_LIST_ALERT_DATE = "list_alert_date";
     public static final String COLUMN_LIST_ALERT_PROXIMITY = "list_alert_proximity";
@@ -72,8 +64,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             + COLUMN_LIST_NAME + " TEXT NOT NULL, "
             + COLUMN_LIST_ALERT_DATE + " TEXT, "
             + COLUMN_LIST_ALERT_PROXIMITY + " INTEGER, "
-            + "FOREIGN KEY(" + COLUMN_STORE_ID + ") REFERENCES " + TABLE_STORE + "(" + COLUMN_STORE_ID + "), "
-            + "FOREIGN KEY(" + COLUMN_CATEGORY_ID + ") REFERENCES " + TABLE_CATEGORY + "(" + COLUMN_CATEGORY_ID + ")"
+            + "FOREIGN KEY(" + COLUMN_STORE_ID + ") REFERENCES " + TABLE_STORE + "(" + COLUMN_STORE_ID + ") "
             + ");";
 
     public static final String TABLE_ITEM = "item";
@@ -104,15 +95,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db = getReadableDatabase();
         if(updateGlobal)
         {
-            UpdateCategory(2, "Work");
-            UpdateCategory(3, "Personal");
-            Map<Integer, String> empty = new TreeMap<Integer, String>();
-            UpdateStore(new Store(1, "Store1", 1, 1, empty));
-            UpdateStore(new Store(2, "Store2", 2, 2, empty));
-            UpdateStore(new Store(3, "Store3", 3, 3, empty));
+            UpdateStore(new Store(1, "Coles Maylands", -31.9292884d, 115.8972774d));
+            UpdateStore(new Store(2, "Galleria", -31.8960124d, 115.8986233d));
+            UpdateStore(new Store(3, "Woolworths Perth", -31.9524646d, 115.8595188d));
             Log.d("", "Placeholder Values Updated from 'new DatabaseManager(Context, boolean == true)'");
 
-            CATEGORIES = GetCategoryMap(null);
+            CATEGORIES = new TreeMap<Integer, String>();
+            CATEGORIES.put(1, "Work");
+            CATEGORIES.put(2, "Personal");
             STORES = GetStoreMap(null);
             LISTS = GetListMap(null);
         }
@@ -123,7 +113,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CATEGORY);
         db.execSQL(SQL_STORE);
         db.execSQL(SQL_LIST);
         db.execSQL(SQL_ITEM);
@@ -135,72 +124,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + SQL_ITEM);
         db.execSQL("DROP TABLE IF EXISTS " + SQL_LIST);
         db.execSQL("DROP TABLE IF EXISTS " + SQL_STORE);
-        db.execSQL("DROP TABLE IF EXISTS " + SQL_CATEGORY);
         Log.d("", "All tables dropped");
         DATABASE_VERSION = newVersion;
         onCreate(db);
-    }
-
-    /*
-    CATEGORIES
-    As categories don't have an object, only Get method is GetCategoryMap
-     */
-    // GetCategoryMap(String Where), Returns Map<Category_ID, Category_Name> Where
-    // use Where == 'null' for all categories
-    private Map<Integer, String> GetCategoryMap(String Where)
-    {
-        String[] columns = new String[]{COLUMN_CATEGORY_ID, COLUMN_CATEGORY_NAME};
-        Cursor dbResult = db.query(TABLE_CATEGORY, columns, Where, null, null, null, null);
-
-        Map<Integer, String> result = new TreeMap<Integer, String>();
-        while(dbResult.moveToNext()) {
-            int tempCategoryID = dbResult.getInt(0);
-            String tempCategoryName = dbResult.getString(1);
-            result.put(tempCategoryID, tempCategoryName);
-        }
-        return result;
-    }
-
-    // UpdateCategory(int ID, String name)
-    // Inserts/Update the category passed to it
-    // Updates the DatabaseManager's static CATEGORIES at end
-    // Returns the Category_ID, used to reference category_id on return
-    public int UpdateCategory(int ID, String name) {
-
-        ContentValues dbValues = new ContentValues();
-        dbValues.put(COLUMN_CATEGORY_NAME, name);
-
-        int result = -1;
-        Map<Integer, String> test = GetCategoryMap(null);
-        if (test.containsKey(ID))
-        {
-            db.update(TABLE_CATEGORY, dbValues, COLUMN_CATEGORY_ID + " = " + ID, null);
-            result = ID;
-        }
-        else
-        {
-            dbValues.put(COLUMN_CATEGORY_ID, ID);
-            long rowID = db.insert(TABLE_CATEGORY, null, dbValues);
-            Cursor dbResult = db.query(TABLE_CATEGORY, new String[]{COLUMN_CATEGORY_ID}, "ROWID = " + rowID, null, null, null, null);
-            dbResult.moveToFirst();
-            result = dbResult.getInt(0);
-        }
-
-        CATEGORIES = GetCategoryMap(null);
-        return result;
-    }
-
-    // DeleteCategory(int ID)
-    // Attempts to delete the Category_ID row
-    // Returns true if deleted, and updates static CATEGORIES
-    public boolean DeleteCategory(int ID)
-    {
-        boolean result = db.delete(TABLE_CATEGORY, COLUMN_CATEGORY_ID + " = " + ID, null) > 0;
-        if(result)
-        {
-            CATEGORIES = GetStoreMap(null);
-        }
-        return result;
     }
 
     /*
@@ -245,8 +171,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             String tempStoreName = dbResult.getString(1);
             double tempStoreLat = dbResult.getDouble(2);
             double tempStoreLong = dbResult.getDouble(3);
-            Map<Integer, String> tempStoreList = GetListMap(COLUMN_STORE_ID + " = " + tempStoreID);
-            result.add(new Store(tempStoreID, tempStoreName, tempStoreLat, tempStoreLong, tempStoreList));
+            result.add(new Store(tempStoreID, tempStoreName, tempStoreLat, tempStoreLong));
         }
         return result;
     }

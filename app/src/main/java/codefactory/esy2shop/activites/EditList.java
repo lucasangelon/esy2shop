@@ -180,19 +180,27 @@ public class EditList extends ActionBarActivity {
     }
 
     public void listSave(){
-        // Make useable DbManager
-        DatabaseManager db = new DatabaseManager(this);
-
         // Update List Object
-        list.setName(listNameField.getText().toString());
-        list.setItems(listItemsAdapter.GetListItems());
-        for(Item i : listItemsAdapter.mRemovedItems)
-        {
-            db.DeleteItem(i.getId());
-        }
-        list.setCategory(listCategoryIDs[listCategorySpinner.getSelectedItemPosition()]);
+        ArrayList<Item> saveItems = listItemsAdapter.GetListItems();
+        String saveTitle = listNameField.getText().toString();
 
-        // Apply Changes
-        list.SaveChanges(db);
+        if(saveItems.size() > 0 && !saveTitle.equals(""))
+        {
+            list.setName((saveTitle.equals("")) ? saveItems.get(0).getName() : saveTitle);
+            list.setItems(saveItems);
+            list.setCategory(listCategoryIDs[listCategorySpinner.getSelectedItemPosition()]);
+
+            // Make useable DbManager
+            DatabaseManager db = new DatabaseManager(this);
+
+            // Delete removed items
+            for(Item i : listItemsAdapter.mRemovedItems)
+            {
+                db.DeleteItem(i.getId());
+            }
+
+            // Apply Changes
+            list.SaveChanges(db);
+        }
     }
 }

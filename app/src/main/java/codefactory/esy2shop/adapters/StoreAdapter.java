@@ -3,14 +3,26 @@ package codefactory.esy2shop.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.esy2shop.models.Store;
@@ -29,6 +41,7 @@ public class StoreAdapter extends BaseAdapter {
     Context mContext;
     boolean expectResult;
     DatabaseManager db;
+    GoogleMap mMap;
     ArrayList<Store> storeList;
 
 
@@ -45,12 +58,26 @@ public class StoreAdapter extends BaseAdapter {
         UpdateMapMarker(storeList);
     }
 
+    public void SetGoogleMap(GoogleMap googleMap)
+    {
+        mMap = googleMap;
+    }
+
     public void Update(String search)
     {
-        using = searched;
-        storeList = GetMapMarkers(search);
-        UpdateMapMarker(storeList);
-        notifyDataSetChanged();
+
+        ArrayList<Store> searchResult = GetMapMarkers(search);
+        if(searchResult.size() > 0)
+        {
+            using = searched;
+            storeList = searchResult;
+            UpdateMapMarker(storeList);
+            notifyDataSetChanged();
+        }
+        else
+        {
+            Toast.makeText(mContext, "Search Returned No Results", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void Update()
@@ -91,12 +118,12 @@ public class StoreAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                db.UpdateStore(store);
+                int dbID = db.UpdateStore(store);
 
                 if(expectResult)
                 {
                     Intent intent = new Intent();
-                    intent.putExtra("StoreID", store.getId());
+                    intent.putExtra("StoreID", dbID);
                     ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
                     ((Activity) mContext).finish();
                 }
@@ -172,13 +199,45 @@ public class StoreAdapter extends BaseAdapter {
     // These should influence the Google Maps component
     public void UpdateMapMarker(ArrayList<Store> Stores)
     {
+        if(mMap != null)
+        {
+            mMap.clear();
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for(Store s : Stores)
+            {
+                MarkerOptions storeMarker = new MarkerOptions();
 
+                storeMarker.title(s.getName());
+                LatLng storePos = new LatLng(s.getLatitude(), s.getLongitude());
+                storeMarker.position(storePos);
+
+                mMap.addMarker(storeMarker);
+                builder.include(storeMarker.getPosition());
+            }
+            CameraUpdate mapMove = CameraUpdateFactory.newLatLngBounds(builder.build(), 5);
+            mMap.moveCamera(mapMove);
+        }
     }
 
     public ArrayList<Store> GetMapMarkers(String search)
     {
         ArrayList<Store> result = new ArrayList<Store>();
-        result.add(new Store("TEST SEARCHED STORE", 0, 0));
+        try {
+            Geocoder gcode = new Geocoder(mContext, Locale.getDefault());
+            List<Address> searchList = gcode.getFromLocationName(search, 10);
+            if(searchList.size() > 0)
+            {
+                for(Address a : searchList)
+                {
+                    result.add(new Store(a.getFeatureName(), a.getLongitude(), a.getLatitude()));
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         return result;
     }
 }

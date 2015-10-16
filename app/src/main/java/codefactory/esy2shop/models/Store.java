@@ -24,7 +24,6 @@ public class Store {
     private String name;
     private double latitude;
     private double longitude;
-    private Map<Integer, String> listIDs;
 
     /*
         Constructors
@@ -34,7 +33,6 @@ public class Store {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.listIDs = new TreeMap<Integer, String>();
     }
 
     public Store(Context context, int ID){
@@ -45,16 +43,14 @@ public class Store {
             this.name = dbStore.getName();
             this.longitude = dbStore.getLongitude();
             this.latitude = dbStore.getLatitude();
-            this.listIDs = dbStore.getListIDs();
         }
     }
 
-    public Store(int id, String name, double longitude, double latitude, Map<Integer, String> ListIDs){
+    public Store(int id, String name, double longitude, double latitude){
         this.id = id;
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.listIDs = ListIDs;
     }
 
     public boolean Delete(DatabaseManager db)
@@ -91,18 +87,5 @@ public class Store {
     }
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }
-
-    public Map<Integer, String> getListIDs() {
-        return listIDs;
-    }
-    public int listIDsSize(){
-        return listIDs.keySet().size();
-    }
-    public void addID(int listID, String listName){
-        listIDs.put(listID, listName);
-    }
-    public void removeID(int listID){
-        listIDs.remove(listID);
     }
 }

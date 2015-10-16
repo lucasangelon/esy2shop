@@ -3,7 +3,6 @@ package codefactory.esy2shop.activites;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,37 +22,17 @@ import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
 import codefactory.esy2shop.models.List;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenu extends Activity {
 
     Intent listIntent;
     codefactory.esy2shop.adapters.ListAdapter listAdapter;
-
-    ListView mainListView;
-
-    //Navigation Drawer
-    private ListView mDrawerList;
-    private ArrayAdapter<String> mAdapter;
-    private DrawerLayout drawer;
-
-    //@Bind(R.id.refreshImageView) ImageView mRefreshImageView;
-
-    //Method called in onCreate
-    private void addDrawerItems(){
-        String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders", "Saved Stores", "About Page"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
-        mDrawerList.setAdapter(mAdapter);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-
         listIntent = new Intent(this, EditList.class);
-
-
-
 
         Button newButton = (Button) findViewById(R.id.newList);
         newButton.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +40,6 @@ public class MainMenu extends AppCompatActivity {
                 listIntent.putExtra("ListID", -1);
                 startActivity(listIntent);
             }});
-
-
 
         // Load the Database for Static
         DatabaseManager dbLoad = new DatabaseManager(this, true);

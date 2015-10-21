@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +27,10 @@ public class MainMenu extends Activity {
 
     Intent listIntent;
     codefactory.esy2shop.adapters.ListAdapter listAdapter;
+
+    //Nav Drawer Initialize JLO
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,14 @@ public class MainMenu extends Activity {
         mainListView.setAdapter(listAdapter);
 
         placeholderComponents();
+
+        //Create Nav Drawer JLO
+        mDrawerList = (ListView)findViewById(R.id.navList);
+
+        //Call the method
+        addDrawerItems();
+
+
     }
 
     @Override
@@ -63,8 +76,9 @@ public class MainMenu extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main_menu, menu);
+        return true;
     }
 
     private void placeholderComponents()
@@ -101,6 +115,13 @@ public class MainMenu extends Activity {
                 listAdapter.FilterStore(storeIDs[storeSpinner.getSelectedItemPosition()], active.isChecked());
             }
         });
+    }
+
+    //Create Drawer items (called in onCreate) JLO
+    private void addDrawerItems() {
+        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
     }
 }
 

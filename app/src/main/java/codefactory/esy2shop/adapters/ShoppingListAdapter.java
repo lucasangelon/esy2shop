@@ -2,6 +2,7 @@ package codefactory.esy2shop.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,8 @@ public class ShoppingListAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<List> mList;
     ArrayList<List> fullList;
+
+
 
 
 
@@ -135,7 +138,13 @@ public class ShoppingListAdapter extends BaseAdapter {
          */
         Button editButton = (Button) convertView.findViewById(R.id.editListBtn);
         editButton.setText(list.getName());
-        editButton.setBackgroundColor();
+
+        int colorPos = position%6;
+        int red = 253;
+        int green = (int)(231 -(22/6)*colorPos);
+        int blue = (int)(130-(106/6)*colorPos);
+
+        editButton.setBackgroundColor(Color.rgb(red,green,blue));
         /*
             OnClick Listener
             Re-driects to edit list activity.

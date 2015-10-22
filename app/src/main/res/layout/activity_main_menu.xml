@@ -7,92 +7,71 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="codefactory.esy2shop.activites.MainMenu"
-    android:id="@+id/activity_main_layout">
+                android:id="@+id/activity_main_layout">
 
 
     <RelativeLayout
-        android:id="@+id/PLACEHOLDER"
+        android:id="@+id/ImageLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="REFINE"
-            android:id="@+id/refineCategoryBtn"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
 
-        <CheckBox
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/storeActiveBtn"
-            android:checked="false"
-            android:layout_above="@+id/refineCategoryBtn"
-            android:layout_toLeftOf="@+id/refineStoreBtn"
-            android:layout_toStartOf="@+id/refineStoreBtn" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TEMPCategorySpinner"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/refineCategoryBtn"
-            android:layout_toStartOf="@+id/refineCategoryBtn"
-            android:layout_alignTop="@+id/refineCategoryBtn" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TEMPStoreSpinner"
-            android:layout_above="@+id/TEMPCategorySpinner"
+            android:id="@+id/titleImageView"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/storeActiveBtn"
-            android:layout_toStartOf="@+id/storeActiveBtn" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="REFINE"
-            android:id="@+id/refineStoreBtn"
-            android:layout_above="@+id/refineCategoryBtn"
-            android:layout_alignRight="@+id/refineCategoryBtn"
-            android:layout_alignEnd="@+id/refineCategoryBtn" />
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/titleImageDesc"/>
 
     </RelativeLayout>
 
-    <Button
+    <RelativeLayout
+        android:id="@+id/ListLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New List"
-        android:id="@+id/newList"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/PLACEHOLDER"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ImageLayout"
+        android:layout_above="@+id/Add_space">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mainListView"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/newList"
-        android:layout_above="@+id/ADVERTISEMENT_PLACEHOLDER" />
+        <RelativeLayout
+            android:id="@+id/newButtonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/newList"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainListView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/newButtonLayout" />
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90px"
+        android:layout_height="90dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/ADVERTISEMENT_PLACEHOLDER" />
+        android:id="@+id/Add_space" />
 
 </RelativeLayout>

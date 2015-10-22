@@ -26,4 +26,5 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="title_activity_edit_store">Edit Store</string>
     <string name="title_activity_edit_notification">Edit Notification</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="titleImageDesc">Title Image</string>
 </resources>

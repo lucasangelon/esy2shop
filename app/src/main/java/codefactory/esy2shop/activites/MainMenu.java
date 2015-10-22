@@ -5,51 +5,48 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
-
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
 import codefactory.esy2shop.database.DatabaseManager;
-import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
-import codefactory.esy2shop.models.List;
+import codefactory.esy2shop.adapters.ShoppingListAdapter;
 
 public class MainMenu extends Activity {
 
-    Intent listIntent;
-    codefactory.esy2shop.adapters.ListAdapter listAdapter;
+    ShoppingListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        listIntent = new Intent(this, EditList.class);
-
+        /*
+           New List Button
+         */
         Button newButton = (Button) findViewById(R.id.newList);
         newButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                Intent listIntent;
+                listIntent = new Intent(getApplicationContext(), EditList.class);
                 listIntent.putExtra("ListID", -1);
                 startActivity(listIntent);
+
             }});
 
         // Load the Database for Static
         DatabaseManager dbLoad = new DatabaseManager(this, true);
 
         //Set adapter to list view
-        listAdapter = new codefactory.esy2shop.adapters.ListAdapter(dbLoad.GetLists(null), this);
+        listAdapter = new ShoppingListAdapter(dbLoad.GetLists(null), this);
         ListView mainListView = (ListView)findViewById(R.id.mainListView);
         mainListView.setAdapter(listAdapter);
 
-        placeholderComponents();
+        //placeholderComponents();
+
+
     }
 
     @Override
@@ -67,6 +64,7 @@ public class MainMenu extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
     private void placeholderComponents()
     {
         final Spinner categorySpinner = (Spinner) findViewById(R.id.TEMPCategorySpinner);
@@ -101,6 +99,6 @@ public class MainMenu extends Activity {
                 listAdapter.FilterStore(storeIDs[storeSpinner.getSelectedItemPosition()], active.isChecked());
             }
         });
-    }
+    } */
 }
 

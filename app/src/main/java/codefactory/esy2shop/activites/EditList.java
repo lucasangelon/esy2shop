@@ -43,10 +43,14 @@ public class EditList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_list);
 
+
+
         //Get ID from intent
         db = new DatabaseManager(this);
         Intent intent = getIntent();
         int id = intent.getIntExtra("ListID", -1);
+
+
         // If id == -1 new list else get from DB
         list = (id == -1) ? new List(): new List(db, id);
 
@@ -60,14 +64,19 @@ public class EditList extends ActionBarActivity {
         // Update Category Spinner
         listCategorySpinner = (Spinner) findViewById(R.id.listCategorySpinner);
         int listCategorySize = DatabaseManager.CATEGORIES.size();
+
         // Get Category Names and prepare IDs
         String[] listCategoryNames = new String[listCategorySize + 1];
         listCategoryNames[0] = "";
         listCategoryIDs = new int[listCategorySize + 1];
         listCategoryIDs[0] = -1;
+
+
         // Get the List Category ID for testing
         int listCategoryID = list.getCategory();
         int CategoryStartPos = 0;
+
+
         // Get DB Categories IDs
         String[] tempListCategoryNames = DatabaseManager.CATEGORIES.values().toArray(new String[listCategorySize]);
         Integer[] tempListCategoryIDs = DatabaseManager.CATEGORIES.keySet().toArray(new Integer[listCategorySize]);
@@ -95,12 +104,16 @@ public class EditList extends ActionBarActivity {
         listItemsView.setAdapter(listItemsAdapter);
     }
 
+
+
     @Override
     public void onPause()
     {
         listSave();
         super.onPause();
     }
+
+
 
     @Override
      public void onStop()
@@ -109,6 +122,7 @@ public class EditList extends ActionBarActivity {
         super.onStop();
     }
 
+
     @Override
     public void onDestroy()
     {
@@ -116,12 +130,15 @@ public class EditList extends ActionBarActivity {
         super.onDestroy();
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_edit_list, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -137,6 +154,7 @@ public class EditList extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     /*
         OnClick Listener
@@ -167,6 +185,9 @@ public class EditList extends ActionBarActivity {
         }
     }
 
+
+
+
     @Override
     public void onBackPressed()
     {
@@ -178,6 +199,8 @@ public class EditList extends ActionBarActivity {
         // Close
         finish();
     }
+
+
 
     public void listSave(){
         // Make useable DbManager

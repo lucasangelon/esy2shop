@@ -135,7 +135,9 @@ public class ShoppingListAdapter extends BaseAdapter {
          */
         Button editButton = (Button) convertView.findViewById(R.id.editListBtn);
         editButton.setText(list.getName());
-        editButton.setBackgroundColor();
+
+
+
         /*
             OnClick Listener
             Re-driects to edit list activity.

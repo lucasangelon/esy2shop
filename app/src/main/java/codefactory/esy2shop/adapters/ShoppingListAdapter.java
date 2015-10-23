@@ -50,6 +50,9 @@ public class ShoppingListAdapter extends BaseAdapter {
     }
 
 
+
+
+
     public void Update(ArrayList<List> list)
     {
         fullList = list;
@@ -59,9 +62,11 @@ public class ShoppingListAdapter extends BaseAdapter {
 
 
 
+
+
     public void FilterCategory(int CategoryID)
     {
-        mList = new ArrayList<List>();
+        mList = new ArrayList<>();
         for(List l : fullList)
         {
             if(l.getCategory() == CategoryID)
@@ -72,9 +77,12 @@ public class ShoppingListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
+
+
     public void FilterStore(int StoreID, boolean OnlyActive)
     {
-        mList = new ArrayList<List>();
+        mList = new ArrayList<>();
         for(List l : fullList)
         {
             if(l.getStore() == StoreID && !(OnlyActive && l.getProximityAlert()))
@@ -84,6 +92,9 @@ public class ShoppingListAdapter extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
+
+
+
 
     public void FilterTodays()
     {
@@ -99,11 +110,14 @@ public class ShoppingListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
+
     public void FilterClear()
     {
         mList = fullList;
         notifyDataSetChanged();
     }
+
 
     @Override
     public int getCount() {
@@ -138,13 +152,19 @@ public class ShoppingListAdapter extends BaseAdapter {
          */
         Button editButton = (Button) convertView.findViewById(R.id.editListBtn);
         editButton.setText(list.getName());
-        
+
+
+        /*
+            Generates gradient for the Lists.
+         */
         int colorPos = position%6;
         int red = 253;
         int green = (int)(231 -(22/6)*colorPos);
         int blue = (int)(130-(106/6)*colorPos);
-
         editButton.setBackgroundColor(Color.rgb(red,green,blue));
+
+
+
         /*
             OnClick Listener
             Re-driects to edit list activity.

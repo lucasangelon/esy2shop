@@ -27,6 +27,9 @@ import codefactory.projectshop.R;
 
 public class EditList extends ActionBarActivity {
 
+
+
+
     List list;
     DatabaseManager db;
     EditText listNameField;
@@ -34,8 +37,11 @@ public class EditList extends ActionBarActivity {
     Spinner listCategorySpinner;
     ArrayAdapter<String> listCategoryAdapter;
     int[] listCategoryIDs;
-    Button listAddItemBtn;
+    ///Button listAddItemBtn;
     ListItemAdapter listItemsAdapter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +64,8 @@ public class EditList extends ActionBarActivity {
         listNameField = (EditText) findViewById(R.id.listNameField);
         listNameField.setText(list.getName());
 
-        // Set New Store button
-        newStoreBtn = (Button) findViewById(R.id.listStoreBtn);
+       /* // Set New Store button
+        newStoreBtn = (Button) findViewById(R.id.listStoreBtn);*/
 
         // Update Category Spinner
         listCategorySpinner = (Spinner) findViewById(R.id.listCategorySpinner);
@@ -95,13 +101,13 @@ public class EditList extends ActionBarActivity {
         listCategorySpinner.setAdapter(listCategoryAdapter);
         listCategorySpinner.setSelection(CategoryStartPos);
 
-        // Setup Add Item Button
+       /* // Setup Add Item Button
         listAddItemBtn = (Button) findViewById(R.id.listNewItem);
 
         // Setup Items List View
         listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
         ListView listItemsView = (ListView) findViewById(R.id.listItemVeiw);
-        listItemsView.setAdapter(listItemsAdapter);
+        listItemsView.setAdapter(listItemsAdapter);*/
     }
 
 

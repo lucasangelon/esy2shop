@@ -1,91 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="codefactory.esy2shop.activites.EditList">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/list_name_layout">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:id="@+id/list_name_input_layout"
+            android:background="@color/gray"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:id="@+id/listNameLabel"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listNameField"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center_vertical"
+                android:maxLines="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:id="@+id/list_cat_input_layout"
+            android:background="@color/gray"
+            android:layout_below="@+id/list_name_input_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/catagory"
+                android:id="@+id/listCategoryField"
+                android:layout_gravity="center_vertical" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listCategorySpinner"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:orientation="horizontal"
+        android:id="@+id/seperator_layout"
+        android:background="@color/yellow"
+        android:layout_below="@+id/list_name_layout"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ADVERTISEMENT_PLACEHOLDER">
+        android:id="@+id/item_list_layout"
+        android:layout_below="@+id/seperator_layout"
+        android:layout_above="@+id/add_space_list">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/name"
-            android:id="@+id/listNameLabel"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listNameField"
-            android:layout_alignTop="@+id/listNameLabel"
-            android:layout_toRightOf="@+id/listNameLabel"
-            android:layout_toLeftOf="@+id/listStoreBtn"
-            android:layout_toStartOf="@+id/listStoreBtn" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S"
-            android:id="@+id/listStoreBtn"
-            android:onClick="listStoreBtnOnClick"
-            android:layout_alignTop="@+id/listNameLabel"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/catagory"
-            android:id="@+id/listCategoryField"
-            android:layout_below="@+id/listStoreBtn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listCategorySpinner"
-            android:layout_alignTop="@+id/listCategoryField"
-            android:layout_toRightOf="@+id/listCategoryField"
-            android:layout_toLeftOf="@+id/listNotificationBtn"
-            android:layout_toStartOf="@+id/listNotificationBtn" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="N"
-            android:id="@+id/listNotificationBtn"
-            android:onClick="listNotificationBtnOnClick"
-            android:layout_alignTop="@+id/listCategoryField"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New Item"
-            android:id="@+id/listNewItem"
-            android:onClick="listAddItemBtnOnClick"
-            android:layout_below="@+id/listNotificationBtn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listItemVeiw"
+            android:id="@+id/list_item_view"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/listNewItem" />
+            android:layout_alignParentStart="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/add_item_button"
+            android:onClick="listNotificationBtnOnClick"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/list_item_view"/>
 
     </RelativeLayout>
 
@@ -95,6 +107,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/ADVERTISEMENT_PLACEHOLDER" />
+        android:id="@+id/add_space_list" />
 
 </RelativeLayout>

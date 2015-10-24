@@ -3,8 +3,11 @@ package codefactory.esy2shop.activites;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +26,7 @@ import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
 import codefactory.esy2shop.models.List;
 
-public class MainMenu extends Activity {
+public class MainMenu extends ActionBarActivity {
 
     Intent listIntent;
     codefactory.esy2shop.adapters.ListAdapter listAdapter;
@@ -31,6 +34,7 @@ public class MainMenu extends Activity {
     //Nav Drawer Initialize JLO
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,25 @@ public class MainMenu extends Activity {
 
         //Create Nav Drawer JLO
         mDrawerList = (ListView)findViewById(R.id.navList);
+        drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
 
         //Call the method
         addDrawerItems();
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_action_settings:
+                drawer.openDrawer(mDrawerList);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -78,6 +96,7 @@ public class MainMenu extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main_menu, menu);
+
         return true;
     }
 

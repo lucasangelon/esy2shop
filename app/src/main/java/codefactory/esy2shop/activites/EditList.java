@@ -24,6 +24,8 @@ import codefactory.esy2shop.models.Item;
 import codefactory.esy2shop.models.List;
 import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class EditList extends ActionBarActivity {
 
@@ -93,6 +95,11 @@ public class EditList extends ActionBarActivity {
         listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
         ListView listItemsView = (ListView) findViewById(R.id.listItemVeiw);
         listItemsView.setAdapter(listItemsAdapter);
+
+        //Banner Ad Create
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

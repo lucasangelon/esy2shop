@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import codefactory.projectshop.R;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 
 /**
  *
@@ -27,6 +30,11 @@ public class AboutActivity extends ActionBarActivity {
 
 
         backButton = (Button) findViewById(R.id.backButton);
+
+        //Banner Ad Create
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 

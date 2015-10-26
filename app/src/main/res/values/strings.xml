@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">ProjectShop</string>
+    <string name="app_name">Pantry</string>
+    
+    <string name="banner_ad_main">ca-app-pub-6249722927072095/5291186962</string>
+    <string name="banner_ad_list">ca-app-pub-6249722927072095/4115504969</string>
+    <string name="banner_ad_map">ca-app-pub-6249722927072095/5592238161</string>
+    <string name="banner_ad_about">ca-app-pub-6249722927072095/2499170960</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_items">AddItems</string>
     <string name="title_activity_copyright">CopyrightActivity</string>

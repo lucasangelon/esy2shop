@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,8 +23,12 @@ import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
 import codefactory.esy2shop.models.List;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
-public class MainMenu extends AppCompatActivity {
+
+public class MainMenu extends ActionBarActivity {
+
 
     Intent listIntent;
     codefactory.esy2shop.adapters.ListAdapter listAdapter;
@@ -73,6 +78,12 @@ public class MainMenu extends AppCompatActivity {
         mainListView.setAdapter(listAdapter);
 
         placeholderComponents();
+
+        //create Banner Ad
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
     @Override

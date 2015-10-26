@@ -179,5 +179,7 @@ public class ShoppingListAdapter extends BaseAdapter {
             }});
 
         return convertView;
+
+
     }
 }

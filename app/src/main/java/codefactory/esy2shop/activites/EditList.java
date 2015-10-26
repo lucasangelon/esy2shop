@@ -90,6 +90,7 @@ public class EditList extends ActionBarActivity {
         // Get DB Categories IDs
         String[] tempListCategoryNames = DatabaseManager.CATEGORIES.values().toArray(new String[listCategorySize]);
         Integer[] tempListCategoryIDs = DatabaseManager.CATEGORIES.keySet().toArray(new Integer[listCategorySize]);
+
         // Add DB data to adapter array
         for(int i = 0; i < listCategorySize; i++)
         {
@@ -103,20 +104,19 @@ public class EditList extends ActionBarActivity {
 
 
         // Finalise adapter and spinner
-        listCategoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCategoryNames);
+        listCategoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listCategoryNames);
         listCategorySpinner.setAdapter(listCategoryAdapter);
         listCategorySpinner.setSelection(CategoryStartPos);
+        listCategorySpinner.setFocusable(true);
+        listCategorySpinner.setFocusableInTouchMode(true);
 
         // Setup Add Item Button
         listAddItemBtn = (Button) findViewById(R.id.add_item_button);
 
 
-        /*
-        // Setup Items List View
         listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
-        ListView listItemsView = (ListView) findViewById(R.id.listItemVeiw);
+        ListView listItemsView = (ListView) findViewById(R.id.list_item_view);
         listItemsView.setAdapter(listItemsAdapter);
-        */
 
 
 
@@ -128,12 +128,20 @@ public class EditList extends ActionBarActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    Toast.makeText(EditList.this, "So this happened", Toast.LENGTH_SHORT).show();
+
+                    /*
+                        Sets focus after name is entered to the spinner
+                     */
+                    listCategorySpinner.requestFocus();
+                    listCategorySpinner.performClick();
                     handled = true;
                 }
                 return handled;
             }
         });
+
+
+
 
 
     }

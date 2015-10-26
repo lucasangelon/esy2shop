@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,25 +31,17 @@ import com.google.android.gms.ads.AdView;
 
 public class MainMenu extends ActionBarActivity {
 
-
     Intent listIntent;
     codefactory.esy2shop.adapters.ListAdapter listAdapter;
 
     ListView mainListView;
 
-    //Navigation Drawer
+    //Nav_drawer_redo
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout drawer;
 
     //@Bind(R.id.refreshImageView) ImageView mRefreshImageView;
-
-    //Method called in onCreate
-    private void addDrawerItems(){
-        String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders", "Saved Stores", "About Page"};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
-        mDrawerList.setAdapter(mAdapter);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +73,31 @@ public class MainMenu extends ActionBarActivity {
 
         placeholderComponents();
 
-        //create Banner Ad
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        //Create Nav Drawer JLO
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //Call the method
+        addDrawerItems();
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_action_settings:
+                drawer.openDrawer(mDrawerList);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -97,8 +111,10 @@ public class MainMenu extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main_menu, menu);
+
+        return true;
     }
 
     private void placeholderComponents()
@@ -135,6 +151,13 @@ public class MainMenu extends ActionBarActivity {
                 listAdapter.FilterStore(storeIDs[storeSpinner.getSelectedItemPosition()], active.isChecked());
             }
         });
+    }
+
+    //Create Drawer items (called in onCreate) JLO
+    private void addDrawerItems(){
+        String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders", "Saved Stores", "About Page"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
     }
 }
 

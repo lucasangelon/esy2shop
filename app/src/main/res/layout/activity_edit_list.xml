@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:id="@+id/listNameLabel"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"/>
 
             <EditText
                 android:layout_width="fill_parent"
@@ -35,7 +36,8 @@
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 android:layout_gravity="center_vertical"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -53,13 +55,17 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/catagory"
                 android:id="@+id/listCategoryField"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"/>
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/listCategorySpinner"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
 
         </LinearLayout>
 
@@ -89,15 +95,46 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+"
-            android:id="@+id/add_item_button"
-            android:onClick="listNotificationBtnOnClick"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/list_item_view"/>
+            android:layout_below="@+id/list_item_view"
+            android:id="@+id/list_shopping_item">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/add_item_button"
+                android:onClick="listNotificationBtnOnClick"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/vertical_yellow_add_separator"
+                android:background="@color/yellow"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/add_item_button"
+                android:layout_toRightOf="@+id/add_item_button"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/add_item_editText"
+                android:layout_alignBottom="@+id/add_item_button"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/vertical_yellow_add_separator"
+                android:layout_toEndOf="@+id/vertical_yellow_add_separator"
+                android:background="@color/gray"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:imeOptions="actionNext"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

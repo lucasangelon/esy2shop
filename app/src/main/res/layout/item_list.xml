@@ -19,7 +19,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/vertical_yellow_separator" />
+            android:layout_alignBottom="@+id/vertical_yellow_separator"
+            android:background="@color/gray"/>
 
         <LinearLayout
             android:layout_width="5dp"
@@ -38,7 +39,8 @@
             android:text="@string/no_list_data"
             android:layout_gravity="left|center_vertical"
             android:layout_toRightOf="@+id/vertical_yellow_separator"
-            android:background="@color/white"/>
+            android:background="@color/gray"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 

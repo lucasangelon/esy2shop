@@ -1,19 +1,23 @@
 package codefactory.esy2shop.activites;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class EditList extends ActionBarActivity {
     Spinner listCategorySpinner;
     ArrayAdapter<String> listCategoryAdapter;
     int[] listCategoryIDs;
-    ///Button listAddItemBtn;
+    Button listAddItemBtn;
     ListItemAdapter listItemsAdapter;
 
 
@@ -96,18 +100,42 @@ public class EditList extends ActionBarActivity {
                 CategoryStartPos = i;
             }
         }
+
+
         // Finalise adapter and spinner
         listCategoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCategoryNames);
         listCategorySpinner.setAdapter(listCategoryAdapter);
         listCategorySpinner.setSelection(CategoryStartPos);
 
-       /* // Setup Add Item Button
-        listAddItemBtn = (Button) findViewById(R.id.listNewItem);
+        // Setup Add Item Button
+        listAddItemBtn = (Button) findViewById(R.id.add_item_button);
 
+
+        /*
         // Setup Items List View
         listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
         ListView listItemsView = (ListView) findViewById(R.id.listItemVeiw);
-        listItemsView.setAdapter(listItemsAdapter);*/
+        listItemsView.setAdapter(listItemsAdapter);
+        */
+
+
+
+        /*
+            IME handle for next on list name field
+         */
+        listNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    Toast.makeText(EditList.this, "So this happened", Toast.LENGTH_SHORT).show();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
+
     }
 
 
@@ -162,12 +190,15 @@ public class EditList extends ActionBarActivity {
     }
 
 
+
+
     /*
         OnClick Listener
      */
     public void listAddItemBtnOnClick(View view){
         listItemsAdapter.AddItem();
     }
+
 
     public void listStoreBtnOnClick(View view){
         // Get the store ID from intent
@@ -176,10 +207,13 @@ public class EditList extends ActionBarActivity {
         startActivityForResult(storeIntent, 1);
     }
 
+
+
     public void listNotificationBtnOnClick(View view){
         Intent storeIntent = new Intent(this, EditStore.class);
         startActivity(storeIntent);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -209,6 +243,7 @@ public class EditList extends ActionBarActivity {
 
 
     public void listSave(){
+
         // Make useable DbManager
         DatabaseManager db = new DatabaseManager(this);
 
@@ -224,4 +259,6 @@ public class EditList extends ActionBarActivity {
         // Apply Changes
         list.SaveChanges(db);
     }
+
+
 }

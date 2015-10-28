@@ -19,13 +19,19 @@ import codefactory.projectshop.R;
 
 /**
  * Created by Dillon on 5/10/2015.
+ *
+ *
+ * Use in edit list activity.
+ * Inflates item_list_item
  */
 public class ListItemAdapter extends BaseAdapter {
-    LayoutInflater inflater;
 
+
+    LayoutInflater inflater;
     private Context mContext;
     private ArrayList<ItemHandler> itemHandlers = new ArrayList<ItemHandler>();
     public ArrayList<Item> mRemovedItems = new ArrayList<Item>();
+
 
     public ListItemAdapter (ArrayList<Item> items, Context context) {
         mContext = context;
@@ -46,11 +52,21 @@ public class ListItemAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void AddItem()
+    public void addItem()
     {
         GetListItems();
         itemHandlers.add(new ItemHandler(new Item()));
         notifyDataSetChanged();
+    }
+
+    /*
+        27.10.15
+     */
+    public void addItem(String itemName){
+
+        GetListItems();
+        itemHandlers.add(new ItemHandler());
+
     }
 
     @Override
@@ -69,6 +85,8 @@ public class ListItemAdapter extends BaseAdapter {
         return itemHandlers.get(position).item.getId();
     }
 
+
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null)
@@ -76,10 +94,14 @@ public class ListItemAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_list_item, null);
         }
 
-        itemHandlers.get(position).SetCompletedField((CheckBox) convertView.findViewById(R.id.listItemComplete));
-        itemHandlers.get(position).SetItemNameField((EditText) convertView.findViewById(R.id.listItemName));
+        itemHandlers.get(position).SetCompletedField((CheckBox) convertView.findViewById(R.id.item_complete_checkbox));
+        itemHandlers.get(position).SetItemNameField((EditText) convertView.findViewById(R.id.edit_List_Text));
 
-        Button deleteBtn = (Button) convertView.findViewById(R.id.listItemDelete);
+
+        /*
+                Need to be uncommented when swipe is in -------------
+         */
+/*        Button deleteBtn = (Button) convertView.findViewById(R.id.listItemDelete);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +109,15 @@ public class ListItemAdapter extends BaseAdapter {
                 itemHandlers.remove(position);
                 notifyDataSetChanged();
             }
-        });
+        });*/
+
+
 
         return convertView;
     }
+
+
+
 
     public ArrayList<Item> GetListItems()
     {
@@ -107,6 +134,11 @@ public class ListItemAdapter extends BaseAdapter {
 
         return result;
     }
+
+
+
+
+
 
     private class ItemHandler
     {
@@ -131,11 +163,13 @@ public class ListItemAdapter extends BaseAdapter {
             itemNameField.setText(item.getName());
         }
 
-        public Item returnUpdate()
+        public Item returnUpdate(String name)
         {
             item.setComplete(completedField.isChecked());
-            item.setName(itemNameField.getText().toString());
+            //item.setName(itemNameField.getText().toString());
+            item.setName(name);
             return item;
         }
+
     }
 }

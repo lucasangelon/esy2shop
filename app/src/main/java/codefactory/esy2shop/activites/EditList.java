@@ -37,11 +37,15 @@ public class EditList extends ActionBarActivity {
     List list;
     DatabaseManager db;
     EditText listNameField;
-    Button newStoreBtn;
     Spinner listCategorySpinner;
+
+
     ArrayAdapter<String> listCategoryAdapter;
+    ArrayList<Item> itemList;
     int[] listCategoryIDs;
+
     Button listAddItemBtn;
+    EditText itemAddText;
     ListItemAdapter listItemsAdapter;
 
 
@@ -112,9 +116,16 @@ public class EditList extends ActionBarActivity {
 
         // Setup Add Item Button
         listAddItemBtn = (Button) findViewById(R.id.add_item_button);
+        itemAddText = (EditText) findViewById(R.id.add_item_editText);
+        itemAddText.setFocusableInTouchMode(true);
+        itemAddText.setFocusable(true);
 
 
-        listItemsAdapter = new ListItemAdapter(list.getItemList(), this);
+        /*
+            Ste up Item adapter
+         */
+        itemList = list.getItemList();
+        listItemsAdapter = new ListItemAdapter(itemList, this);
         ListView listItemsView = (ListView) findViewById(R.id.list_item_view);
         listItemsView.setAdapter(listItemsAdapter);
 
@@ -135,10 +146,32 @@ public class EditList extends ActionBarActivity {
                     listCategorySpinner.requestFocus();
                     listCategorySpinner.performClick();
                     handled = true;
+
                 }
                 return handled;
             }
         });
+
+
+        /*
+            Ime handler for add items
+         */
+        itemAddText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+
+                    addItem();
+
+                }
+                return handled;
+            }
+        });
+
+
+
+
 
 
 
@@ -223,6 +256,7 @@ public class EditList extends ActionBarActivity {
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
@@ -266,6 +300,54 @@ public class EditList extends ActionBarActivity {
 
         // Apply Changes
         list.SaveChanges(db);
+    }
+
+    /*
+        When an item is added to the list
+     */
+    private void addItem(){
+
+        /*
+            If txt is empty
+         */
+        if(itemAddText.getText().toString().trim().equals("")){
+
+
+            itemAddText.setText("");
+            Toast.makeText(EditList.this, "Please enter Tex", Toast.LENGTH_SHORT).show();
+
+        }else{
+
+            /*
+                If text field has text
+             */
+
+            //Add item to adapter
+            Item item = new Item();
+            item.setName(itemAddText.getText().toString().trim());
+            item.setComplete(false);
+            itemList.add(item);
+            list.add(item);
+            listItemsAdapter.notifyDataSetChanged();
+
+
+            //Clear text
+            itemAddText.setText("");
+
+            //reset focus
+            itemAddText.requestFocus();
+            itemAddText.performClick();
+
+        }
+
+    }
+
+
+    /*
+        "add" button is clicked
+     */
+    public void addItemClick(View view){
+        addItem();
     }
 
 

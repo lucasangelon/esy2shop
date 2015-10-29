@@ -40,7 +40,6 @@ public class EditList extends ActionBarActivity {
     Spinner listCategorySpinner;
     ArrayAdapter<String> listCategoryAdapter;
     ArrayList<Item> mRemovedItems;
-    ArrayList<Item> itemList;
     int[] listCategoryIDs;
     ItemAdapter itemAdapter;
     Button listAddItemBtn;
@@ -121,8 +120,7 @@ public class EditList extends ActionBarActivity {
         /*
             Ste up Item adapter
          */
-        itemList = list.getItemList();
-        itemAdapter = new ItemAdapter(this, itemList);
+        itemAdapter = new ItemAdapter(this, list);
         ListView listItemsView = (ListView) findViewById(R.id.list_item_view);
         listItemsView.setAdapter(itemAdapter);
 
@@ -165,7 +163,7 @@ public class EditList extends ActionBarActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
 
                     addItem();
 
@@ -277,12 +275,19 @@ public class EditList extends ActionBarActivity {
         // Make useable DbManager
         DatabaseManager db = new DatabaseManager(this);
 
+        //get from adapter (updates checkboxes)
+        list = itemAdapter.getList();
+
         // Update List Object
         list.setName(listNameField.getText().toString());
+
+        //remove items from database
         for(Item i : mRemovedItems)
         {
             db.DeleteItem(i.getId());
         }
+
+        //set the catagory
         list.setCategory(listCategoryIDs[listCategorySpinner.getSelectedItemPosition()]);
 
         // Apply Changes
@@ -318,13 +323,14 @@ public class EditList extends ActionBarActivity {
             itemAdapter.notifyDataSetChanged();
 
 
+
             //Clear text
-            itemAddText.setText("");
+            //itemAddText.clearComposingText();
 
             //Focus
             itemAddText.requestFocus();
             itemAddText.performClick();
-
+            itemAddText.setText("");
 
 
         }

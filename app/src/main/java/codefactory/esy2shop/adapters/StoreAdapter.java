@@ -39,11 +39,11 @@ public class StoreAdapter extends BaseAdapter {
         expectResult = ExpectResult;
         inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         db = new DatabaseManager(context);
-
         using = existing;
         storeList = db.GetStores(null);
         UpdateMapMarker(storeList);
     }
+
 
     public void Update(String search)
     {

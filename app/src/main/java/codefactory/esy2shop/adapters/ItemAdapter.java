@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import codefactory.esy2shop.models.Item;
+import codefactory.esy2shop.models.List;
 import codefactory.projectshop.R;
 
 /**
@@ -23,11 +24,11 @@ public class ItemAdapter extends BaseAdapter {
 
 
     private LayoutInflater mInflater;
-    private ArrayList<Item> itemList;
+    private List itemList;
     Context mContext;
 
 
-    public ItemAdapter(Context mContext, ArrayList<Item> itemList){
+    public ItemAdapter(Context mContext, List itemList){
 
         this.itemList = itemList;
         this.mContext = mContext;
@@ -38,19 +39,19 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return itemList.size();
+        return itemList.getItemList().size();
     }
 
 
     @Override
     public Item getItem(int position) {
-        return itemList.get(position);
+        return itemList.getItemList().get(position);
     }
 
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return itemList.getItemList().get(position).getId();
     }
 
 
@@ -59,51 +60,55 @@ public class ItemAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         View view;
-        ViewHolder holder;
+        ViewHolder holder = new ViewHolder();
 
 
 
         if(convertView == null) {
+
             view = mInflater.inflate(R.layout.item_list_item, parent, false);
-            holder = new ViewHolder();
 
-            // Init views
-            holder.completeCheckBox = (CheckBox) view.findViewById(R.id.item_complete_checkbox);
-            holder.itemEditText = (EditText) view.findViewById(R.id.edit_List_Text);
-
-            /*
-                Set Text and Checkbox
-             */
-            holder.completeCheckBox.setChecked(itemList.get(position).isComplete());
-            holder.itemEditText.setText(itemList.get(position).getName());
-            Log.d("get View", itemList.get(position).getName() + position);
-
-            /*
-                Set listener for checkbox
-             */
-            holder.completeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                                                                   @Override
-                                                                   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                                                                       /*
-                                                                            Changes top the current state of the checkbox
-                                                                        */
-                                                                       itemList.get(position).setComplete(isChecked);
-
-                                                                   }
-                                                               }
-            );
-
-
-            view.setTag(holder);
         } else {
             view = convertView;
             holder = (ViewHolder)view.getTag();
         }
 
+
+        // Init views
+        holder.completeCheckBox = (CheckBox) view.findViewById(R.id.item_complete_checkbox);
+        holder.itemEditText = (EditText) view.findViewById(R.id.edit_List_Text);
+
+
+            /*
+                Set Text and Checkbox
+             */
+        holder.completeCheckBox.setChecked(itemList.getItemList().get(position).isComplete());
+        holder.itemEditText.setText(itemList.getItemList().get(position).getName());
+
+
+
+            /*
+                Set listener for checkbox
+             */
+        holder.completeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                                                               @Override
+                                                               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                                   /*
+                                                                      Changes top the current state of the checkbox
+                                                                   */
+                                                                   itemList.getItemList().get(position).setComplete(isChecked);
+                                                               }
+                                                           }
+        );
+
+
+        view.setTag(holder);
         return view;
+
     }
+
+
 
 
     public class ViewHolder{
@@ -111,6 +116,12 @@ public class ItemAdapter extends BaseAdapter {
         public CheckBox completeCheckBox;
         public EditText itemEditText;
 
+    }
+
+
+
+    public List getList(){
+        return itemList;
     }
 
 

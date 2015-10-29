@@ -131,10 +131,12 @@
                 android:layout_alignParentEnd="true"
                 android:layout_toRightOf="@+id/vertical_yellow_add_separator"
                 android:layout_toEndOf="@+id/vertical_yellow_add_separator"
+                android:inputType="text"
                 android:background="@color/gray"
                 android:textColor="@color/white"
+                android:singleLine="true"
                 android:maxLines="1"
-                android:imeOptions="actionNext"/>
+                android:imeOptions="actionUnspecified"/>
 
         </RelativeLayout>
 

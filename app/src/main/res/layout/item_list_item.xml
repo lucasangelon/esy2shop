@@ -10,17 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:id="@+id/list_shopping_item">
+        android:id="@+id/list_shopping_item"
+        android:background="@color/gray">
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/item_complete_checkbox"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/vertical_yellow_separator"
-            android:background="@color/gray"/>
+            android:layout_alignBottom="@+id/edit_List_Text"
+            android:background="@color/gray"
+            />
 
         <LinearLayout
             android:layout_width="5dp"
@@ -28,17 +29,22 @@
             android:orientation="vertical"
             android:id="@+id/vertical_yellow_separator"
             android:background="@color/yellow"
-            android:layout_alignBottom="@+id/editListBtn"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/item_complete_checkbox"/>
+            android:layout_toRightOf="@+id/item_complete_checkbox"
+            android:layout_toEndOf="@+id/item_complete_checkbox"
+            android:layout_alignBottom="@+id/edit_List_Text"/>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edit_List_Text"
             android:text="@string/no_list_data"
-            android:layout_gravity="left|center_vertical"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            android:layout_gravity="start|center_vertical"
             android:layout_toRightOf="@+id/vertical_yellow_separator"
+            android:layout_toEndOf="@+id/vertical_yellow_separator"
             android:background="@color/gray"
             android:textColor="@color/white"/>
 

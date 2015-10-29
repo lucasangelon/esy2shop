@@ -1,19 +1,19 @@
 package codefactory.esy2shop.activites;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import codefactory.esy2shop.adapters.ListItemAdapter;
+import codefactory.esy2shop.adapters.ItemAdapter;
 import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.esy2shop.models.Item;
 import codefactory.esy2shop.models.List;
@@ -38,15 +38,13 @@ public class EditList extends ActionBarActivity {
     DatabaseManager db;
     EditText listNameField;
     Spinner listCategorySpinner;
-
-
     ArrayAdapter<String> listCategoryAdapter;
+    ArrayList<Item> mRemovedItems;
     ArrayList<Item> itemList;
     int[] listCategoryIDs;
-
+    ItemAdapter itemAdapter;
     Button listAddItemBtn;
     EditText itemAddText;
-    ListItemAdapter listItemsAdapter;
 
 
 
@@ -58,6 +56,8 @@ public class EditList extends ActionBarActivity {
         setContentView(R.layout.activity_edit_list);
 
 
+        //Init removed items
+        mRemovedItems = new ArrayList<>();
 
         //Get ID from intent
         db = new DatabaseManager(this);
@@ -71,9 +71,6 @@ public class EditList extends ActionBarActivity {
         // Update Name Field
         listNameField = (EditText) findViewById(R.id.listNameField);
         listNameField.setText(list.getName());
-
-       /* // Set New Store button
-        newStoreBtn = (Button) findViewById(R.id.listStoreBtn);*/
 
         // Update Category Spinner
         listCategorySpinner = (Spinner) findViewById(R.id.listCategorySpinner);
@@ -125,9 +122,10 @@ public class EditList extends ActionBarActivity {
             Ste up Item adapter
          */
         itemList = list.getItemList();
-        listItemsAdapter = new ListItemAdapter(itemList, this);
+        itemAdapter = new ItemAdapter(this, itemList);
         ListView listItemsView = (ListView) findViewById(R.id.list_item_view);
-        listItemsView.setAdapter(listItemsAdapter);
+        listItemsView.setAdapter(itemAdapter);
+
 
 
 
@@ -141,16 +139,23 @@ public class EditList extends ActionBarActivity {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
 
                     /*
+                        Hide Keyboard
+                     */
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(listNameField.getWindowToken(), 0);
+                    /*
                         Sets focus after name is entered to the spinner
                      */
                     listCategorySpinner.requestFocus();
                     listCategorySpinner.performClick();
+
                     handled = true;
 
                 }
                 return handled;
             }
         });
+
 
 
         /*
@@ -160,7 +165,7 @@ public class EditList extends ActionBarActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
 
                     addItem();
 
@@ -168,13 +173,6 @@ public class EditList extends ActionBarActivity {
                 return handled;
             }
         });
-
-
-
-
-
-
-
 
 
     }
@@ -231,16 +229,6 @@ public class EditList extends ActionBarActivity {
     }
 
 
-
-
-    /*
-        OnClick Listener
-     */
-    public void listAddItemBtnOnClick(View view){
-        listItemsAdapter.AddItem();
-    }
-
-
     public void listStoreBtnOnClick(View view){
         // Get the store ID from intent
         Intent storeIntent = new Intent(this, EditStore.class);
@@ -291,8 +279,7 @@ public class EditList extends ActionBarActivity {
 
         // Update List Object
         list.setName(listNameField.getText().toString());
-        list.setItems(listItemsAdapter.GetListItems());
-        for(Item i : listItemsAdapter.mRemovedItems)
+        for(Item i : mRemovedItems)
         {
             db.DeleteItem(i.getId());
         }
@@ -325,18 +312,20 @@ public class EditList extends ActionBarActivity {
             //Add item to adapter
             Item item = new Item();
             item.setName(itemAddText.getText().toString().trim());
+            Toast.makeText(EditList.this, itemAddText.getText().toString().trim(), Toast.LENGTH_SHORT).show();
             item.setComplete(false);
-            itemList.add(item);
             list.add(item);
-            listItemsAdapter.notifyDataSetChanged();
+            itemAdapter.notifyDataSetChanged();
 
 
             //Clear text
             itemAddText.setText("");
 
-            //reset focus
+            //Focus
             itemAddText.requestFocus();
             itemAddText.performClick();
+
+
 
         }
 
@@ -348,6 +337,23 @@ public class EditList extends ActionBarActivity {
      */
     public void addItemClick(View view){
         addItem();
+    }
+
+
+    /*
+        Item is removed from list
+     */
+    public void removeItem(int position){
+
+        //Add to removed items
+        mRemovedItems.add(list.getItemList().get(position));
+
+        //remove item form list
+        list.getItemList().remove(position);
+
+        //Update adapter
+        itemAdapter.notifyDataSetChanged();
+
     }
 
 

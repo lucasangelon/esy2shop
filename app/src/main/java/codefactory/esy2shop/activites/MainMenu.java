@@ -64,6 +64,11 @@ public class MainMenu extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
+
     /*
     private void placeholderComponents()
     {

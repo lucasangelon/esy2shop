@@ -1,3 +1,4 @@
+/*
 package codefactory.esy2shop.adapters;
 
 import android.content.Context;
@@ -17,13 +18,15 @@ import codefactory.esy2shop.models.List;
 import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
 
+*/
 /**
  * Created by Dillon on 5/10/2015.
  *
  *
  * Use in edit list activity.
  * Inflates item_list_item
- */
+ *//*
+
 public class ListItemAdapter extends BaseAdapter {
 
 
@@ -59,9 +62,11 @@ public class ListItemAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    /*
+    */
+/*
         27.10.15
-     */
+     *//*
+
     public void addItem(String itemName){
 
         GetListItems();
@@ -98,9 +103,12 @@ public class ListItemAdapter extends BaseAdapter {
         itemHandlers.get(position).SetItemNameField((EditText) convertView.findViewById(R.id.edit_List_Text));
 
 
-        /*
+        */
+/*
                 Need to be uncommented when swipe is in -------------
-         */
+         *//*
+
+*/
 /*        Button deleteBtn = (Button) convertView.findViewById(R.id.listItemDelete);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +117,8 @@ public class ListItemAdapter extends BaseAdapter {
                 itemHandlers.remove(position);
                 notifyDataSetChanged();
             }
-        });*/
+        });*//*
+
 
 
 
@@ -173,3 +182,4 @@ public class ListItemAdapter extends BaseAdapter {
 
     }
 }
+*/

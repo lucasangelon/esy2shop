@@ -1,5 +1,6 @@
 package codefactory.esy2shop.adapters;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.PriorityQueue;
 
+import codefactory.esy2shop.activites.AboutActivity;
 import codefactory.esy2shop.activites.EditList;
 import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.esy2shop.models.List;
@@ -52,6 +54,14 @@ public class ListAdapter extends BaseAdapter {
         mList = new ArrayList<List>();
         for(List l : fullList)
         {
+            if(CategoryID==1)
+                mList.add(l);
+            else
+            if(CategoryID==6)
+            {
+                Intent i = new Intent(mContext, AboutActivity.class);
+                mContext.startActivity(i);
+            }
             if(l.getCategory() == CategoryID)
             {
                 mList.add(l);

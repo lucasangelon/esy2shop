@@ -104,6 +104,16 @@
             android:layout_alignParentStart="true"
             android:id="@+id/ADVERTISEMENT_PLACEHOLDER" />
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_main">
+        </com.google.android.gms.ads.AdView>
+
     </RelativeLayout>
 
 
@@ -112,17 +122,10 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
+        android:choiceMode="singleChoice"
         android:background="#ffeeeeee"/>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_main">
-    </com.google.android.gms.ads.AdView>
+
 
 
 </android.support.v4.widget.DrawerLayout>

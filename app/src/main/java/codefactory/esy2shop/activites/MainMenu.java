@@ -1,32 +1,28 @@
 package codefactory.esy2shop.activites;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
-import codefactory.esy2shop.database.DatabaseManager;
-import codefactory.esy2shop.models.Store;
-import codefactory.projectshop.R;
-import codefactory.esy2shop.models.List;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import codefactory.esy2shop.database.DatabaseManager;
+import codefactory.projectshop.R;
 
 
 public class MainMenu extends ActionBarActivity {
@@ -83,7 +79,16 @@ public class MainMenu extends ActionBarActivity {
 
         //Call the method
         addDrawerItems();
-
+        mDrawerList.bringToFront();
+        drawer.requestLayout();
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listAdapter.FilterCategory(position+1);
+                Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
+                drawer.closeDrawer(mDrawerList);
+            }
+        });
 
     }
 
@@ -151,6 +156,7 @@ public class MainMenu extends ActionBarActivity {
                 listAdapter.FilterStore(storeIDs[storeSpinner.getSelectedItemPosition()], active.isChecked());
             }
         });
+
     }
 
     //Create Drawer items (called in onCreate) JLO
@@ -158,6 +164,7 @@ public class MainMenu extends ActionBarActivity {
         String[] osArray = { "All Lists", "Work", "Personal", "Daily Reminders", "Saved Stores", "About Page"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
+
     }
 }
 

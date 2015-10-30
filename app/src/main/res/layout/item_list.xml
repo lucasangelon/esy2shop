@@ -4,28 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LIST TITLE"
-        android:id="@+id/editListBtn"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/deleteListBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="D"
-        android:id="@+id/deleteListBtn"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editListBtn"
+            android:text="@string/no_list_data"
+            android:layout_gravity="left|center_vertical"
+            android:layout_toRightOf="@+id/vertical_yellow_separator"
+            android:background="@color/gray"
+            android:textColor="@color/white"/>
 
 </RelativeLayout>

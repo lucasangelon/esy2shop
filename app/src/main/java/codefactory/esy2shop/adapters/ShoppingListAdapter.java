@@ -3,6 +3,7 @@ package codefactory.esy2shop.adapters;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,21 +27,33 @@ import codefactory.projectshop.R;
  *
  *  Josh, with help from ItemAdapter
  *  Update Dillon (041502996) 5/10/15
+ *
  */
-public class ListAdapter extends BaseAdapter {
+public class ShoppingListAdapter extends BaseAdapter {
+
+
 
     LayoutInflater inflater;
-
     private Context mContext;
     private ArrayList<List> mList;
     ArrayList<List> fullList;
 
-    public ListAdapter (ArrayList<List> list, Context context) {
-        mContext = context;
-        fullList = list;
-        mList = list;
+
+
+
+
+    public ShoppingListAdapter(ArrayList<List> fullList, Context mContext) {
+
+        this.mContext = mContext;
+        this.fullList = fullList;
+        this.mList = fullList;
         inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
+
     }
+
+
+
+
 
     public void Update(ArrayList<List> list)
     {
@@ -49,9 +62,13 @@ public class ListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
+
+
+
     public void FilterCategory(int CategoryID)
     {
-        mList = new ArrayList<List>();
+        mList = new ArrayList<>();
         for(List l : fullList)
         {
             if(CategoryID==1)
@@ -70,9 +87,12 @@ public class ListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
+
+
     public void FilterStore(int StoreID, boolean OnlyActive)
     {
-        mList = new ArrayList<List>();
+        mList = new ArrayList<>();
         for(List l : fullList)
         {
             if(l.getStore() == StoreID && !(OnlyActive && l.getProximityAlert()))
@@ -82,6 +102,9 @@ public class ListAdapter extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
+
+
+
 
     public void FilterTodays()
     {
@@ -97,11 +120,14 @@ public class ListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
+
     public void FilterClear()
     {
         mList = fullList;
         notifyDataSetChanged();
     }
+
 
     @Override
     public int getCount() {
@@ -119,6 +145,9 @@ public class ListAdapter extends BaseAdapter {
         return mList.get(position).getId();
     }
 
+
+
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final List list = mList.get(position);
@@ -133,6 +162,24 @@ public class ListAdapter extends BaseAdapter {
          */
         Button editButton = (Button) convertView.findViewById(R.id.editListBtn);
         editButton.setText(list.getName());
+
+
+        /*
+            Generates gradient for the Lists.
+         */
+        int colorPos = position%6;
+        int red = 253;
+        int green = (int)(231 -(22/6)*colorPos);
+        int blue = (int)(130-(106/6)*colorPos);
+        editButton.setBackgroundColor(Color.rgb(red,green,blue));
+
+
+
+        /*
+            OnClick Listener
+            Re-driects to edit list activity.
+            Passes the list id to edit list
+         */
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent toListIntent = new Intent(mContext, EditList.class);
@@ -141,21 +188,8 @@ public class ListAdapter extends BaseAdapter {
                 mContext.startActivity(toListIntent);
             }});
 
-        /*
-            Delete Button
-        */
-        Button deleteButton = (Button) convertView.findViewById(R.id.deleteListBtn);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                DatabaseManager db = new DatabaseManager(mContext);
-                list.Delete(db);
-                mList.remove(position);
-
-                //Update adapter
-                notifyDataSetChanged();
-            }
-        });
-
         return convertView;
+
+
     }
 }

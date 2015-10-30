@@ -74,6 +74,8 @@ public class List{
         this.dateAlert = dateAlert;
     }
 
+
+
     public void SaveChanges(DatabaseManager db)
     {
         // As per hierarchy
@@ -86,6 +88,9 @@ public class List{
             i.setId(db.UpdateItem(i, id));
         }
     }
+
+
+
 
     public boolean Delete(DatabaseManager db)
     {

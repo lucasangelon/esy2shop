@@ -1,35 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listItemComplete"
-        android:checked="false"
-        android:layout_alignBottom="@+id/listItemName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listItemName"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/listItemComplete"
-        android:layout_toLeftOf="@+id/listItemDelete"
-        android:layout_toStartOf="@+id/listItemDelete"
-        android:layout_alignBottom="@+id/listItemDelete" />
+        android:id="@+id/list_shopping_item"
+        android:background="@color/gray">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="D"
-        android:id="@+id/listItemDelete"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_complete_checkbox"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/edit_List_Text"
+            android:background="@color/gray"
+            />
+
+        <LinearLayout
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/vertical_yellow_separator"
+            android:background="@color/yellow"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/item_complete_checkbox"
+            android:layout_toEndOf="@+id/item_complete_checkbox"
+            android:layout_alignBottom="@+id/edit_List_Text"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_List_Text"
+            android:text="@string/no_list_data"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            android:layout_gravity="start|center_vertical"
+            android:layout_toRightOf="@+id/vertical_yellow_separator"
+            android:layout_toEndOf="@+id/vertical_yellow_separator"
+            android:background="@color/gray"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/horizontal_white_separator"
+        android:background="@color/white"
+        android:layout_below="@+id/list_shopping_item"/>
 
 </RelativeLayout>

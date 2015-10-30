@@ -23,12 +23,18 @@ import com.google.android.gms.ads.AdView;
 
 import codefactory.esy2shop.database.DatabaseManager;
 import codefactory.projectshop.R;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import codefactory.esy2shop.database.DatabaseManager;
+import codefactory.projectshop.R;
+import codefactory.esy2shop.adapters.ShoppingListAdapter;
 
 
 public class MainMenu extends ActionBarActivity {
 
-    Intent listIntent;
-    codefactory.esy2shop.adapters.ListAdapter listAdapter;
+    ShoppingListAdapter listAdapter;
 
     ListView mainListView;
 
@@ -44,17 +50,18 @@ public class MainMenu extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-
-        listIntent = new Intent(this, EditList.class);
-
-
-
-
+        /*
+           New List Button
+         */
         Button newButton = (Button) findViewById(R.id.newList);
         newButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                Intent listIntent;
+                listIntent = new Intent(getApplicationContext(), EditList.class);
                 listIntent.putExtra("ListID", -1);
                 startActivity(listIntent);
+
             }});
 
 
@@ -63,13 +70,12 @@ public class MainMenu extends ActionBarActivity {
         DatabaseManager dbLoad = new DatabaseManager(this, true);
 
         //Set adapter to list view
-        listAdapter = new codefactory.esy2shop.adapters.ListAdapter(dbLoad.GetLists(null), this);
+        listAdapter = new ShoppingListAdapter(dbLoad.GetLists(null), this);
         ListView mainListView = (ListView)findViewById(R.id.mainListView);
         mainListView.setAdapter(listAdapter);
 
-        placeholderComponents();
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdView mAdView = (AdView) findViewById(R.id.add_view);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -122,6 +128,12 @@ public class MainMenu extends ActionBarActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
+
+    /*
     private void placeholderComponents()
     {
         final Spinner categorySpinner = (Spinner) findViewById(R.id.TEMPCategorySpinner);
@@ -156,8 +168,10 @@ public class MainMenu extends ActionBarActivity {
                 listAdapter.FilterStore(storeIDs[storeSpinner.getSelectedItemPosition()], active.isChecked());
             }
         });
+<<<<<<< HEAD
 
     }
+    */
 
     //Create Drawer items (called in onCreate) JLO
     private void addDrawerItems(){

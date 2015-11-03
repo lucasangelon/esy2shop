@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -55,6 +56,12 @@ public class ItemAdapter extends BaseAdapter {
     }
 
 
+    public void remove(int index)
+    {
+        itemList.remove(index);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -76,7 +83,7 @@ public class ItemAdapter extends BaseAdapter {
 
         // Init views
         holder.completeCheckBox = (CheckBox) view.findViewById(R.id.item_complete_checkbox);
-        holder.itemEditText = (EditText) view.findViewById(R.id.edit_List_Text);
+        holder.itemEditText = (TextView) view.findViewById(R.id.edit_List_Text);
 
 
             /*
@@ -114,7 +121,7 @@ public class ItemAdapter extends BaseAdapter {
     public class ViewHolder{
 
         public CheckBox completeCheckBox;
-        public EditText itemEditText;
+        public TextView itemEditText;
 
     }
 

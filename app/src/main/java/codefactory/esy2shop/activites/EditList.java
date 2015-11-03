@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -28,6 +30,11 @@ import codefactory.esy2shop.models.Item;
 import codefactory.esy2shop.models.List;
 import codefactory.esy2shop.models.Store;
 import codefactory.projectshop.R;
+
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -47,7 +54,25 @@ public class EditList extends ActionBarActivity {
     Button listAddItemBtn;
     EditText itemAddText;
 
+    SwipeMenuCreator creator = new SwipeMenuCreator() {
 
+        @Override
+        public void create(SwipeMenu menu) {
+            // create "open" item
+
+            // create "delete" item
+            SwipeMenuItem deleteItem = new SwipeMenuItem(
+                    getApplicationContext());
+            // set item background
+            deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                    0x3F, 0x25)));
+            // set item width
+            deleteItem.setWidth((90));
+            // set a icon
+            // add to menu
+            menu.addMenuItem(deleteItem);
+        }
+    };
 
 
     @Override
@@ -123,8 +148,21 @@ public class EditList extends ActionBarActivity {
             Ste up Item adapter
          */
         itemAdapter = new ItemAdapter(this, list);
-        ListView listItemsView = (ListView) findViewById(R.id.list_item_view);
+        com.baoyz.swipemenulistview.SwipeMenuListView listItemsView = (com.baoyz.swipemenulistview.SwipeMenuListView) findViewById(R.id.list_item_view);
         listItemsView.setAdapter(itemAdapter);
+        listItemsView.setMenuCreator(creator);
+        listItemsView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        itemAdapter.remove(position);
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
 
 
 

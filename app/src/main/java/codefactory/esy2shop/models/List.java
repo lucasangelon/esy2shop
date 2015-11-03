@@ -64,6 +64,11 @@ public class List{
         }
     }
 
+    public void remove(int index)
+    {
+        items.remove(index);
+    }
+
     public List(int id, String name, ArrayList<Item> items, int store, boolean proximityAlert, int category, Date dateAlert){
         this.id = id;
         this.name = name;

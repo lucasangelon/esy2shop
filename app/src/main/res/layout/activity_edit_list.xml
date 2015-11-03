@@ -92,7 +92,7 @@
         android:layout_above="@+id/add_space_list">
 
 
-        <ListView
+        <com.baoyz.swipemenulistview.SwipeMenuListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_view"

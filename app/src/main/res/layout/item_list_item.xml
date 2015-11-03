@@ -34,7 +34,7 @@
             android:layout_toEndOf="@+id/item_complete_checkbox"
             android:layout_alignBottom="@+id/edit_List_Text"/>
 
-        <EditText
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edit_List_Text"

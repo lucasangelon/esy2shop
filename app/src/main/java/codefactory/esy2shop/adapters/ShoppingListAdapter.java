@@ -51,7 +51,11 @@ public class ShoppingListAdapter extends BaseAdapter {
 
     }
 
-
+    public void remove(int index)
+    {
+        mList.remove(index);
+        notifyDataSetChanged();
+    }
 
 
 

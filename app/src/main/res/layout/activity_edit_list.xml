@@ -75,19 +75,29 @@
                 android:focusableInTouchMode="true"
                 android:layout_weight="0.80" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/bellButton"
-                android:src="@mipmap/bell_icon"
-                android:background="#333333" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/notification_icon_layout"
+                android:background="@color/gray">
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/gpsButton"
-                android:src="@mipmap/gps_icon"
-                android:background="#333333" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bellButton"
+                    android:src="@mipmap/bell_icon"
+                    android:background="@color/gray" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gpsButton"
+                    android:src="@mipmap/gps_icon"
+                    android:background="@color/gray" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

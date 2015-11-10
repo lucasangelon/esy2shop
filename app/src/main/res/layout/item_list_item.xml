@@ -15,7 +15,7 @@
 
         <CheckBox
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/item_complete_checkbox"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -25,7 +25,7 @@
 
         <LinearLayout
             android:layout_width="5dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/vertical_yellow_separator"
             android:background="@color/yellow"
@@ -36,7 +36,7 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/edit_List_Text"
             android:text="@string/no_list_data"
             android:singleLine="true"
@@ -50,12 +50,5 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:orientation="horizontal"
-        android:id="@+id/horizontal_white_separator"
-        android:background="@color/white"
-        android:layout_below="@+id/list_shopping_item"/>
 
 </RelativeLayout>

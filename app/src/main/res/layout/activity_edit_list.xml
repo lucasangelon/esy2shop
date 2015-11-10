@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="codefactory.esy2shop.activites.EditList">
+    tools:context="codefactory.esy2shop.activites.EditList"
+    android:background="@color/gray">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:id="@+id/list_name_layout">
+        android:id="@+id/list_name_layout"
+        android:background="@color/gray">
 
 
         <LinearLayout
@@ -125,7 +127,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/list_item_view"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:divider="@color/white"
+            android:dividerHeight="2dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

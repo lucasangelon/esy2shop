@@ -38,7 +38,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class EditList extends ActionBarActivity {
+public class EditList extends Activity {
 
 
 
@@ -217,6 +217,8 @@ public class EditList extends ActionBarActivity {
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
     }
 
 
@@ -230,12 +232,18 @@ public class EditList extends ActionBarActivity {
 
 
 
+
+
+
     @Override
      public void onStop()
     {
         listSave();
         super.onStop();
     }
+
+
+
 
 
     @Override
@@ -247,12 +255,20 @@ public class EditList extends ActionBarActivity {
 
 
 
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_edit_list, menu);
         return true;
     }
+
+
+
+
 
 
     @Override
@@ -271,19 +287,7 @@ public class EditList extends ActionBarActivity {
     }
 
 
-    public void listStoreBtnOnClick(View view){
-        // Get the store ID from intent
-        Intent storeIntent = new Intent(this, EditStore.class);
-        storeIntent.putExtra("StoreID", list.getStore());
-        startActivityForResult(storeIntent, 1);
-    }
 
-
-
-    public void listNotificationBtnOnClick(View view){
-        Intent storeIntent = new Intent(this, EditStore.class);
-        startActivity(storeIntent);
-    }
 
 
 
@@ -300,6 +304,8 @@ public class EditList extends ActionBarActivity {
 
 
 
+
+
     @Override
     public void onBackPressed()
     {
@@ -311,6 +317,8 @@ public class EditList extends ActionBarActivity {
         // Close
         finish();
     }
+
+
 
 
 
@@ -337,6 +345,13 @@ public class EditList extends ActionBarActivity {
         // Apply Changes
         list.SaveChanges(db);
     }
+
+
+
+
+
+
+
 
     /*
         When an item is added to the list
@@ -382,12 +397,19 @@ public class EditList extends ActionBarActivity {
     }
 
 
+
+
+
     /*
         "add" button is clicked
      */
     public void addItemClick(View view){
         addItem();
     }
+
+
+
+
 
 
     /*

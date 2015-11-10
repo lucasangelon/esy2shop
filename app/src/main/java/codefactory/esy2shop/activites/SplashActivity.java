@@ -1,5 +1,6 @@
 package codefactory.esy2shop.activites;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +15,7 @@ import android.view.MenuItem;
 import codefactory.projectshop.R;
 
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

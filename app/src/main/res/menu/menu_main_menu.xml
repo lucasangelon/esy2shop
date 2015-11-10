@@ -2,11 +2,14 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="codefactory.esy2shop.activites.MainMenu">
-    <item android:id="@+id/menu_action_settings"
+
+
+
+      <item android:id="@+id/menu_action_settings"
           android:icon="@mipmap/ic_list_white_24dp"
           android:title="@string/action_settings"
           android:orderInCategory="100"
-          app:showAsAction="always"/>
+          app:showAsAction="ifRoom|withText"/>
 
 
 </menu>

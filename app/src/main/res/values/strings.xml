@@ -35,4 +35,13 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="titleImageDesc">Title Image</string>
     <string name="name">Name:</string>
     <string name="catagory">Catagory:</string>
+    <string-array name="menu_items">
+        <item>All Lists</item>
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Daily Reminders</item>
+        <item>Saved Stores</item>
+        <item>About Page</item>
+    </string-array>
+    <string name="add_button_description">Add Button</string>
 </resources>

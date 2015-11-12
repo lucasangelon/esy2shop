@@ -62,6 +62,13 @@ public class ItemAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    @Override
+    public void notifyDataSetChanged()
+    {
+
+        super.notifyDataSetChanged();
+    }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -89,7 +96,7 @@ public class ItemAdapter extends BaseAdapter {
             /*
                 Set Text and Checkbox
              */
-        holder.completeCheckBox.setChecked(itemList.getItemList().get(position).isComplete());
+
         holder.itemEditText.setText(itemList.getItemList().get(position).getName());
 
 
@@ -108,8 +115,14 @@ public class ItemAdapter extends BaseAdapter {
                                                                }
                                                            }
         );
+        Toast.makeText(this.mContext,itemList.getItemList().get(position).getName(),Toast.LENGTH_SHORT).show();
+        if(holder.completeCheckBox.isChecked()&& !itemList.getItemList().get(position).isComplete())
+            holder.completeCheckBox.performClick();
 
+        if(!holder.completeCheckBox.isChecked()&& itemList.getItemList().get(position).isComplete())
+            holder.completeCheckBox.performClick();
 
+        //dont use setChecked as it will bug out
         view.setTag(holder);
         return view;
 

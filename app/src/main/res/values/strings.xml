@@ -34,5 +34,5 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="drawer_close">Close navigation drawer</string>
     <string name="titleImageDesc">Title Image</string>
     <string name="name">Name:</string>
-    <string name="catagory">Catagory:</string>
+    <string name="Category">Category</string>
 </resources>

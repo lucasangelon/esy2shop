@@ -57,5 +57,6 @@ Central Institute of Technology may update this policy at anytime. Any changes w
 
     <!-- Maps -->
     <string name="search_results">Search Results</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

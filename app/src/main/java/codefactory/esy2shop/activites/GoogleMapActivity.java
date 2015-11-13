@@ -203,11 +203,11 @@ public class GoogleMapActivity extends AppCompatActivity
 
             Geocoder geocoder = new Geocoder(this);
 
-            //
+            // Searchs for an
             try {
                 //Using Geocoder's object to transform string in geolocation
                 addressList = geocoder.getFromLocationName(destination, 20);
-
+                String whateve = geocoder
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -2,46 +2,221 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\041402465\AppData\Roaming\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.1.0\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.0"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-45c925b75f98c55f6154409f3207e87ebe0a1361.jar" />
+        revision="23.0.1"
+        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-739686598dc20cc9644e3f36c70136a97dfeeb1a.jar" />
     </item>
     <item
-        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\libs\internal_impl-22.2.0.jar"
         jumboMode="false"
-        revision="23.0.0"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-6c8be59db703d5c6a1c3986c65aabcc0347badaa.jar" />
+        revision="23.0.1"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-d7d406485acc0011598af0a7cf4aa8499363f662.jar" />
     </item>
     <item
-        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.1.0\jars\classes.jar"
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.1.0\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.0"
+        revision="23.0.1"
+        sha1="95758a2905669affbffc5ddd262921d375674fad">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-dc25c4bb073be9e2811fe9b67dde6333e89d33f0.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-156d1143085381fe49c6bb2d6af03fd303c2e5ee.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-588d663aa41821464ff37ef6b57dc6f76257d4e2.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-06d63433138a69801b817aedfc5f32967781b70a.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-8e6de66fc63a4d3447a533cc1e8d6c07b603c450.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-4fb3ce73315feac02c22fa520430ebb11eceef0c.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-a85efbeb06bc69e5711bc75d3db07e791204a2fa.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
         sha1="997773777cf3904c11d6764fe3b7668538220e49">
-        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-60d934a45ae65ea8e4d1b5cc085aee8a9bfd4470.jar" />
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-74fe44cb95413270035248f743e7da7d5572f7bb.jar" />
     </item>
     <item
-        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\8.1.0\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.0"
+        revision="23.0.1"
+        sha1="82054090e487d78e163a988557db62d809fa9b95">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-af5f0b7f149cbc46422df6c9b41fadb513be6f73.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-664190cc0a56cb5a807a87ea5440a632113ad155.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-720fa1d17b3a4d7de895a7a98787227e86188476.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-b4b8d1840b7a7b2e8bfc5125dfcc633292cc2652.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="482de223655d06253cc6a4955d653f8994169500">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-f3aa0d89802203ba7a0ae0aa0bf6f6d59993b5d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-771cf8af00000a946d1f63843c44e9a4f9e4d338.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-e4794cfaf515a9b8fae9268e6232aeee40623652.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-6104eafdf113b961cbce3d4a94859b70bda5b710.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-2c8bc83e958727bd80a2b67f47c5621c26272f5b.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d294caf562c4c678b2ef351662a0ca6f1a4d06c0">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-c6c0872a714d9710299c6e2ad8ad14081dc8aa78.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\libs\library-1.3.0-sources.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4d7abb7fbfc955f1b54aff3a9410d9bbf8cd98b3">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\library-1.3.0-sources-5837143f45bc5b3b54c72778916fe14a186eb3d6.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-5af7ef7c614d15b6d4e2d9e957e431b7da7a7e50.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.baoyz.swipemenulistview\library\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8ec8378e8d7aa3104f60823e6350f2728d3609ba">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-4c4d7bd312b3208d71343559b341ba8c5b007fa8.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-9a5e5a1898eb0b5b6f515cc147178dbcd6394541.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-5d108c28418004b65fdcc8520d9aa1d44fc33394.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-b60373c80272c086ebdab4abd9151b36eea102a7.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
         sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
-        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-186ab3bffee31cd51fbd9a6b49d451d39a40f553.jar" />
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-39d14c35ad47955a690bee41eaa2bff8bfcf4250.jar" />
     </item>
     <item
-        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.1.0\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.0"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-180791f4a38c8fc5cd310b495c4bde46c786fe6e.jar" />
+        revision="23.0.1"
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-296f6dc3c6d0b8a308fd74d6eabfc0fae653b990.jar" />
     </item>
     <item
-        jar="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.1.0\jars\classes.jar"
         jumboMode="false"
-        revision="23.0.0"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\041402465\Desktop\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-5954a9a392f10d2bbbf81ba74a5ede9718bd2c62.jar" />
+        revision="23.0.1"
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-c2ec5ff5ec7e8e649452a931754312ef12f22a3d.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-9015dad2ffc8ca3b21b002efcdbe125ee3af847e.jar" />
+    </item>
+    <item
+        jar="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="C:\Users\James\Documents\GitHub\esy2shop\app\build\intermediates\pre-dexed\debug\classes-ed2453aca55f2d54b73748c22bac66567f1df87e.jar" />
     </item>
 
 </items>

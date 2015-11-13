@@ -367,6 +367,9 @@ public class MainMenu extends Activity {
 
                 //
                 drawer.closeDrawer(mDrawerList);
+                Intent mapIntent;
+                mapIntent = new Intent(getApplicationContext(), GoogleMapActivity.class);
+                startActivity(mapIntent);
                 break;
 
 

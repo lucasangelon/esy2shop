@@ -6,4 +6,13 @@
 
     </style>
 
+    <style name="MapActivityTheme" parent="Theme.AppCompat.Light">
+
+        <!-- Set AppCompat’s color theming attrs -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+
+        <!-- The rest of your attributes -->
+    </style>
+
 </resources>

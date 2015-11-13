@@ -366,7 +366,6 @@ public class MainMenu extends Activity {
             case 4:
 
                 //
-                Toast.makeText(MainMenu.this, "I don't know what this list item is supposed to do so instead im just going to make it pop up this obnoxious and rather pointless toast message then close the drawer. Have a Nice Day!!!", Toast.LENGTH_SHORT).show();
                 drawer.closeDrawer(mDrawerList);
                 break;
 

@@ -64,7 +64,9 @@ public class AboutActivity extends Activity {
 
     public void goBack(View view){
 
-        //Go back to whence thy came
+        Intent aboutIntent;
+        aboutIntent = new Intent(getApplicationContext(), MainMenu.class);
+        startActivity(aboutIntent);
 
     }
 }

@@ -7,17 +7,20 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="codefactory.esy2shop.activites.AboutActivity">
+                tools:context="codefactory.esy2shop.activites.AboutActivity"
+                android:background="@color/gray">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="About stuff goes here"
-        android:id="@+id/textView"
+        android:text="@string/about_text"
+        android:id="@+id/about_text"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/gray"
+        android:textColor="@color/yellow"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -25,7 +28,11 @@
         android:text="Back"
         android:id="@+id/backButton"
         android:layout_centerHorizontal="true"
-        android:onClick="goBack"/>
+        android:layout_below="@+id/about_text"
+        android:onClick="goBack"
+        android:background="@color/gray"
+        android:textColor="@color/yellow"
+        />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

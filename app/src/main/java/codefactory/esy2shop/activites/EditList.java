@@ -204,9 +204,8 @@ public class EditList extends Activity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-
+                    handled = true;
                     addItem();
-
                 }
                 return handled;
             }

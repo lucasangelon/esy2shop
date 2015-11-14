@@ -1,0 +1,104 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/map_search_parent_frame_layout"
+        android:layout_above="@+id/location_list_map_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/map_fragment_layout">
+
+
+            <fragment
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/map"
+                tools:context="codefactory.esy2shop.activites.GoogleMapActivity"
+                android:name="com.google.android.gms.maps.SupportMapFragment">
+
+            </fragment>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/map_search_input_layout"
+            android:gravity="top|left">
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/map_search_image_button"
+                android:src="@mipmap/tick_icon"
+                android:background="@android:color/transparent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:alpha="0.9" />
+
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:id="@+id/map_search_input_text"
+                android:imeOptions="actionSearch"
+                android:textColor="@color/yellow"
+                android:inputType="text"
+                android:layout_toRightOf="@+id/map_search_image_button"
+                android:layout_toEndOf="@+id/map_search_image_button"
+                android:alpha="0.9"
+                />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/location_list_map_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow"
+            android:textColor="@color/gray"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal|center_vertical"
+            android:id="@+id/search_result_text_view"
+            android:text="@string/search_results"/>
+
+        <ListView
+            android:id="@+id/results_map_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="5dp"
+            android:background="@android:color/transparent"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

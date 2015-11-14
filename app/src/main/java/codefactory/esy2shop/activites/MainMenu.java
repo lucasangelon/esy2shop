@@ -367,6 +367,9 @@ public class MainMenu extends Activity {
 
                 //
                 drawer.closeDrawer(mDrawerList);
+                Intent mapIntent;
+                mapIntent = new Intent(getApplicationContext(), GoogleMapActivity.class);
+                startActivity(mapIntent);
                 break;
 
 
@@ -385,7 +388,7 @@ public class MainMenu extends Activity {
             default:
 
                 //
-                Toast.makeText(MainMenu.this, "Default!! I love aqua marnie socks", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainMenu.this, "", Toast.LENGTH_SHORT).show();
                 drawer.closeDrawer(mDrawerList);
 
 

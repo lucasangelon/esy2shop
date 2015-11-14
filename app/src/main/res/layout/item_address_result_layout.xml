@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_address_result_layout"
+    android:background="@color/gray"
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_result_image_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/address_icon_button"
+            android:src="@mipmap/gps_icon"
+            android:background="@android:color/transparent"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/address_name_detail_layout"
+        android:layout_toRightOf="@+id/search_result_image_view"
+        android:layout_toEndOf="@+id/search_result_image_view"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Name"
+            android:singleLine="true"
+            android:id="@+id/address_name_text_view"
+            android:textColor="@color/yellow"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Details"
+            android:textColor="@color/yellow"
+            android:singleLine="true"
+            android:id="@+id/address_detail_text_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/address_name_text_view"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,7 +1,9 @@
 package codefactory.esy2shop.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import codefactory.esy2shop.activites.Notification;
 import codefactory.projectshop.R;
 
 /**
@@ -113,18 +116,12 @@ public class AddressAdapter extends BaseAdapter {
                 Toast.makeText(mContext, "Layout Pressed\n" + address.getFeatureName(), Toast.LENGTH_SHORT).show();
 
                 /*
-                    TEST TEST TEST TEST
+                    Redirects to notification page -
+                    Parses the selected address in the intent
                  */
-                String testLine = "";
-                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-
-                    testLine += "\n" + address.getAddressLine(i);
-
-                }
-                Toast.makeText(mContext, testLine , Toast.LENGTH_SHORT).show();
-                /*
-                    TEST TETS TEST TEST
-                 */
+                Intent notficationIntent = new Intent(mContext, Notification.class);
+                notficationIntent.putExtra("storeAddress", address); // Address is parcelable, uses getParcelable to retrieve in notifications
+                mContext.startActivity(notficationIntent);
 
             }
         });

@@ -59,4 +59,31 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="search_results">Search Results</string>
     <string name="title_activity_maps">Map</string>
 
+
+    <!-- Notifications -->
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="Repeat">Repeat</string>
+
+    <!-- Spinner String for Date -->
+    <string-array name="date_options">
+        <item>Today</item>
+        <item>Tomorrow</item>
+        <item>Next Week</item>
+        <item>Set Date</item>
+    </string-array>
+
+
+    <!-- Spinner Strings for Time options-->
+    <string-array name="time_options">
+        <item>Morning -- 9:00</item>
+        <item>Noon  --  12:00</item>
+        <item>Evening-- 17:00</item>
+        <item>Night --  21:00</item>
+        <item>Set Time</item>
+    </string-array>
+
+
+
+
 </resources>

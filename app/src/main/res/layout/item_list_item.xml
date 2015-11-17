@@ -14,12 +14,13 @@
 
         <CheckBox
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/item_complete_checkbox"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/edit_List_Text"
             android:background="@color/gray"
+            android:button="@drawable/checkcheck"
             />
 
         <LinearLayout

@@ -115,7 +115,6 @@ public class ItemAdapter extends BaseAdapter {
                                                                }
                                                            }
         );
-        Toast.makeText(this.mContext,itemList.getItemList().get(position).getName(),Toast.LENGTH_SHORT).show();
         if(holder.completeCheckBox.isChecked()&& !itemList.getItemList().get(position).isComplete())
             holder.completeCheckBox.performClick();
 

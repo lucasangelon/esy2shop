@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Pantry</string>
-    
+
     <string name="banner_ad_main">ca-app-pub-6249722927072095/5291186962</string>
     <string name="banner_ad_list">ca-app-pub-6249722927072095/4115504969</string>
     <string name="banner_ad_map">ca-app-pub-6249722927072095/5592238161</string>
@@ -84,6 +84,35 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     </string-array>
 
 
+    <!-- Strings for the geofence errors-->
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+    <string name="not_connected">GoogleApiClient no yet connected. Try again.</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+
+
+
+
+    <!-- Geofence Trasiontion Types -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+
+
+    <!-- When Geofence Notification is triggerd -->
+    <string name="geofence_transition_notification_text">Click notification to return to app</string>
+
+    <!-- Google Play services cannot connect -->
+    <string name="google_api_not_connected">Could not connect to google play</string>
 
 
 </resources>

@@ -68,7 +68,11 @@
             android:label="@string/title_activity_google_map"
             android:theme="@style/MapActivityTheme" >
         </activity>
-        <service android:name=".GeofenceTransitionsIntentService"/>
+
+        <service
+            android:name="codefactory.esy2shop.Services.GeofenceTransitionsIntentService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

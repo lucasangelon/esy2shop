@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.location.Address;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -16,18 +19,50 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import codefactory.esy2shop.Services.GeofenceTransitionsIntentService;
+import codefactory.esy2shop.helpers.GeofenceErrorMessages;
+import codefactory.esy2shop.helpers.GeofencingConstants;
 import codefactory.projectshop.R;
 
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Notification extends Activity {
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.GeofencingApi;
+import com.google.android.gms.maps.model.LatLng;
+
+public class Notification extends Activity implements
+        ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<Status> {
 
 
+    //Tag for Log Cat
+    protected static final String TAG = "LocationActivity";
+
+    Intent receivedIntent;
 
     Spinner dateSpinner;
     Spinner timeSpinner;
@@ -39,8 +74,33 @@ public class Notification extends Activity {
 
 
     //Geofencing variables
-
     Address locationNotification;
+
+    /**
+     * Provides the entry point to Google Play services.
+     */
+    protected GoogleApiClient mGoogleApiClient;
+
+    /**
+     * The list of geofences used in this sample.
+     */
+    protected ArrayList<Geofence> mGeofenceList;
+
+    /**
+     * Used to keep track of whether geofences were added.
+     */
+    private boolean mGeofencesAdded;
+    /**
+     * Used when requesting to add or remove geofences.
+     */
+    private PendingIntent mGeofencePendingIntent;
+
+    /**
+     * Used to persist application state about whether geofences were added.
+     */
+    private SharedPreferences mSharedPreferences;
+
+
 
 
 
@@ -50,6 +110,7 @@ public class Notification extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_notification);
 
+        receivedIntent = getIntent();
 
         /*
             Banner Add
@@ -61,24 +122,13 @@ public class Notification extends Activity {
         //_______________________
 
 
-        //Calender Being init
+        //Calender Being initinitled
         calendar = Calendar.getInstance();
-        /*
-            Gets intent Extras
-         */
-        //If store has been selected on the maps activity
-        if(getIntent().getExtras().containsKey("storeAddress"))
-            locationNotification = getIntent().getExtras().getParcelable("storeAddress");
-
-
-
 
 
         /*
             Spinners
          */
-        //Initialise Calender
-
         //Populate Date Spinner
         dateSpinner = (Spinner) findViewById(R.id.date_spinner);
         ArrayAdapter<CharSequence> dateOptionAdapter = ArrayAdapter.createFromResource(this,
@@ -190,7 +240,7 @@ public class Notification extends Activity {
                     //Select a time is selected
                     case 4:
                         DialogFragment newFragment = new TimePickerFragment();
-                        newFragment.show(getFragmentManager(),"Choose a Time");
+                        newFragment.show(getFragmentManager(), "Choose a Time");
                         break;
 
 
@@ -205,7 +255,76 @@ public class Notification extends Activity {
             }
         });
 
-    }
+
+
+
+
+        /*
+            Geofencing
+            _________________________________________________________________________________
+         */
+
+        // Empty list for storing geofences.
+        mGeofenceList = new ArrayList<Geofence>();
+
+        // Initially set the PendingIntent used in addGeofences() and removeGeofences() to null.
+        mGeofencePendingIntent = null;
+
+        // Retrieve an instance of the SharedPreferences object.
+        mSharedPreferences = getSharedPreferences(GeofencingConstants.SHARED_PREFERENCES_NAME,
+                MODE_PRIVATE);
+
+        // Get the value of mGeofencesAdded from SharedPreferences. Set to false as a default.
+        mGeofencesAdded = mSharedPreferences.getBoolean(GeofencingConstants.GEOFENCES_ADDED_KEY, false);
+
+        // Kick off the request to build GoogleApiClient.
+        buildGoogleApiClient();
+
+        // Gets the address from the intent from google maps activity
+        if(receivedIntent.hasExtra("storeAddress")) {
+
+            /*
+                Gets the sent address from the google maps
+             */
+            locationNotification = getIntent().getExtras().getParcelable("storeAddress");
+
+
+            /*
+                Check google api conncection
+             */
+            if (!mGoogleApiClient.isConnected()) {
+                Toast.makeText(this, getString(R.string.google_api_not_connected), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+
+            try {
+                LocationServices.GeofencingApi.addGeofences(
+                        mGoogleApiClient,
+                        // The GeofenceRequest object.
+                        getGeofencingRequest(),
+                        // A pending intent that that is reused when calling removeGeofences(). This
+                        // pending intent is used to generate an intent when a matched geofence
+                        // transition is observed.
+                        getGeofencePendingIntent()
+                ).setResultCallback(this); // Result processed in onResult().
+            } catch (SecurityException securityException) {
+                // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
+                logSecurityException(securityException);
+            }
+
+        }else{
+            Log.d(TAG,"Has no Store Address");
+        }
+    } /// End of Oncreate
+
+
+
+
+
+
+
 
 
 
@@ -249,6 +368,11 @@ public class Notification extends Activity {
 
 
 
+
+
+
+
+
     /*
         Time Picker dialog
      */
@@ -281,43 +405,177 @@ public class Notification extends Activity {
 
 
 
-
-
-    /*
-        Geofening Class
-        ---------------------------------------------------------------------------
+    /**
+     * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
+     * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
+     * current list of geofences.
+     *
+     * @return A PendingIntent for the IntentService that handles geofence transitions.
      */
-    private Geofence createGeofence(Address address){
+    private PendingIntent getGeofencePendingIntent() {
+        // Reuse the PendingIntent if we already have it.
+        if (mGeofencePendingIntent != null) {
+            return mGeofencePendingIntent;
+        }
+        Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
+        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
+        // addGeofences() and removeGeofences().
+        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
 
-        return new Geofence.Builder()
+
+    /**
+     * This sample hard codes geofence data. A real app might dynamically create geofences based on
+     * the user's location.
+     */
+    public void populateGeofence(Address location, String geoFenceID) {
+
+        mGeofenceList.add(new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.
-                .setRequestId(entry.getKey())
+                .setRequestId(geoFenceID)
 
                         // Set the circular region of this geofence.
                 .setCircularRegion(
-                        entry.getValue().latitude,
-                        entry.getValue().longitude,
-                        Constants.GEOFENCE_RADIUS_IN_METERS
-                )
+                        location.getLatitude(),
+                            location.getLongitude(),
+                            GeofencingConstants.GEOFENCE_RADIUS_IN_METERS
+                    )
 
-                        // Set the expiration duration of the geofence. This geofence gets automatically
-                        // removed after this period of time.
-                .setExpirationDuration(Constants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
+                            // Set the expiration duration of the geofence. This geofence gets automatically
+                            // removed after this period of time.
+                    .setExpirationDuration(GeofencingConstants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
 
-                        // Set the transition types of interest. Alerts are only generated for these
-                        // transition. We track entry and exit transitions in this sample.
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-                        Geofence.GEOFENCE_TRANSITION_EXIT)
+                            // Set the transition types of interest. Alerts are only generated for these
+                            // transition. We track entry and exit transitions in this sample.
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                            Geofence.GEOFENCE_TRANSITION_EXIT)
 
-                        // Create the geofence.
-                .build();
+                            // Create the geofence.
+                    .build());
 
     }
 
 
 
+    /**
+     * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the LocationServices API.
+     */
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
+    }
+
+
+
+    /**
+     * Runs when a GoogleApiClient object successfully connects.
+     */
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        Log.i(TAG, "Connected to GoogleApiClient");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
+        // onConnectionFailed.
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        // The connection to Google Play services was lost for some reason.
+        Log.i(TAG, "Connection suspended");
+
+        // onConnected() will be called again automatically when the service reconnects
+    }
+
+
+
+
+    /**
+     * Runs when the result of calling addGeofences() and removeGeofences() becomes available.
+     * Either method can complete successfully or with an error.
+     *
+     * Since this activity implements the {@link ResultCallback} interface, we are required to
+     * define this method.
+     *
+     * @param status The Status returned through a PendingIntent when addGeofences() or
+     *               removeGeofences() get called.
+     */
+    public void onResult(Status status) {
+        if (status.isSuccess()) {
+            // Update state and save in shared preferences.
+            mGeofencesAdded = !mGeofencesAdded;
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putBoolean(GeofencingConstants.GEOFENCES_ADDED_KEY, mGeofencesAdded);
+            editor.apply();
+
+            // Update the UI. Adding geofences enables the Remove Geofences button, and removing
+            // geofences enables the Add Geofences button.
+            //setButtonsEnabledState();
+
+            Toast.makeText(
+                    this,
+                    "Toast and Vegemite",
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            // Get the status code for the error and log it using a user-friendly message.
+            String errorMessage = GeofenceErrorMessages.getErrorString(this,
+                    status.getStatusCode());
+            Log.e(TAG, errorMessage);
+        }
+    }
+
+
+
+
+    /**
+     * Builds and returns a GeofencingRequest. Specifies the list of geofences to be monitored.
+     * Also specifies how the geofence notifications are initially triggered.
+     */
+    private GeofencingRequest getGeofencingRequest() {
+        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
+
+        // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
+        // GEOFENCE_TRANSITION_ENTER notification when the geofence is added and if the device
+        // is already inside that geofence. -- Changed to Dwell
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_DWELL);
+
+        // Add the geofences to be monitored by geofencing service.
+        builder.addGeofences(mGeofenceList);
+
+        // Return a GeofencingRequest.
+        return builder.build();
+    }
+
+
+
+
+    /*
+        Sends a log cat message whenever a securut exception is caught
+     */
+    private void logSecurityException(SecurityException securityException) {
+        Log.e(TAG, "Invalid location permission. " +
+                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);
+    }
 
 
 

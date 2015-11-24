@@ -171,7 +171,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
         // Dismiss notification once the user touches it.
         builder.setAutoCancel(true);
 
-        // Get an instance of the Notification manager
+        // Get an instance of the NotificationActivity manager
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

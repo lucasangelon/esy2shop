@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    tools:context="codefactory.esy2shop.activites.Notification">
+    tools:context="codefactory.esy2shop.activites.NotificationActivity">
 
 
     <!--  Date Layout-->
@@ -60,6 +60,7 @@
 
 
 
+    <!-- Banner Add -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/notification_add_view"
         android:layout_width="wrap_content"
@@ -69,6 +70,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
     </com.google.android.gms.ads.AdView>
+
 
     <Button
         android:layout_width="wrap_content"

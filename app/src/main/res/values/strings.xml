@@ -108,7 +108,7 @@ Central Institute of Technology may update this policy at anytime. Any changes w
 
 
 
-    <!-- When Geofence Notification is triggerd -->
+    <!-- When Geofence NotificationActivity is triggerd -->
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
 
     <!-- Google Play services cannot connect -->

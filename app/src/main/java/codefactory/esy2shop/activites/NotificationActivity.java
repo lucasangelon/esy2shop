@@ -1,15 +1,18 @@
 package codefactory.esy2shop.activites;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import codefactory.esy2shop.Services.GeofenceTransitionsIntentService;
 import codefactory.esy2shop.helpers.GeofenceErrorMessages;
 import codefactory.esy2shop.helpers.GeofencingConstants;
+import codefactory.esy2shop.helpers.TimeNotificationPublisher;
 import codefactory.projectshop.R;
 
 
@@ -33,29 +37,18 @@ import com.google.android.gms.location.Geofence;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.GeofencingApi;
-import com.google.android.gms.maps.model.LatLng;
 
-public class Notification extends Activity implements
+public class NotificationActivity extends Activity implements
         ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<Status> {
 
 
@@ -258,9 +251,10 @@ public class Notification extends Activity implements
 
 
 
-
         /*
             Geofencing
+
+            Creates a notfication when user enters a area around a shop
             _________________________________________________________________________________
          */
 
@@ -403,6 +397,67 @@ public class Notification extends Activity implements
         }
     }
 
+
+
+
+    /*
+    Time NotificationActivity
+    */
+
+
+
+    private void scheduleNotification(Notification notification, int delay) {
+
+        Intent notificationIntent = new Intent(this, TimeNotificationPublisher.class);
+        notificationIntent.putExtra(TimeNotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(TimeNotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = futureMilliseconds(calendar);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+
+
+
+    /*
+        Builds the date notification
+     */
+    private Notification getNotification(String content) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle("Pantry");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        return builder.build();
+    }
+
+
+
+    private int futureMilliseconds(Calendar futureCalender){
+
+        //Get Current time
+        Calendar currentTime = Calendar.getInstance();
+
+        //Return differcence
+        return (int)(Math.floor(calendar.getTimeInMillis() - currentTime.getTimeInMillis()));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /*
+        GeoFencing
+        ---------------------------------------------------------------------
+     */
 
 
     /**

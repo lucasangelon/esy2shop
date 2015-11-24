@@ -47,7 +47,7 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="codefactory.esy2shop.activites.Notification"
+            android:name="codefactory.esy2shop.activites.NotificationActivity"
             android:label="@string/title_activity_edit_notification"
             android:windowSoftInputMode="adjustPan" >
         </activity>

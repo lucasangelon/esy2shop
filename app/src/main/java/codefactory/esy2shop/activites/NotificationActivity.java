@@ -317,9 +317,20 @@ public class NotificationActivity extends Activity implements
 
 
 
-
-
-
+    /**
+     * Builds a Notification to be used by the
+     * Geo Notification and the time notify
+     *
+     * @param content
+     * @return
+     */
+    private Notification getNotification(String content) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle("Pantry");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        return builder.build();
+    }
 
 
 
@@ -359,14 +370,6 @@ public class NotificationActivity extends Activity implements
     }
 
 
-
-
-
-
-
-
-
-
     /*
         Time Picker dialog
      */
@@ -400,49 +403,28 @@ public class NotificationActivity extends Activity implements
 
 
 
-    /*
-    Time NotificationActivity
-    */
-
-
-
+    /**
+     *  Creates the notification and pending intent for the time notifications
+     *  Time is set to current instance of calender as set by user.
+     *  Broadcast reciever - @see codefactory.esy2shop.helpers.TimeNotificationPublisher
+     *
+     *
+     * @param notification
+     * @param delay
+     */
     private void scheduleNotification(Notification notification, int delay) {
+
+
 
         Intent notificationIntent = new Intent(this, TimeNotificationPublisher.class);
         notificationIntent.putExtra(TimeNotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(TimeNotificationPublisher.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        long futureInMillis = futureMilliseconds(calendar);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
-
-
-
-    /*
-        Builds the date notification
-     */
-    private Notification getNotification(String content) {
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("Pantry");
-        builder.setContentText(content);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        return builder.build();
-    }
-
-
-
-    private int futureMilliseconds(Calendar futureCalender){
-
-        //Get Current time
-        Calendar currentTime = Calendar.getInstance();
-
-        //Return differcence
-        return (int)(Math.floor(calendar.getTimeInMillis() - currentTime.getTimeInMillis()));
-
-    }
 
 
 
@@ -493,21 +475,21 @@ public class NotificationActivity extends Activity implements
                         // Set the circular region of this geofence.
                 .setCircularRegion(
                         location.getLatitude(),
-                            location.getLongitude(),
-                            GeofencingConstants.GEOFENCE_RADIUS_IN_METERS
-                    )
+                        location.getLongitude(),
+                        GeofencingConstants.GEOFENCE_RADIUS_IN_METERS
+                )
 
-                            // Set the expiration duration of the geofence. This geofence gets automatically
-                            // removed after this period of time.
-                    .setExpirationDuration(GeofencingConstants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
+                        // Set the expiration duration of the geofence. This geofence gets automatically
+                        // removed after this period of time.
+                .setExpirationDuration(GeofencingConstants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)
 
-                            // Set the transition types of interest. Alerts are only generated for these
-                            // transition. We track entry and exit transitions in this sample.
-                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
-                            Geofence.GEOFENCE_TRANSITION_EXIT)
+                        // Set the transition types of interest. Alerts are only generated for these
+                        // transition. We track entry and exit transitions in this sample.
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                        Geofence.GEOFENCE_TRANSITION_EXIT)
 
-                            // Create the geofence.
-                    .build());
+                        // Create the geofence.
+                .build());
 
     }
 
@@ -622,10 +604,9 @@ public class NotificationActivity extends Activity implements
     }
 
 
-
-
-    /*
-        Sends a log cat message whenever a securut exception is caught
+    /**
+     *
+     * @param securityException
      */
     private void logSecurityException(SecurityException securityException) {
         Log.e(TAG, "Invalid location permission. " +
@@ -633,9 +614,34 @@ public class NotificationActivity extends Activity implements
     }
 
 
+    /*
+        Onclick Methods
+     */
+
+    /**
+     * Onclick method for the date button
+     * Adds a date notification for a certain list
+     * @param view
+     */
+    public void addDateNotification(View view){
+
+
+
+    }
+
+    public void addGeoNotification(View view){
+
+
+
+    }
 
 
 
 }
+
+
+
+
+
 
 

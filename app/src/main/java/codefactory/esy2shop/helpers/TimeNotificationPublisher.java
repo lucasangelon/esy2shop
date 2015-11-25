@@ -11,12 +11,8 @@ import android.content.Intent;
  */
 public class TimeNotificationPublisher extends BroadcastReceiver{
 
-
-
-
     public static String NOTIFICATION_ID = "notification-id";
     public static String NOTIFICATION = "notification";
-
 
     public void onReceive(Context context, Intent intent) {
 

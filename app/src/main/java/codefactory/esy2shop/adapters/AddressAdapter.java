@@ -3,7 +3,6 @@ package codefactory.esy2shop.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
-import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import codefactory.esy2shop.activites.Notification;
+import codefactory.esy2shop.activites.NotificationActivity;
 import codefactory.projectshop.R;
 
 /**
@@ -119,7 +118,7 @@ public class AddressAdapter extends BaseAdapter {
                     Redirects to notification page -
                     Parses the selected address in the intent
                  */
-                Intent notficationIntent = new Intent(mContext, Notification.class);
+                Intent notficationIntent = new Intent(mContext, NotificationActivity.class);
                 notficationIntent.putExtra("storeAddress", address); // Address is parcelable, uses getParcelable to retrieve in notifications
                 mContext.startActivity(notficationIntent);
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    tools:context="codefactory.esy2shop.activites.Notification">
+    tools:context="codefactory.esy2shop.activites.NotificationActivity">
 
 
     <!--  Date Layout-->
@@ -58,6 +58,28 @@
 
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Date"
+        android:id="@+id/add_date_note_button"
+        android:layout_below="@+id/time_layout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="addDateNotification"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Geo"
+        android:id="@+id/add_geo_note_button"
+        android:layout_below="@+id/time_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="addGeoNotification"/>
+
+
+
 
 
     <com.google.android.gms.ads.AdView
@@ -70,12 +92,13 @@
         android:layout_centerHorizontal="true">
     </com.google.android.gms.ads.AdView>
 
-    <Button
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/time_layout"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/listView"
+        android:layout_below="@+id/add_geo_note_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/notification_add_view" />
 
 </RelativeLayout>

@@ -410,11 +410,8 @@ public class NotificationActivity extends Activity implements
      *
      *
      * @param notification
-     * @param delay
      */
-    private void scheduleNotification(Notification notification, int delay) {
-
-
+    public void scheduleNotification(Notification notification) {
 
         Intent notificationIntent = new Intent(this, TimeNotificationPublisher.class);
         notificationIntent.putExtra(TimeNotificationPublisher.NOTIFICATION_ID, 1);
@@ -625,13 +622,28 @@ public class NotificationActivity extends Activity implements
      */
     public void addDateNotification(View view){
 
+        //Create Notification
+        Notification timeNotification = getNotification("Test");  // Should be list.getName()......
+
+        //Schedule the notification
+        scheduleNotification(timeNotification);
 
 
     }
 
+
+    /**
+     * Onclick method for geo notification
+     * Opens google maps activitie
+     * Sends list id as extra
+     * @param view
+     */
     public void addGeoNotification(View view){
 
-
+        Intent listIntent;
+        listIntent = new Intent(getApplicationContext(), GoogleMapActivity.class);
+        listIntent.putExtra("ListID", -1);
+        startActivity(listIntent);
 
     }
 

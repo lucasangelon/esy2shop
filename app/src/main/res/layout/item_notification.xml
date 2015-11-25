@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/gray">
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/notification_item_image"
-        android:src="@mipmap/bell_icon" />
+        android:src="@mipmap/bell_icon"
+        android:background="@color/gray"/>
 
 
 
     <LinearLayout
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="0dp"
         android:id="@+id/notification_item_text_layout"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@color/gray">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/notification_item_title"
-            android:text="BIG TEXT"/>
+            android:text="BIG TEXT"
+            android:textColor="@color/yellow"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/notification_item_deatails"
-            android:text="Small Deatail text"/>
+            android:text="Small Deatail text"
+            android:textColor="@color/yellow"/>
 
 
     </LinearLayout>
@@ -41,10 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/notification_item_delete_button"
-        android:src="@mipmap/left_arrow"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:src="@mipmap/tick_icon"
         android:gravity="center_vertical"/>
 
 

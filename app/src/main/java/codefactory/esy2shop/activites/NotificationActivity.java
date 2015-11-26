@@ -23,9 +23,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import codefactory.esy2shop.Services.GeofenceTransitionsIntentService;
+import codefactory.esy2shop.adapters.NotificationAdapter;
 import codefactory.esy2shop.helpers.GeofenceErrorMessages;
 import codefactory.esy2shop.helpers.GeofencingConstants;
 import codefactory.esy2shop.helpers.TimeNotificationPublisher;
+import codefactory.esy2shop.models.ListNotifcation;
 import codefactory.projectshop.R;
 
 
@@ -53,7 +55,11 @@ public class NotificationActivity extends Activity implements
 
 
     //Tag for Log Cat
-    protected static final String TAG = "LocationActivity";
+    protected static final String TAG = "NotificationActivity";
+
+    //Adapter Vars
+    ArrayList<ListNotifcation> notifcationArrayList;
+    NotificationAdapter notificationAdapter;
 
     Intent receivedIntent;
 
@@ -65,6 +71,8 @@ public class NotificationActivity extends Activity implements
     private Calendar tempCalendar;
     private int tempInt;
 
+    // list id
+    private int listId;
 
     //Geofencing variables
     Address locationNotification;
@@ -102,8 +110,6 @@ public class NotificationActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_notification);
-
-        receivedIntent = getIntent();
 
         /*
             Banner Add
@@ -202,10 +208,7 @@ public class NotificationActivity extends Activity implements
                     //Morning is selected
                     case 0:
 
-
-                        /*
-                            Sets time on calender to 9:00 am
-                         */
+                        //   Sets time on calender to 9:00 am
                         calendar.set(Calendar.HOUR_OF_DAY, 9);
                         break;
 
@@ -274,6 +277,36 @@ public class NotificationActivity extends Activity implements
         // Kick off the request to build GoogleApiClient.
         buildGoogleApiClient();
 
+
+
+        /*
+            Initise notification array list
+            and add to adatapter
+         */
+        notifcationArrayList = new ArrayList<>();
+        notificationAdapter = new NotificationAdapter(this,notifcationArrayList);
+
+
+
+        /**
+         *  Gets extras from intents
+         */
+        // Get intent
+        receivedIntent = getIntent();
+
+                /*
+            List id from extras
+            Should have if coming from either Maps or edit list
+         */
+        if(receivedIntent.hasExtra("ListId")){
+
+            listId = receivedIntent.getIntExtra("ListId", -1);
+
+        } else {
+
+            Log.d(TAG,"Recvied intent has no list id");
+        }
+
         // Gets the address from the intent from google maps activity
         if(receivedIntent.hasExtra("storeAddress")) {
 
@@ -303,6 +336,19 @@ public class NotificationActivity extends Activity implements
                         // transition is observed.
                         getGeofencePendingIntent()
                 ).setResultCallback(this); // Result processed in onResult().
+
+                // Create new listNotification
+                ListNotifcation listNotifcation = new ListNotifcation(listId,false);
+                listNotifcation.setTitle("List Name here"); // Needs to get the current lIst name
+                // Corresponds to listId
+                listNotifcation.setDetails(locationNotification.getFeatureName());
+                listNotifcation.setNotifyAddress(locationNotification);
+
+                //Add to Array list
+                notifcationArrayList.add(listNotifcation);
+                notificationAdapter.notifyDataSetChanged();
+
+
             } catch (SecurityException securityException) {
                 // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
                 logSecurityException(securityException);
@@ -311,6 +357,9 @@ public class NotificationActivity extends Activity implements
         }else{
             Log.d(TAG,"Has no Store Address");
         }
+
+
+
     } /// End of Oncreate
 
 
@@ -615,6 +664,8 @@ public class NotificationActivity extends Activity implements
         Onclick Methods
      */
 
+
+
     /**
      * Onclick method for the date button
      * Adds a date notification for a certain list
@@ -627,6 +678,17 @@ public class NotificationActivity extends Activity implements
 
         //Schedule the notification
         scheduleNotification(timeNotification);
+
+        // Create new listNotification
+        ListNotifcation listNotifcation = new ListNotifcation(listId,true);
+        listNotifcation.setNotifyTime(calendar);
+        listNotifcation.setListID(listId);
+        listNotifcation.setTitle("List Name");
+        listNotifcation.setDetails(calendar.toString());
+
+        //Add notification to the adapter
+        notifcationArrayList.add(listNotifcation);
+        notificationAdapter.notifyDataSetChanged();
 
 
     }
@@ -646,9 +708,6 @@ public class NotificationActivity extends Activity implements
         startActivity(listIntent);
 
     }
-
-
-
 }
 
 

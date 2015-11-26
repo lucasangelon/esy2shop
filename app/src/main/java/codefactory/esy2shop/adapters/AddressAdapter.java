@@ -29,6 +29,7 @@ public class AddressAdapter extends BaseAdapter {
     private ArrayList<Address> addressArrayList;
     private LayoutInflater mInflater;
     private Context mContext;
+    private int listId;
 
 
     /*
@@ -39,6 +40,7 @@ public class AddressAdapter extends BaseAdapter {
         this.mContext = mContext;
         this.addressArrayList = addressArrayList;
         mInflater = LayoutInflater.from(mContext);
+        listId = -1;
 
     }
 
@@ -60,9 +62,14 @@ public class AddressAdapter extends BaseAdapter {
     }
 
 
-
-    /*
-
+    /**
+     *
+     *
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
      */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -120,6 +127,7 @@ public class AddressAdapter extends BaseAdapter {
                  */
                 Intent notficationIntent = new Intent(mContext, NotificationActivity.class);
                 notficationIntent.putExtra("storeAddress", address); // Address is parcelable, uses getParcelable to retrieve in notifications
+                notficationIntent.putExtra("ListId",listId);
                 mContext.startActivity(notficationIntent);
 
             }
@@ -132,8 +140,9 @@ public class AddressAdapter extends BaseAdapter {
 
 
 
-    /*
-        View Holder
+
+    /**
+     *
      */
     private class AddressViewHolder{
 
@@ -155,5 +164,23 @@ public class AddressAdapter extends BaseAdapter {
 
         }
 
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public int getListId() {
+        return listId;
+    }
+
+
+    /**
+     *
+     * @param listId
+     */
+    public void setListId(int listId) {
+        this.listId = listId;
     }
 }

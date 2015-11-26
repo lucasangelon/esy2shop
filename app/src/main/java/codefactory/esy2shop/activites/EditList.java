@@ -346,14 +346,11 @@ public class EditList extends Activity {
     }
 
 
-
-
-
-
-
-
-    /*
-        When an item is added to the list
+    /**
+     *  Adds item to the list
+     *
+     *  Used when add_item_button is pressed or
+     *  the 'next' is pressed on teh keyboard
      */
     private void addItem(){
 
@@ -396,23 +393,19 @@ public class EditList extends Activity {
     }
 
 
-
-
-
-    /*
-        "add" button is clicked
+    /**
+     *  Onclick method for add_item_button
+     *
+     * @param view
      */
     public void addItemClick(View view){
         addItem();
     }
 
 
-
-
-
-
-    /*
-        Item is removed from list
+    /**
+     *  Removes and item from the currnent list
+     * @param position
      */
     public void removeItem(int position){
 
@@ -426,6 +419,23 @@ public class EditList extends Activity {
         itemAdapter.notifyDataSetChanged();
 
     }
+
+
+    /**
+     * Onclick Method for the GPS icon
+     *
+     * Directs user to the Google maps activity
+     * @param view
+     */
+    public void gpsIconClick(View view){
+
+        Intent listIntent;
+        listIntent = new Intent(getApplicationContext(), GoogleMapActivity.class);
+        listIntent.putExtra("ListId", -1);
+        startActivity(listIntent);
+
+    }
+
 
 
 }

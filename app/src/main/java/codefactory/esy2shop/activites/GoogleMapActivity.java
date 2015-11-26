@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -47,6 +48,8 @@ public class GoogleMapActivity extends AppCompatActivity
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
+
+    protected static final String LOGCAT_TAG = "Google Maps Activity";
     /**
      * Request code for location permission request.
      *
@@ -77,14 +80,29 @@ public class GoogleMapActivity extends AppCompatActivity
     AddressAdapter addressAdapter;
 
 
+    // Intent
     Intent receivedIntent;
+    int listId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
 
-        receivedIntent = getIntent();
 
+        // Get Extras
+        receivedIntent = getIntent();
+        if(receivedIntent.hasExtra("ListId")){
+
+            listId = receivedIntent.getIntExtra("ListId",-1);
+
+        } else {
+
+            Log.d(LOGCAT_TAG,"No listId Extra recieved");
+        }
+
+
+        //Initialise Google map fragment
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -253,6 +271,7 @@ public class GoogleMapActivity extends AppCompatActivity
 
                 //set adapter
                 addressAdapter = new AddressAdapter(GoogleMapActivity.this, addressList);
+                addressAdapter.setListId(listId);
                 resultsList.setAdapter(addressAdapter);
                 addressAdapter.notifyDataSetChanged();
 

@@ -70,9 +70,10 @@
         </activity>
 
         <service
-            android:name="codefactory.esy2shop.Services.GeofenceTransitionsIntentService"
+            android:name="codefactory.esy2shop.services.GeofenceTransitionsIntentService"
             android:exported="false" >
         </service>
+        <receiver android:name="codefactory.esy2shop.helpers.TimeNotificationPublisher" />
     </application>
 
 </manifest>

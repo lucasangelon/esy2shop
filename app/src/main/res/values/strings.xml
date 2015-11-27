@@ -112,7 +112,7 @@ Central Institute of Technology may update this policy at anytime. Any changes w
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
 
     <!-- Google Play services cannot connect -->
-    <string name="google_api_not_connected">Could not connect to google play</string>
+    <string name="google_api_not_connected">Could not connect to google api</string>
 
 
 </resources>

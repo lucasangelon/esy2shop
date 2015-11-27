@@ -1,4 +1,4 @@
-package codefactory.esy2shop.Services;
+package codefactory.esy2shop.services;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -20,11 +20,8 @@ import android.content.Context;
  * limitations under the License.
  */
 
-import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;

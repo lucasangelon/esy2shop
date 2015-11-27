@@ -60,25 +60,21 @@ public class NotificationAdapter extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
-        View view;
-        ViewHolder viewHolder = new ViewHolder();
+
+        ViewHolder viewHolder;
+
 
         if(convertView == null) {
 
-            view = mInflater.inflate(R.layout.item_notification, parent, false);
+            convertView = mInflater.inflate(R.layout.item_notification, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
 
         } else {
 
-            view = convertView;
-            viewHolder = (ViewHolder)view.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-
-        //Initialise Views
-        viewHolder.titleTextView = (TextView) view.findViewById(R.id.notification_item_title);
-        viewHolder.detailsTextView = (TextView) view.findViewById(R.id.notification_item_deatails);
-        viewHolder.iconImageView = (ImageView) view.findViewById(R.id.notification_item_image);
-        viewHolder.removeNotificationButton = (ImageButton) view.findViewById(R.id.notification_item_delete_button);
 
 
         // Set text for each notification
@@ -118,7 +114,7 @@ public class NotificationAdapter extends BaseAdapter{
 
 
         //Return the view
-        return view;
+        return convertView;
     }
 
 
@@ -133,7 +129,19 @@ public class NotificationAdapter extends BaseAdapter{
         ImageView iconImageView;
 
 
+        public ViewHolder(View view){
+
+            //Initialise Views
+            this.titleTextView = (TextView) view.findViewById(R.id.notification_item_title);
+            this.detailsTextView = (TextView) view.findViewById(R.id.notification_item_deatails);
+            this.iconImageView = (ImageView) view.findViewById(R.id.notification_item_image);
+            this.removeNotificationButton = (ImageButton) view.findViewById(R.id.notification_item_delete_button);
+
+        }
+
     }
+
+
 
 
 

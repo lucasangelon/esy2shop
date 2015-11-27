@@ -12,17 +12,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import codefactory.esy2shop.Services.GeofenceTransitionsIntentService;
+import codefactory.esy2shop.services.GeofenceTransitionsIntentService;
 import codefactory.esy2shop.adapters.NotificationAdapter;
 import codefactory.esy2shop.helpers.GeofenceErrorMessages;
 import codefactory.esy2shop.helpers.GeofencingConstants;
@@ -36,6 +36,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -60,12 +61,13 @@ public class NotificationActivity extends Activity implements
     //Adapter Vars
     ArrayList<ListNotifcation> notifcationArrayList;
     NotificationAdapter notificationAdapter;
+    ListView notificationListView;
 
     Intent receivedIntent;
 
     Spinner dateSpinner;
     Spinner timeSpinner;
-    private static Calendar calendar;
+    protected static Calendar calendar;
 
     //Used to set the date in the spinners
     private Calendar tempCalendar;
@@ -276,15 +278,15 @@ public class NotificationActivity extends Activity implements
 
         // Kick off the request to build GoogleApiClient.
         buildGoogleApiClient();
-
-
-
+        
         /*
             Initise notification array list
             and add to adatapter
          */
         notifcationArrayList = new ArrayList<>();
         notificationAdapter = new NotificationAdapter(this,notifcationArrayList);
+        notificationListView = (ListView) findViewById(R.id.notification_listView);
+        notificationListView.setAdapter(notificationAdapter);
 
 
 
@@ -305,57 +307,6 @@ public class NotificationActivity extends Activity implements
         } else {
 
             Log.d(TAG,"Recvied intent has no list id");
-        }
-
-        // Gets the address from the intent from google maps activity
-        if(receivedIntent.hasExtra("storeAddress")) {
-
-            /*
-                Gets the sent address from the google maps
-             */
-            locationNotification = getIntent().getExtras().getParcelable("storeAddress");
-
-
-            /*
-                Check google api conncection
-             */
-            if (!mGoogleApiClient.isConnected()) {
-                Toast.makeText(this, getString(R.string.google_api_not_connected), Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-
-
-            try {
-                LocationServices.GeofencingApi.addGeofences(
-                        mGoogleApiClient,
-                        // The GeofenceRequest object.
-                        getGeofencingRequest(),
-                        // A pending intent that that is reused when calling removeGeofences(). This
-                        // pending intent is used to generate an intent when a matched geofence
-                        // transition is observed.
-                        getGeofencePendingIntent()
-                ).setResultCallback(this); // Result processed in onResult().
-
-                // Create new listNotification
-                ListNotifcation listNotifcation = new ListNotifcation(listId,false);
-                listNotifcation.setTitle("List Name here"); // Needs to get the current lIst name
-                // Corresponds to listId
-                listNotifcation.setDetails(locationNotification.getFeatureName());
-                listNotifcation.setNotifyAddress(locationNotification);
-
-                //Add to Array list
-                notifcationArrayList.add(listNotifcation);
-                notificationAdapter.notifyDataSetChanged();
-
-
-            } catch (SecurityException securityException) {
-                // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
-                logSecurityException(securityException);
-            }
-
-        }else{
-            Log.d(TAG,"Has no Store Address");
         }
 
 
@@ -472,16 +423,6 @@ public class NotificationActivity extends Activity implements
     }
 
 
-
-
-
-
-
-
-
-
-
-
     /*
         GeoFencing
         ---------------------------------------------------------------------
@@ -566,12 +507,76 @@ public class NotificationActivity extends Activity implements
 
 
 
+
+
     /**
      * Runs when a GoogleApiClient object successfully connects.
      */
     @Override
     public void onConnected(Bundle connectionHint) {
+
         Log.i(TAG, "Connected to GoogleApiClient");
+
+        // Gets the address from the intent from google maps activity
+        if(receivedIntent.hasExtra("storeAddress")) {
+
+            /*
+                Gets the sent address from the google maps
+             */
+            locationNotification = getIntent().getExtras().getParcelable("storeAddress");
+
+            Log.d(TAG, locationNotification.getFeatureName());
+            Toast.makeText(NotificationActivity.this, "Great", Toast.LENGTH_SHORT).show();
+
+
+            /*
+                Check google api conncection
+             */
+
+            if (!mGoogleApiClient.isConnected()) {
+                Toast.makeText(this, getString(R.string.google_api_not_connected), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+
+            try {
+
+
+                Toast.makeText(NotificationActivity.this, "Really Great", Toast.LENGTH_SHORT).show();
+                // Create new listNotification
+                ListNotifcation listNotifcation = new ListNotifcation(listId,false);
+                listNotifcation.setTitle("List Name here"); // Needs to get the current lIst name
+                // Corresponds to listId
+                listNotifcation.setDetails(locationNotification.getFeatureName());
+                listNotifcation.setNotifyAddress(locationNotification);
+
+                //Add to Array list
+                notifcationArrayList.add(listNotifcation);
+                notificationAdapter.notifyDataSetChanged();
+
+                LocationServices.GeofencingApi.addGeofences(
+                        mGoogleApiClient,
+                        // The GeofenceRequest object.
+                        getGeofencingRequest(),
+                        // A pending intent that that is reused when calling removeGeofences(). This
+                        // pending intent is used to generate an intent when a matched geofence
+                        // transition is observed.
+                        getGeofencePendingIntent()
+                ).setResultCallback(this); // Result processed in onResult().
+
+
+            } catch (SecurityException securityException) {
+                // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
+                logSecurityException(securityException);
+                Toast.makeText(NotificationActivity.this, "Security Exception", Toast.LENGTH_SHORT).show();
+            }
+
+        }else{
+            Log.d(TAG,"Has no Store Address");
+        }
+
+
     }
 
     @Override
@@ -635,6 +640,7 @@ public class NotificationActivity extends Activity implements
      * Also specifies how the geofence notifications are initially triggered.
      */
     private GeofencingRequest getGeofencingRequest() {
+
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
 
         // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
@@ -673,6 +679,9 @@ public class NotificationActivity extends Activity implements
      */
     public void addDateNotification(View view){
 
+        //TEST
+        Toast.makeText(NotificationActivity.this, "addDateNottification", Toast.LENGTH_SHORT).show();
+
         //Create Notification
         Notification timeNotification = getNotification("Test");  // Should be list.getName()......
 
@@ -684,7 +693,7 @@ public class NotificationActivity extends Activity implements
         listNotifcation.setNotifyTime(calendar);
         listNotifcation.setListID(listId);
         listNotifcation.setTitle("List Name");
-        listNotifcation.setDetails(calendar.toString());
+        listNotifcation.setDetails(convertCalenderToString(calendar));
 
         //Add notification to the adapter
         notifcationArrayList.add(listNotifcation);
@@ -706,8 +715,30 @@ public class NotificationActivity extends Activity implements
         listIntent = new Intent(getApplicationContext(), GoogleMapActivity.class);
         listIntent.putExtra("ListID", -1);
         startActivity(listIntent);
+    }
+
+
+
+
+    /**
+     * Returns a formatted string rep of a calenders
+     *
+     * @param calender
+     * @return
+     */
+    public String convertCalenderToString(Calendar calender){
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a  EEE MMM d yyyy G");
+        dateFormat.setCalendar(calender);
+        return dateFormat.format(calender.getTime());
 
     }
+
+
+
+
+
+
 }
 
 

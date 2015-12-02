@@ -15,4 +15,12 @@
         <!-- The rest of your attributes -->
     </style>
 
+
+    <style name="PantryMaterialTheme" parent="Theme.AppCompat.Light">
+
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+
+    </style>
+
 </resources>

@@ -89,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/bellButton"
                     android:src="@mipmap/bell_icon"
-                    android:background="@color/gray" />
+                    android:background="@color/gray"
+                    android:onClick="bellButtonClick"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -105,13 +106,77 @@
 
     </RelativeLayout>
 
+
+    <!-- Date Spinner Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/time_spinner_layout"
+        android:layout_below="@+id/list_name_layout"
+        android:visibility="gone">
+
+
+        <!-- Date layout-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/date_layout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Date"
+                android:id="@+id/date_text_view" />
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_spinner" />
+
+
+        </LinearLayout>
+
+
+        <!-- Time Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time_layout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Time"
+                android:id="@+id/time_text_view" />
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/time_spinner" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:orientation="horizontal"
         android:id="@+id/seperator_layout"
         android:background="@color/yellow"
-        android:layout_below="@+id/list_name_layout"/>
+        android:layout_below="@+id/time_spinner_layout"/>
+
+
 
 
     <RelativeLayout

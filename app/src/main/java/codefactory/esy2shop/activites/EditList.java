@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,7 +40,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class EditList extends Activity {
+public class EditList extends AppCompatActivity {
 
 
 
@@ -53,6 +55,10 @@ public class EditList extends Activity {
     ItemAdapter itemAdapter;
     Button listAddItemBtn;
     EditText itemAddText;
+
+
+    //Spinner Layout
+    LinearLayout spinnerLayout;
 
     SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -113,6 +119,8 @@ public class EditList extends Activity {
         int listCategoryID = list.getCategory();
         int CategoryStartPos = 0;
 
+        // Date spinner layout
+        spinnerLayout = (LinearLayout) findViewById(R.id.time_spinner_layout);
 
         // Get DB Categories IDs
         String[] tempListCategoryNames = DatabaseManager.CATEGORIES.values().toArray(new String[listCategorySize]);
@@ -433,6 +441,29 @@ public class EditList extends Activity {
         listIntent = new Intent(getApplicationContext(), GoogleMapActivity.class);
         listIntent.putExtra("ListId", -1);
         startActivity(listIntent);
+
+    }
+
+
+    /**
+     * OnClick method for date notification
+     *
+     * @param view
+     */
+    public void bellButtonClick(View view){
+
+
+        if(spinnerLayout.getVisibility() == View.GONE){
+
+            //Spinner is not visible
+            spinnerLayout.setVisibility(View.VISIBLE);
+
+        } else {
+
+            spinnerLayout.setVisibility(View.GONE);
+
+        }
+
 
     }
 

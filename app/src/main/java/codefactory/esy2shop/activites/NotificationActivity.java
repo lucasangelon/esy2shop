@@ -278,7 +278,7 @@ public class NotificationActivity extends Activity implements
 
         // Kick off the request to build GoogleApiClient.
         buildGoogleApiClient();
-        
+
         /*
             Initise notification array list
             and add to adatapter
@@ -555,6 +555,9 @@ public class NotificationActivity extends Activity implements
                 notifcationArrayList.add(listNotifcation);
                 notificationAdapter.notifyDataSetChanged();
 
+                //Add geofecnce to mGeofenceList
+                populateGeofence(locationNotification,"TestID");
+
                 LocationServices.GeofencingApi.addGeofences(
                         mGoogleApiClient,
                         // The GeofenceRequest object.
@@ -733,9 +736,6 @@ public class NotificationActivity extends Activity implements
         return dateFormat.format(calender.getTime());
 
     }
-
-
-
 
 
 

@@ -16,7 +16,7 @@
     </style>
 
 
-    <style name="PantryMaterialTheme" parent="Theme.AppCompat.Light">
+    <style name="PantryMaterialTheme" parent="Theme.AppCompat">
 
         <item name="colorPrimary">@color/yellow</item>
         <item name="colorPrimaryDark">@color/gray</item>

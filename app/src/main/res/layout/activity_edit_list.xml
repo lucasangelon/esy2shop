@@ -97,7 +97,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/gpsButton"
                     android:src="@mipmap/gps_icon"
-                    android:background="@color/gray" />
+                    android:background="@color/gray"
+                    android:onClick="gpsIconClick"/>
 
 
             </LinearLayout>
@@ -134,7 +135,7 @@
             <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/date_spinner" />
+                android:id="@+id/edit_list_date_spinner" />
 
 
         </LinearLayout>
@@ -157,24 +158,52 @@
             <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/time_spinner" />
+                android:id="@+id/edit_list_time_spinner" />
 
 
         </LinearLayout>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/add_time_notifiy_button"
+            android:onClick="addTimeNotificationClick"/>
 
 
     </LinearLayout>
 
 
 
+    <!-- Notification adapter layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/notification_list_layout"
+        android:background="@color/yellow"
+        android:layout_below="@+id/time_spinner_layout"
+        android:visibility="gone">
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_list_notification_listView" />
+
+    </LinearLayout>
+
+
+
+
+    <!-- Yellow Seperator-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:orientation="horizontal"
         android:id="@+id/seperator_layout"
         android:background="@color/yellow"
-        android:layout_below="@+id/time_spinner_layout"/>
+        android:layout_below="@+id/notification_list_layout"/>
 
 
 

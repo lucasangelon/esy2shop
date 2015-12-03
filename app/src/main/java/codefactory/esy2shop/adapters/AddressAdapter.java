@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import codefactory.esy2shop.activites.EditList;
 import codefactory.esy2shop.activites.NotificationActivity;
 import codefactory.projectshop.R;
 
@@ -107,10 +108,10 @@ public class AddressAdapter extends BaseAdapter {
             }
         });
 
-        // Name
+        // Name -- Large Text
         mViewHolder.addressNameTextView.setText(address.getFeatureName());
 
-        //Details
+        //Details -- Small Text
         mViewHolder.addressDetailTextView.setText(address.getLocality() + ", " + address.getAddressLine(1));
 
 
@@ -125,9 +126,9 @@ public class AddressAdapter extends BaseAdapter {
                     Redirects to notification page -
                     Parses the selected address in the intent
                  */
-                Intent notficationIntent = new Intent(mContext, NotificationActivity.class);
+                Intent notficationIntent = new Intent(mContext, EditList.class);
                 notficationIntent.putExtra("storeAddress", address); // Address is parcelable, uses getParcelable to retrieve in notifications
-                notficationIntent.putExtra("ListId",listId);
+                notficationIntent.putExtra("ListID",listId);
                 mContext.startActivity(notficationIntent);
 
             }

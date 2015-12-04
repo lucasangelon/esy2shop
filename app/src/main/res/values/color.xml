@@ -6,4 +6,12 @@
     <color name="gray">#3a3a3a</color>
     <color name="yellow">#fed018</color>
 
+    <color name="primary">#FFCF04</color>
+    <color name="primary_dark">#cca500</color>
+    <color name="primary_light">#ffdd4d</color>
+    <color name="accent">#333333</color>
+    <color name="primary_text">#333333</color>
+    <color name="secondary_text">#777777</color>
+    <color name="icons">#333333</color>
+    <color name="divider">#FFCF04</color>
 </resources>

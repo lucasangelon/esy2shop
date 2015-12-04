@@ -6,21 +6,23 @@
 
     </style>
 
-    <style name="MapActivityTheme" parent="Theme.AppCompat.Light">
-
-        <!-- Set AppCompat’s color theming attrs -->
-        <item name="colorPrimary">@color/yellow</item>
-        <item name="colorPrimaryDark">@color/gray</item>
-
-        <!-- The rest of your attributes -->
-    </style>
-
 
     <style name="PantryMaterialTheme" parent="Theme.AppCompat">
 
-        <item name="colorPrimary">@color/yellow</item>
-        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:actionBarStyle">@style/PantryActionBar</item>
 
+    </style>
+
+
+    <style name="PantryActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/PantryTitleTextStyle</item>
+    </style>
+
+    <style name="PantryTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/primary_text</item>
     </style>
 
 </resources>

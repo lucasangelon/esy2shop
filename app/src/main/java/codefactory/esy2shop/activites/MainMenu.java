@@ -6,9 +6,8 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +22,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -43,7 +45,7 @@ import codefactory.projectshop.R;
 import codefactory.esy2shop.adapters.ShoppingListAdapter;
 
 
-public class MainMenu extends Activity {
+public class MainMenu extends AppCompatActivity {
 
 
     ShoppingListAdapter listAdapter;
@@ -167,7 +169,7 @@ public class MainMenu extends Activity {
             Navigation Drawer
          */
         mDrawerList = (ListView)findViewById(R.id.navList);
-        drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer_items = getResources().getStringArray(R.array.menu_items);
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, drawer_items);
 
@@ -180,8 +182,8 @@ public class MainMenu extends Activity {
 
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -192,19 +194,18 @@ public class MainMenu extends Activity {
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,           /* host Activity */
                 drawer,         /* DrawerLayout object */
-                R.drawable.ic_drawer,   /* nav drawer image to replace 'Up' caret */
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
                 R.string.drawer_close  /* "close drawer" description for accessibility */
         )
 
         {
             public void onDrawerClosed(View view) {
-                getActionBar().setTitle(mTitle);
+                getSupportActionBar().setTitle(mTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(mDrawerTitle);
+                getSupportActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
@@ -279,7 +280,7 @@ public class MainMenu extends Activity {
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(mTitle);
     }
 
 
